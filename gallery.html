@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+  Infintech Designs — Web Design Style Exploration Gallery
+  10 styles | 3 categories | comparison view + full-screen preview
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Web Design Style Exploration 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --orange: #EA4517; --gold: #ED9924; --pink: #FF4E5E; --ink: #0E0E0E; --paper: #F9F9FA; --card: #FFFFFF; --line: #E5E5E5; --muted: #737373; --cream: #F5F0E8; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Raleway', sans-serif; line-height: 1.5; }
+  header { padding: 40px 48px 32px; border-bottom: 1px solid var(--line); background: #fff; }
+  header .top { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+  header .brand { display: flex; align-items: center; gap: 18px; }
+  header .logo-pill { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 6px 14px; }
+  header .logo-pill img { height: 40px; display: block; }
+  header .title { font-family: 'Raleway', sans-serif; font-size: 20px; letter-spacing: -0.01em; line-height: 1.1; font-weight: 800; color: var(--ink); }
+  header .title small { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; margin-top: 5px; }
+  header .meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); text-align: right; letter-spacing: 0.05em; }
+  header .meta strong { color: var(--orange); }
+  header .swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink); letter-spacing: 0.03em; }
+  .swatch .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+
+  nav.filters { position: sticky; top: 0; background: #fff; z-index: 50; padding: 16px 48px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  nav.filters .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-right: 8px; font-weight: 500; }
+  nav.filters .tab { padding: 10px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 100px; font-size: 13px; color: var(--ink); cursor: pointer; transition: all 0.15s; font-family: inherit; font-weight: 600; }
+  nav.filters .tab:hover { border-color: var(--muted); }
+  nav.filters .tab.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  nav.filters .tab span { opacity: 0.7; margin-left: 6px; font-size: 11px; }
+  nav.filters .compare-toggle { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); cursor: pointer; font-weight: 500; }
+  nav.filters .compare-toggle input { accent-color: var(--orange); width: 16px; height: 16px; cursor: pointer; }
+
+  .grid { padding: 36px 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: all 0.2s; display: flex; flex-direction: column; position: relative; }
+  .card:hover { border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(234,69,23,0.12); }
+  .card .preview-frame-wrap { width: 100%; height: 200px; overflow: hidden; position: relative; background: #fff; border-bottom: 1px solid var(--line); }
+  .card .preview-frame-wrap iframe { width: 1280px; height: 900px; transform: scale(0.27); transform-origin: top left; pointer-events: none; border: none; display: block; }
+  .card .body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+  .card .id-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .card .id-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.08em; }
+  .card.cat-A .id-badge { background: #E8EEF5; color: #2C3E50; }
+  .card.cat-B .id-badge { background: var(--gold); color: var(--ink); }
+  .card.cat-C .id-badge { background: var(--orange); color: #fff; }
+  .card .cat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  .card h3 { font-family: 'Raleway', sans-serif; font-size: 21px; letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 8px; font-weight: 700; color: var(--ink); }
+  .card .fit { font-size: 13px; color: var(--muted); margin-bottom: 14px; flex: 1; line-height: 1.55; }
+  .card .fit strong { color: var(--orange); text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; display: block; margin-bottom: 4px; font-weight: 700; }
+  .card .btns { display: flex; gap: 8px; }
+  .card button, .card a.btn { flex: 1; padding: 10px 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 12px; font-family: inherit; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; border-radius: 6px; text-align: center; text-decoration: none; transition: all 0.15s; }
+  .card button:hover, .card a.btn:hover { border-color: var(--orange); background: rgba(234,69,23,0.06); color: var(--orange); }
+  .card button.primary { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .card button.primary:hover { background: #d13d13; border-color: #d13d13; color: #fff; }
+
+  .card .compare-chk { position: absolute; top: 10px; right: 10px; z-index: 3; display: none; background: rgba(14,14,14,0.85); padding: 4px 8px; border-radius: 4px; font-size: 11px; color: #fff; cursor: pointer; font-weight: 500; }
+  .card .compare-chk input { accent-color: var(--orange); margin-right: 4px; cursor: pointer; }
+  body.compare-mode .card .compare-chk { display: flex; align-items: center; }
+
+  .modal { position: fixed; inset: 0; background: rgba(14,14,14,0.94); z-index: 200; display: none; flex-direction: column; }
+  .modal.open { display: flex; }
+  .modal .mh { padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--ink); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .modal .mh h3 { font-family: 'Raleway', sans-serif; font-size: 18px; letter-spacing: -0.01em; color: #fff; font-weight: 700; }
+  .modal .mh .actions { display: flex; gap: 10px; }
+  .modal .mh button { background: transparent; border: 1px solid rgba(255,255,255,0.14); color: #fff; padding: 8px 14px; font-size: 13px; cursor: pointer; border-radius: 6px; font-family: inherit; font-weight: 500; }
+  .modal .mh button:hover { border-color: var(--orange); color: var(--orange); }
+  .modal .mh .close { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .modal .mh .close:hover { background: #d13d13; border-color: #d13d13; color: #fff; }
+  .modal iframe { flex: 1; width: 100%; border: none; background: #fff; }
+
+  .compare-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; padding: 14px 24px; border-radius: 100px; box-shadow: 0 12px 40px rgba(234,69,23,0.38); display: none; z-index: 100; align-items: center; gap: 16px; }
+  .compare-bar.visible { display: flex; }
+  .compare-bar button { background: #fff; color: var(--orange); border: none; padding: 8px 18px; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .compare-modal { position: fixed; inset: 0; z-index: 300; background: var(--ink); display: none; flex-direction: column; }
+  .compare-modal.open { display: flex; }
+  .compare-modal .ch { padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .compare-modal .iframes { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); }
+  .compare-modal iframe { background: #fff; border: none; width: 100%; height: 100%; }
+
+  footer { padding: 32px 48px; text-align: center; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; margin-top: 48px; background: #fff; }
+  footer .tag { color: var(--ink); font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 8px; letter-spacing: -0.01em; }
+  footer .tag .r { color: var(--orange); }
+
+  @media (max-width: 1024px) {
+    header { padding: 32px 24px 24px; }
+    nav.filters { padding: 14px 24px; }
+    .grid { padding: 28px 24px; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    footer { padding: 28px 24px; }
+  }
+  @media (max-width: 768px) {
+    header { padding: 24px 16px 20px; }
+    header .top { gap: 16px; margin-bottom: 18px; }
+    header .brand { gap: 14px; }
+    header .logo-pill img { height: 34px; }
+    header .title { font-size: 17px; }
+    header .title small { font-size: 10px; }
+    header .meta { text-align: left; font-size: 11px; width: 100%; }
+    header .swatches { gap: 8px; }
+    .swatch { padding: 5px 10px; font-size: 10px; }
+    nav.filters { padding: 12px 16px; gap: 6px; }
+    nav.filters .label { display: none; }
+    nav.filters .tab { padding: 8px 14px; font-size: 12px; }
+    nav.filters .compare-toggle { margin-left: 0; font-size: 12px; flex-basis: 100%; padding-top: 4px; }
+    .grid { padding: 20px 16px; gap: 16px; grid-template-columns: 1fr; }
+    .card .preview-frame-wrap { height: 220px; }
+    .card .preview-frame-wrap iframe { transform: scale(0.3); }
+    .card h3 { font-size: 19px; }
+    .modal .mh { padding: 12px 14px; flex-wrap: wrap; gap: 8px; }
+    .modal .mh h3 { font-size: 14px; flex-basis: 100%; }
+    .modal .mh .actions { gap: 6px; flex-wrap: wrap; }
+    .modal .mh button { padding: 7px 10px; font-size: 12px; }
+    .compare-modal .iframes { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    .compare-modal .ch { padding: 12px 14px; }
+    .compare-bar { bottom: 14px; padding: 12px 18px; gap: 10px; font-size: 12px; left: 16px; right: 16px; transform: none; border-radius: 14px; }
+    .compare-bar button { padding: 6px 12px; font-size: 12px; }
+    footer { padding: 24px 16px; font-size: 11px; margin-top: 32px; }
+    footer .tag { font-size: 15px; }
+  }
+  @media (max-width: 400px) {
+    header .title { font-size: 15px; }
+    .card .preview-frame-wrap { height: 180px; }
+    .card .preview-frame-wrap iframe { transform: scale(0.25); }
+    nav.filters .tab { padding: 7px 12px; }
+    nav.filters .tab span { display: none; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <div class="brand">
+        <div class="logo-pill"><img src="Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+        <div class="title">INFINTECH DESIGNS<small>Web Design Style Exploration · 2026</small></div>
+      </div>
+      <div class="meta">
+        <strong>10 Styles</strong> · 3 Categories · infintechdesigns.com<br>
+        New Orleans, LA · (504) 547-6565
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><span class="dot" style="background:#EA4517;"></span>#EA4517 Orange</div>
+      <div class="swatch"><span class="dot" style="background:#ED9924;"></span>#ED9924 Gold</div>
+      <div class="swatch"><span class="dot" style="background:#FF4E5E;"></span>#FF4E5E Pink</div>
+      <div class="swatch"><span class="dot" style="background:#0E0E0E;"></span>#0E0E0E Ink</div>
+      <div class="swatch"><span class="dot" style="background:#FFFFFF; border:1px solid #ddd;"></span>#FFFFFF Paper</div>
+    </div>
+  </header>
+
+  <nav class="filters">
+    <span class="label">Filter //</span>
+    <button class="tab active" data-filter="all">All <span>10</span></button>
+    <button class="tab" data-filter="A">Structural A <span>4</span></button>
+    <button class="tab" data-filter="B">Visual B <span>4</span></button>
+    <button class="tab" data-filter="C">Functional C <span>2</span></button>
+    <label class="compare-toggle"><input type="checkbox" id="compareMode"> Compare Two</label>
+  </nav>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <div class="tag">Rank <span class="r">higher</span>. Grow faster. Convert better.</div>
+    <div>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</div>
+  </footer>
+
+  <div class="modal" id="modal">
+    <div class="mh">
+      <h3 id="modalTitle">—</h3>
+      <div class="actions">
+        <button id="prevBtn">← Prev</button>
+        <button id="nextBtn">Next →</button>
+        <a id="openTab" class="btn" target="_blank" style="display:inline-block; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.14); color:#fff; text-decoration:none; border-radius:6px; font-size:13px; font-weight: 500;">↗ Full Page</a>
+        <button class="close" id="modalClose">✕ Close</button>
+      </div>
+    </div>
+    <iframe id="modalFrame" src=""></iframe>
+  </div>
+
+  <div class="compare-bar" id="compareBar">
+    <span id="compareCount">0 / 2 selected</span>
+    <button id="compareGo">Compare</button>
+    <button id="compareClear" style="background:transparent; color:#fff; border:1px solid #fff;">Clear</button>
+  </div>
+
+  <div class="compare-modal" id="compareModal">
+    <div class="ch">
+      <h3 style="font-family:'Raleway',sans-serif; font-size:18px; letter-spacing:-0.01em; color:#fff; font-weight:700;">Compare Two Styles</h3>
+      <button class="close" id="compareClose" style="background:var(--orange); color:#fff; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; font-family:inherit; font-weight:700;">✕ Close</button>
+    </div>
+    <div class="iframes">
+      <iframe id="cmpA"></iframe>
+      <iframe id="cmpB"></iframe>
+    </div>
+  </div>
+
+<script>
+  const styles = [
+    { id: 'A03', cat: 'A', name: 'Bento Grid', catLabel: 'Structural', fit: 'Services + case studies as tileable blocks. Agency-defining layout right now.', file: 'styles/A03-bento-grid.html' },
+    { id: 'A06', cat: 'A', name: 'Asymmetric', catLabel: 'Structural', fit: 'Broken grid with diagonal accent — signals creative-agency, not template farm.', file: 'styles/A06-asymmetric-layout.html' },
+    { id: 'A07', cat: 'A', name: 'Full-Screen Hero', catLabel: 'Structural', fit: 'Cinematic 100vh hero. Tagline takes over the viewport.', file: 'styles/A07-fullscreen-hero.html' },
+    { id: 'A09', cat: 'A', name: 'Card-Based', catLabel: 'Structural', fit: 'Services catalog with rainbow-rotation card borders. Scannable, bid-friendly.', file: 'styles/A09-card-based.html' },
+    { id: 'B16', cat: 'B', name: 'Dark Mode', catLabel: 'Visual Style', fit: 'Tech-forward, orange-glow CTA, mono labels. Appeals to SaaS / B2B buyers.', file: 'styles/B16-dark-mode.html' },
+    { id: 'B17', cat: 'B', name: 'Maximalism', catLabel: 'Visual Style', fit: 'Full rainbow palette, ticker ribbon, badge rail. Dense but disciplined.', file: 'styles/B17-maximalism.html' },
+    { id: 'B20', cat: 'B', name: 'Typographic', catLabel: 'Visual Style', fit: '"RANK. GROW. CONVERT." monumental. Type carries the whole composition.', file: 'styles/B20-typographic.html' },
+    { id: 'B23', cat: 'B', name: 'Corporate / Professional', catLabel: 'Visual Style', fit: 'Navy + single orange accent, Lora serif. Enterprise-pitch restraint.', file: 'styles/B23-corporate-professional.html' },
+    { id: 'C25', cat: 'C', name: 'Landing Page', catLabel: 'Functional', fit: 'One conversion — Free Consultation. Sticky form, objection-handling below.', file: 'styles/C25-landing-page.html' },
+    { id: 'C26', cat: 'C', name: 'Portfolio', catLabel: 'Functional', fit: '12 gradient case-study cards, filterable by vertical or service.', file: 'styles/C26-portfolio.html' }
+  ];
+
+  const grid = document.getElementById('grid');
+  let currentFilter = 'all';
+  let selected = [];
+
+  function render() {
+    grid.innerHTML = '';
+    const filtered = currentFilter === 'all' ? styles : styles.filter(s => s.cat === currentFilter);
+    filtered.forEach((s) => {
+      const card = document.createElement('div');
+      card.className = 'card cat-' + s.cat;
+      card.innerHTML = `
+        <label class="compare-chk"><input type="checkbox" data-id="${s.id}"> Compare</label>
+        <div class="preview-frame-wrap"><iframe src="${s.file}" loading="lazy" scrolling="no"></iframe></div>
+        <div class="body">
+          <div class="id-row">
+            <span class="id-badge">${s.id}</span>
+            <span class="cat-label">${s.catLabel}</span>
+          </div>
+          <h3>${s.name}</h3>
+          <div class="fit"><strong>Why this fits Infintech:</strong>${s.fit}</div>
+          <div class="btns">
+            <button class="primary" data-preview="${s.id}">👁 Preview</button>
+            <a class="btn" href="${s.file}" target="_blank">↗ Full Page</a>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+    attachEvents();
+  }
+
+  function attachEvents() {
+    document.querySelectorAll('[data-preview]').forEach(btn => {
+      btn.onclick = (e) => openModal(e.target.dataset.preview);
+    });
+    document.querySelectorAll('.compare-chk input').forEach(chk => {
+      chk.onchange = (e) => {
+        const id = e.target.dataset.id;
+        if (e.target.checked) {
+          if (selected.length >= 2) { e.target.checked = false; return; }
+          selected.push(id);
+        } else {
+          selected = selected.filter(x => x !== id);
+        }
+        updateCompareBar();
+      };
+    });
+  }
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentFilter = tab.dataset.filter;
+      render();
+    };
+  });
+
+  const compareMode = document.getElementById('compareMode');
+  compareMode.onchange = () => {
+    document.body.classList.toggle('compare-mode', compareMode.checked);
+    if (!compareMode.checked) {
+      selected = [];
+      document.querySelectorAll('.compare-chk input').forEach(c => c.checked = false);
+      updateCompareBar();
+    }
+  };
+  function updateCompareBar() {
+    const bar = document.getElementById('compareBar');
+    document.getElementById('compareCount').textContent = `${selected.length} / 2 selected`;
+    bar.classList.toggle('visible', selected.length > 0);
+  }
+  document.getElementById('compareGo').onclick = () => {
+    if (selected.length !== 2) return alert('Select exactly 2 styles.');
+    const a = styles.find(s => s.id === selected[0]);
+    const b = styles.find(s => s.id === selected[1]);
+    document.getElementById('cmpA').src = a.file;
+    document.getElementById('cmpB').src = b.file;
+    document.getElementById('compareModal').classList.add('open');
+  };
+  document.getElementById('compareClear').onclick = () => {
+    selected = [];
+    document.querySelectorAll('.compare-chk input').forEach(c => c.checked = false);
+    updateCompareBar();
+  };
+  document.getElementById('compareClose').onclick = () => {
+    document.getElementById('compareModal').classList.remove('open');
+    document.getElementById('cmpA').src = '';
+    document.getElementById('cmpB').src = '';
+  };
+
+  let modalIndex = 0;
+  function openModal(id) {
+    modalIndex = styles.findIndex(s => s.id === id);
+    loadModal();
+    document.getElementById('modal').classList.add('open');
+  }
+  function loadModal() {
+    const s = styles[modalIndex];
+    document.getElementById('modalTitle').textContent = `${s.id} — ${s.name}`;
+    document.getElementById('modalFrame').src = s.file;
+    document.getElementById('openTab').href = s.file;
+  }
+  document.getElementById('modalClose').onclick = () => {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('modalFrame').src = '';
+  };
+  document.getElementById('prevBtn').onclick = () => {
+    modalIndex = (modalIndex - 1 + styles.length) % styles.length;
+    loadModal();
+  };
+  document.getElementById('nextBtn').onclick = () => {
+    modalIndex = (modalIndex + 1) % styles.length;
+    loadModal();
+  };
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('modal');
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') document.getElementById('modalClose').click();
+    if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+    if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+  });
+
+  render();
+</script>
+</body>
+</html>

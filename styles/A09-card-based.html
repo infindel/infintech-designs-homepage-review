@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--
+  Style: A09 — Card-Based
+  Category: Structural Layout
+  Infintech angle: Services catalog + case-study grid. Rainbow-rotated top borders on service cards (red/green/yellow/blue/cyan/orange) tying back to the logo block. Line-art SVG icons per service. Trust band up top (26 years / 4000 sites / 7 cities / Premier Partner).
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Services &amp; Case Studies</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cta: #EA4517;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --ink: #121212;
+    --body: #212529;
+    --paper: #FFFFFF;
+    --mute: #F5F5F5;
+    --border: #E6E6E6;
+    --r1: #E63946;
+    --r2: #2A9D4C;
+    --r3: #F2C200;
+    --r4: #1E73BE;
+    --r5: #17A2B8;
+    --r6: #ED9924;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--paper); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+
+  .trust-band { background: var(--ink); color: #fff; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .trust-band .tb-inner { max-width: 1280px; margin: 0 auto; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .trust-band span { display: inline-flex; align-items: center; gap: 8px; color: #d8d8d8; font-weight: 500; }
+  .trust-band span b { color: var(--gold); font-weight: 700; letter-spacing: 0.06em; }
+
+  nav { background: #fff; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  nav .logo { display: flex; align-items: center; gap: 10px; }
+  nav img { height: 42px; display: block; }
+  nav ul { list-style: none; display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
+  nav a:hover { color: var(--cta); }
+  .btn { background: var(--cta); color: #fff; padding: 11px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: background 0.2s, transform 0.2s; }
+  .btn:hover { background: #c3380f; transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: #fff; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+
+  .hero-card {
+    background: var(--mute); border-radius: 18px; padding: 56px 56px;
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
+    position: relative; overflow: hidden; margin-bottom: 56px;
+  }
+  .hero-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, var(--r1) 0%, var(--r1) 16.6%, var(--r2) 16.6%, var(--r2) 33.3%, var(--r3) 33.3%, var(--r3) 50%, var(--r4) 50%, var(--r4) 66.6%, var(--r5) 66.6%, var(--r5) 83.3%, var(--r6) 83.3%, var(--r6) 100%);
+  }
+  .hero-card .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cta); font-weight: 700; margin-bottom: 18px; }
+  .hero-card h1 { font-size: 52px; line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 18px; }
+  .hero-card h1 em { font-style: normal; color: var(--cta); }
+  .hero-card h1 .pk { color: var(--pink); font-style: normal; }
+  .hero-card p.lead { font-size: 16px; color: #4a4a4a; margin-bottom: 26px; max-width: 560px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-side { background: #fff; border-radius: 14px; padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .hero-side h4 { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); margin-bottom: 14px; font-weight: 700; }
+  .hero-side ul { list-style: none; }
+  .hero-side li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .hero-side li:last-child { border-bottom: none; }
+  .hero-side li svg { flex-shrink: 0; margin-top: 3px; color: var(--cta); }
+
+  .section-head { margin-bottom: 32px; }
+  .section-label { font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--cta); font-weight: 700; margin-bottom: 10px; }
+  .section-title { font-size: 38px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 1.1; }
+  .section-sub { font-size: 15px; color: #555; margin-top: 10px; max-width: 640px; }
+
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 72px; }
+  .svc { background: #fff; border: 1px solid var(--border); border-top: 4px solid var(--border); border-radius: 10px; padding: 28px 26px; transition: transform 0.25s ease, box-shadow 0.25s ease, border-top-color 0.25s ease; cursor: pointer; display: flex; flex-direction: column; }
+  .svc:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(0,0,0,0.09); }
+  .svc:nth-child(6n+1) { border-top-color: var(--r1); }
+  .svc:nth-child(6n+2) { border-top-color: var(--r2); }
+  .svc:nth-child(6n+3) { border-top-color: var(--r3); }
+  .svc:nth-child(6n+4) { border-top-color: var(--r4); }
+  .svc:nth-child(6n+5) { border-top-color: var(--r5); }
+  .svc:nth-child(6n+6) { border-top-color: var(--r6); }
+  .svc .ico { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--ink); margin-bottom: 16px; }
+  .svc:nth-child(6n+1) .ico { color: var(--r1); }
+  .svc:nth-child(6n+2) .ico { color: var(--r2); }
+  .svc:nth-child(6n+3) .ico { color: #C9A100; }
+  .svc:nth-child(6n+4) .ico { color: var(--r4); }
+  .svc:nth-child(6n+5) .ico { color: var(--r5); }
+  .svc:nth-child(6n+6) .ico { color: var(--r6); }
+  .svc h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .svc p { font-size: 13.5px; color: #555; line-height: 1.55; margin-bottom: 16px; flex-grow: 1; }
+  .svc .learn { font-size: 12.5px; font-weight: 700; color: var(--cta); letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; }
+  .svc:hover .learn { gap: 10px; }
+
+  .cases { background: var(--mute); padding: 64px 40px; margin: 0 -40px 0; border-radius: 18px; }
+  .cases-inner { max-width: 1200px; margin: 0 auto; }
+  .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case-grid .case:nth-child(4), .case-grid .case:nth-child(5) { grid-column: span 1; }
+  .case { background: #fff; border-radius: 10px; padding: 24px 22px; border-left: 3px solid var(--cta); transition: transform 0.25s, box-shadow 0.25s; }
+  .case:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.09); }
+  .case:nth-child(1) { border-left-color: var(--r1); }
+  .case:nth-child(2) { border-left-color: var(--r2); }
+  .case:nth-child(3) { border-left-color: var(--r4); }
+  .case:nth-child(4) { border-left-color: var(--r6); }
+  .case:nth-child(5) { border-left-color: var(--r5); }
+  .case .vertical { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #777; font-weight: 700; margin-bottom: 10px; }
+  .case .rank-row { display: flex; align-items: baseline; gap: 10px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .case .rank-before { font-size: 28px; color: #bbb; text-decoration: line-through; text-decoration-thickness: 2px; }
+  .case .arrow { color: var(--cta); font-size: 18px; }
+  .case .rank-after { font-size: 40px; color: var(--cta); letter-spacing: -0.02em; line-height: 1; }
+  .case .query { font-size: 13px; color: var(--body); font-weight: 500; margin-bottom: 12px; font-style: italic; }
+  .case .note { font-size: 12.5px; color: #666; line-height: 1.5; padding-top: 12px; border-top: 1px solid var(--border); }
+
+  .cta-card { background: var(--ink); color: #fff; border-radius: 16px; padding: 48px 52px; margin-top: 64px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+  .cta-card::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--r1), var(--r2), var(--r3), var(--r4), var(--r5), var(--r6));
+  }
+  .cta-card h3 { font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .cta-card h3 em { color: var(--gold); font-style: normal; }
+  .cta-card p { color: #c8c8c8; font-size: 14.5px; max-width: 520px; }
+  .cta-card .actions { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .cta-card .phone { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+  .cta-card .phone span { color: var(--gold); font-size: 11px; letter-spacing: 0.2em; display: block; font-weight: 600; margin-bottom: 4px; }
+
+  footer { text-align: center; padding: 36px 40px; font-size: 12px; color: #777; letter-spacing: 0.14em; text-transform: uppercase; border-top: 1px solid var(--border); margin-top: 48px; }
+
+  @media (max-width: 1024px) {
+    .svc-grid, .case-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-card h1 { font-size: 42px; }
+    .wrap { padding: 40px 32px; }
+    .cases { margin: 0 -32px; padding: 56px 32px; }
+  }
+  @media (max-width: 768px) {
+    .trust-band .tb-inner { gap: 10px; font-size: 10.5px; padding: 10px 24px; }
+    .trust-band span { flex: 1 1 45%; justify-content: center; }
+    nav { padding: 14px 24px; flex-wrap: wrap; gap: 12px; }
+    nav ul { display: none; }
+    nav img { height: 36px; }
+    .wrap { padding: 32px 24px; }
+    .hero-card { grid-template-columns: 1fr; padding: 40px 28px; gap: 28px; }
+    .hero-card h1 { font-size: clamp(30px, 7vw, 38px); }
+    .section-title { font-size: clamp(26px, 6vw, 32px); }
+    .svc-grid, .case-grid { grid-template-columns: 1fr; gap: 16px; }
+    .cases { padding: 48px 24px; margin: 0 -24px; border-radius: 0; }
+    .cta-card { grid-template-columns: 1fr; padding: 36px 28px; }
+    .cta-card .actions { align-items: flex-start; }
+    .cta-card h3 { font-size: 24px; }
+    .hero-ctas .btn { width: 100%; text-align: center; }
+    .cta-card .btn { width: 100%; text-align: center; }
+  }
+  @media (max-width: 400px) {
+    .hero-card { padding: 32px 22px; }
+    .hero-card h1 { font-size: 28px; }
+    .svc { padding: 24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="trust-band">
+    <div class="tb-inner">
+      <span><b>26+</b> Years In Business</span>
+      <span><b>4,000+</b> Websites Built</span>
+      <span><b>7</b> US Cities Served</span>
+      <span><b>2025</b> Google Premier Partner</span>
+    </div>
+  </div>
+
+  <nav>
+    <div class="logo"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn" href="#contact">Free Consultation</a>
+  </nav>
+
+  <div class="wrap">
+
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Full-Service Digital Marketing · New Orleans</div>
+        <h1>We Help Businesses <em>Rank Higher, Grow Faster</em> and <span class="pk">Convert Better</span> To Drive Revenue.</h1>
+        <p class="lead">Our team innovated the Google ranking game and is committed that your business ranks on the highly coveted top 3 spots of the Google Map Pack.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#contact">Claim Your FREE Consultation</a>
+          <a class="btn ghost" href="#services">View All Services</a>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <h4>Why Infintech</h4>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>FREE initial consultation with CEO Brian Hong</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>26+ years SEO and web-design expertise</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Real-time tracking dashboard</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Data-driven SEO with measurable results</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Web design that converts visitors to customers</li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="section-head" id="services">
+      <div class="section-label">Services Catalog</div>
+      <h2 class="section-title">Eleven services. One accountable team.</h2>
+      <p class="section-sub">From the strategy deck to the 3-pack, we handle the full marketing stack in-house — no handoffs, no finger-pointing.</p>
+    </div>
+
+    <div class="svc-grid">
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>Full Stack Digital Marketing</h3>
+        <p>Strategy, channels, and execution — one team driving every touchpoint from awareness to conversion.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 6h.01M11 6h.01"/></svg></div>
+        <h3>Web Design &amp; Development</h3>
+        <p>Conversion-first sites built to turn visitors into customers — responsive, fast, and search-ready from day one.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></div>
+        <h3>SEO</h3>
+        <p>Local, on-page, off-page, and link-building designed to put you in the coveted top 3 of the Map Pack.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/><circle cx="19" cy="7" r="1.5"/></svg></div>
+        <h3>PPC Advertising</h3>
+        <p>Google Ads and Facebook Ads managed by a Premier Partner — spend what converts, cut what doesn't.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H7l-3 3z"/><circle cx="9" cy="11" r="1"/><circle cx="13" cy="11" r="1"/><circle cx="17" cy="11" r="1"/></svg></div>
+        <h3>Social Media Marketing</h3>
+        <p>Channel strategy, content calendars, and paid amplification across the platforms that move your audience.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><path d="M8 12h8M8 15h8M8 18h5"/></svg></div>
+        <h3>Content Marketing</h3>
+        <p>Editorial, landing-page copy, and long-form content engineered for search intent and topical authority.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4 4 14-14"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div>
+        <h3>Conversion Rate Optimization</h3>
+        <p>A/B tests, heatmaps, and funnel audits — squeezing more revenue out of the traffic you already have.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 15 9 21 10 16.5 14.5 18 21 12 17.5 6 21 7.5 14.5 3 10 9 9 12 3"/></svg></div>
+        <h3>Online Reputation Management</h3>
+        <p>Review generation, response workflows, and branded-search cleanup so buyers see your best face first.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l4-8 5 3 4-7 5 5"/><circle cx="7" cy="12" r="1.5"/><circle cx="12" cy="15" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="21" cy="13" r="1.5"/></svg></div>
+        <h3>Lead Generation</h3>
+        <p>Full-funnel lead engines — landing pages, forms, call tracking, and nurture — sized for your sales team.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
+        <h3>White Label Services</h3>
+        <p>Fulfillment muscle for agencies — SEO, PPC, web-dev, and content delivered under your brand, on your terms.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><path d="M12 2v4"/><path d="M8 18v3M16 18v3"/></svg></div>
+        <h3>AI Automation Services</h3>
+        <p>Custom AI workflows for lead qualification, content ops, and reporting — practical automations, not hype.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 5 5.5.8-4 3.9 1 5.5L12 14.5 7 17.2l1-5.5-4-3.9 5.5-.8z"/></svg></div>
+        <h3>Google Premier Partner</h3>
+        <p>Top-tier agency status — advanced certifications, direct Google support, and early access to ad features.</p>
+        <a href="#" class="learn">Learn More →</a>
+      </div>
+
+    </div>
+
+    <section class="cases" id="results">
+      <div class="cases-inner">
+        <div class="section-head">
+          <div class="section-label">Case Studies · Before / After Ranking</div>
+          <h2 class="section-title">Real businesses. Real ranking gains.</h2>
+          <p class="section-sub">Five verticals where we've moved clients from invisible to the top of local search.</p>
+        </div>
+
+        <div class="case-grid">
+
+          <div class="case">
+            <div class="vertical">HVAC · New Orleans</div>
+            <div class="rank-row"><span class="rank-before">#47</span><span class="arrow">→</span><span class="rank-after">#3</span></div>
+            <div class="query">"HVAC New Orleans"</div>
+            <div class="note">Map-pack breakthrough inside 90 days; call volume up materially on branded plus geo-modified queries.</div>
+          </div>
+
+          <div class="case">
+            <div class="vertical">Plumbing · Houston</div>
+            <div class="rank-row"><span class="rank-before">#62</span><span class="arrow">→</span><span class="rank-after">#2</span></div>
+            <div class="query">"emergency plumber Houston"</div>
+            <div class="note">Consolidated GBP profile, cleaned citations, and rebuilt service-area pages around intent clusters.</div>
+          </div>
+
+          <div class="case">
+            <div class="vertical">Roofing · Dallas</div>
+            <div class="rank-row"><span class="rank-before">#28</span><span class="arrow">→</span><span class="rank-after">#1</span></div>
+            <div class="query">"roofing contractor Dallas"</div>
+            <div class="note">On-page overhaul plus off-page authority work took a storm-season competitor to the top of the Map Pack.</div>
+          </div>
+
+          <div class="case">
+            <div class="vertical">Legal · Atlanta</div>
+            <div class="rank-row"><span class="rank-before">#54</span><span class="arrow">→</span><span class="rank-after">#4</span></div>
+            <div class="query">"personal injury lawyer Atlanta"</div>
+            <div class="note">Competitive vertical; practice-area hubs and link development moved the firm into consistent page-one visibility.</div>
+          </div>
+
+          <div class="case">
+            <div class="vertical">Dental · Austin</div>
+            <div class="rank-row"><span class="rank-before">#39</span><span class="arrow">→</span><span class="rank-after">#2</span></div>
+            <div class="query">"cosmetic dentist Austin"</div>
+            <div class="note">Review velocity program plus location-page schema lifted the practice into the 3-pack for core money terms.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-card" id="contact">
+      <div>
+        <h3>Ready to <em>rank higher</em> and turn traffic into revenue?</h3>
+        <p>Free initial consultation with founder and CEO Brian Hong. We'll audit your site, show you where you're leaking leads, and map the first 90 days.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#">Schedule a Free Consultation</a>
+        <div class="phone"><span>Call Direct</span>(504) 547-6565</div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</footer>
+
+</body>
+</html>

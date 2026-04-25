@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<!--
+  Style: B17 — Maximalism
+  Category: Visual Style
+  Infintech angle: Full rainbow spectrum. Raleway + JetBrains Mono ticker. Huge multi-color h1, badge rail, gradient bands, multi-color service borders. Loud on desktop, dialed down on mobile.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Rank Higher. Grow Faster. Convert Better.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cta: #EA4517;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --blue: #1E88E5;
+    --green: #2BB673;
+    --cyan: #00BCD4;
+    --ink: #121212;
+    --body: #212529;
+    --paper: #FFFFFF;
+    --gray: #F5F5F5;
+    --line: #E6E6E6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--paper);
+    color: var(--body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* TICKER RIBBON */
+  .ticker {
+    background: var(--ink);
+    color: #fff;
+    border-bottom: 3px solid var(--cta);
+    overflow: hidden;
+    position: relative;
+  }
+  .ticker::before, .ticker::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ticker::before { left: 0; background: linear-gradient(to right, var(--ink), transparent); }
+  .ticker::after  { right: 0; background: linear-gradient(to left,  var(--ink), transparent); }
+  .ticker-track {
+    display: flex;
+    gap: 32px;
+    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    padding: 10px 0;
+    animation: tkr 45s linear infinite;
+    width: max-content;
+  }
+  .ticker-track span { display: inline-flex; align-items: center; gap: 32px; }
+  .ticker-track .dot { color: var(--gold); }
+  .ticker-track .hl  { color: var(--cta); }
+  .ticker-track .hl2 { color: var(--pink); }
+  .ticker-track .hl3 { color: var(--cyan); }
+  @keyframes tkr { to { transform: translateX(-50%); } }
+
+  /* NAV */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 48px; border-bottom: 1px solid var(--line);
+    background: var(--paper); position: relative; z-index: 5;
+  }
+  nav .logo img { height: 40px; }
+  nav ul { list-style: none; display: flex; gap: 28px; align-items: center; }
+  nav ul a { font-weight: 600; font-size: 14px; letter-spacing: 0.02em; }
+  nav ul a:hover { color: var(--cta); }
+  nav .phone { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--ink); }
+  nav .cta-btn {
+    background: var(--cta); color: #fff; padding: 10px 18px;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+    border-radius: 4px; border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  nav .cta-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); color: #fff; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(1200px 600px at 90% -10%, rgba(234,69,23,0.10), transparent 60%),
+      radial-gradient(1000px 500px at -5% 110%, rgba(255,78,94,0.10), transparent 60%),
+      radial-gradient(900px 500px at 110% 110%, rgba(237,153,36,0.10), transparent 60%),
+      var(--paper);
+    padding: 56px 48px 72px;
+    overflow: hidden;
+    border-bottom: 6px solid var(--ink);
+  }
+  .hero::before {
+    content: 'INFINTECH';
+    position: absolute;
+    top: 60%; right: -30px;
+    font-size: 220px; font-weight: 900;
+    letter-spacing: -0.04em;
+    color: rgba(18,18,18,0.035);
+    line-height: 0.8;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+    gap: 40px;
+    align-items: start;
+    position: relative; z-index: 2;
+  }
+  /* BADGE RAIL */
+  .badge-rail { display: flex; flex-direction: column; gap: 12px; }
+  .badge-rail .badge {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 10px 12px;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 var(--ink);
+    line-height: 1.25;
+  }
+  .badge-rail .badge .n {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+  }
+  .badge-rail .badge:nth-child(1) { border-color: var(--cta); box-shadow: 3px 3px 0 var(--cta); }
+  .badge-rail .badge:nth-child(1) .n { color: var(--cta); }
+  .badge-rail .badge:nth-child(2) { border-color: var(--gold); box-shadow: 3px 3px 0 var(--gold); }
+  .badge-rail .badge:nth-child(2) .n { color: var(--gold); }
+  .badge-rail .badge:nth-child(3) { border-color: var(--pink); box-shadow: 3px 3px 0 var(--pink); }
+  .badge-rail .badge:nth-child(3) .n { color: var(--pink); }
+  .badge-rail .badge:nth-child(4) { border-color: var(--blue); box-shadow: 3px 3px 0 var(--blue); }
+  .badge-rail .badge:nth-child(4) .n { color: var(--blue); }
+
+  /* HERO CENTER */
+  .hero-center .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--ink); color: var(--gold);
+    padding: 6px 12px; margin-bottom: 20px;
+  }
+  .hero-center .eyebrow .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--cta);
+    box-shadow: 0 0 0 0 rgba(234,69,23,0.6);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(234,69,23,0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(234,69,23,0); }
+    100% { box-shadow: 0 0 0 0 rgba(234,69,23,0); }
+  }
+  .hero-center h1 {
+    font-weight: 900;
+    font-size: clamp(42px, 6vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero-center h1 .rank    { color: var(--cta); }
+  .hero-center h1 .higher  { color: var(--ink); font-style: italic; }
+  .hero-center h1 .grow    { color: var(--gold); }
+  .hero-center h1 .faster  { color: var(--ink); font-style: italic; }
+  .hero-center h1 .convert { color: var(--pink); }
+  .hero-center h1 .better  { color: var(--ink); font-style: italic; }
+  .hero-center h1 .amp     { color: var(--cyan); font-weight: 500; }
+  .hero-center .sub {
+    font-size: 17px; line-height: 1.55; color: var(--body);
+    max-width: 620px; margin-bottom: 24px; font-weight: 500;
+  }
+  .hero-center .sub strong { color: var(--ink); font-weight: 800; background: linear-gradient(120deg, transparent 0 60%, rgba(237,153,36,0.35) 60% 100%); padding: 0 2px; }
+  .hero-trust { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; margin-bottom: 28px; }
+  .hero-trust li {
+    position: relative; padding-left: 22px;
+    font-size: 13px; font-weight: 600; color: var(--body);
+  }
+  .hero-trust li::before {
+    content: '✓'; position: absolute; left: 0; top: -1px;
+    color: var(--cta); font-weight: 900;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn-primary {
+    background: var(--cta); color: #fff;
+    padding: 16px 24px; font-weight: 800; font-size: 14px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 2px solid var(--ink); border-radius: 4px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); color: #fff; }
+  .btn-secondary {
+    background: var(--ink); color: var(--gold);
+    padding: 16px 24px; font-weight: 800; font-size: 14px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 2px solid var(--ink); border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .btn-secondary:hover { background: var(--gold); color: var(--ink); }
+
+  /* HERO RIGHT: ranking callout chart */
+  .rank-card {
+    background: var(--ink); color: #fff;
+    border: 3px solid var(--ink);
+    padding: 20px;
+    box-shadow: 6px 6px 0 var(--cta);
+    position: relative;
+  }
+  .rank-card .tag {
+    position: absolute; top: -12px; left: 12px;
+    background: var(--cta); color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+    padding: 4px 10px; text-transform: uppercase;
+  }
+  .rank-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .rank-card h3 { font-size: 20px; font-weight: 900; margin-bottom: 14px; line-height: 1.15; }
+  .rank-row { display: grid; grid-template-columns: 50px 1fr 44px; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 11px; }
+  .rank-row .who { font-weight: 700; letter-spacing: 0.05em; }
+  .rank-row .bar {
+    height: 10px; background: rgba(255,255,255,0.12);
+    position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);
+  }
+  .rank-row .bar .fill { position: absolute; top: 0; bottom: 0; left: 0; }
+  .rank-row .v { font-family: 'JetBrains Mono', monospace; font-weight: 700; text-align: right; }
+  .rank-row.before .bar .fill { width: 22%; background: var(--pink); }
+  .rank-row.after  .bar .fill { width: 94%; background: linear-gradient(90deg, var(--gold), var(--cta)); }
+  .rank-row.after  .v { color: var(--gold); }
+  .rank-meta { margin-top: 12px; font-size: 11px; color: #aaa; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
+  .rank-meta .up { color: var(--green); font-weight: 700; }
+
+  /* STATS BAND */
+  .stats {
+    background: linear-gradient(90deg, var(--cta) 0%, var(--gold) 50%, var(--pink) 100%);
+    color: #fff;
+    padding: 28px 48px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    border-bottom: 6px solid var(--ink);
+  }
+  .stats .s { text-align: center; position: relative; padding: 6px 8px; }
+  .stats .s + .s::before {
+    content: ''; position: absolute; left: -8px; top: 10%; bottom: 10%;
+    width: 2px; background: rgba(255,255,255,0.35);
+  }
+  .stats .n { font-size: 44px; font-weight: 900; line-height: 1; letter-spacing: -0.02em; }
+  .stats .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; opacity: 0.95; }
+
+  /* SERVICES */
+  .services {
+    padding: 72px 48px;
+    background:
+      radial-gradient(800px 400px at 0% 0%, rgba(30,136,229,0.06), transparent 60%),
+      radial-gradient(800px 400px at 100% 100%, rgba(255,78,94,0.06), transparent 60%),
+      var(--paper);
+    border-bottom: 6px solid var(--ink);
+  }
+  .services-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; gap: 24px; flex-wrap: wrap; }
+  .services-head .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; color: var(--cta);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .services-head h2 {
+    font-size: clamp(32px, 4vw, 54px); font-weight: 900;
+    color: var(--ink); line-height: 1; letter-spacing: -0.02em;
+  }
+  .services-head h2 em { font-style: italic; color: var(--pink); }
+  .services-head .note {
+    font-size: 13px; color: var(--body); max-width: 320px;
+    border-left: 3px solid var(--gold); padding-left: 12px; font-weight: 500;
+  }
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .svc {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 20px 18px;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .svc::before {
+    content: '';
+    position: absolute; top: -2px; left: -2px; right: -2px;
+    height: 6px;
+  }
+  .svc:nth-child(1)::before { background: var(--cta); }
+  .svc:nth-child(2)::before { background: var(--gold); }
+  .svc:nth-child(3)::before { background: var(--pink); }
+  .svc:nth-child(4)::before { background: var(--blue); }
+  .svc:nth-child(5)::before { background: var(--green); }
+  .svc:nth-child(6)::before { background: var(--cyan); }
+  .svc:nth-child(7)::before { background: var(--ink); }
+  .svc:nth-child(8)::before { background: linear-gradient(90deg, var(--cta), var(--pink), var(--gold)); }
+  .svc:hover { transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--ink); }
+  .svc .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    color: #888; letter-spacing: 0.15em;
+  }
+  .svc h3 {
+    font-size: 18px; font-weight: 800;
+    color: var(--ink); line-height: 1.2;
+    margin: 6px 0 8px;
+  }
+  .svc p { font-size: 12px; line-height: 1.5; color: var(--body); font-weight: 500; }
+  .svc .arrow { margin-top: 12px; font-size: 14px; color: var(--cta); font-weight: 900; }
+
+  /* CTA BAND */
+  .cta-band {
+    background: var(--ink); color: #fff;
+    padding: 56px 48px;
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
+    position: relative; overflow: hidden;
+    border-bottom: 6px solid var(--gold);
+  }
+  .cta-band::before {
+    content: '★ ★ ★ ★ ★';
+    position: absolute; top: 14px; left: 48px;
+    color: var(--gold); font-size: 14px; letter-spacing: 8px;
+  }
+  .cta-band::after {
+    content: 'GOOGLE PREMIER PARTNER 2025';
+    position: absolute; bottom: 14px; right: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: #666;
+  }
+  .cta-band h2 {
+    font-size: clamp(30px, 3.6vw, 52px); font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-bottom: 14px; margin-top: 14px;
+  }
+  .cta-band h2 .a { color: var(--cta); }
+  .cta-band h2 .b { color: var(--gold); font-style: italic; }
+  .cta-band h2 .c { color: var(--pink); }
+  .cta-band .sub { font-size: 15px; color: #ccc; max-width: 560px; margin-bottom: 22px; font-weight: 500; }
+  .cta-band .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-band .btn-primary { box-shadow: 4px 4px 0 var(--gold); border-color: #fff; }
+  .cta-band .btn-primary:hover { box-shadow: 6px 6px 0 var(--gold); }
+  .cta-band .phone-big {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; font-size: 15px;
+    color: var(--gold); display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 18px; border: 2px dashed var(--gold);
+  }
+  .cta-right {
+    background: linear-gradient(135deg, var(--cta) 0%, var(--pink) 100%);
+    padding: 24px; border: 3px solid #fff;
+    box-shadow: 6px 6px 0 var(--gold);
+    position: relative; z-index: 2;
+  }
+  .cta-right .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: #fff;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .cta-right h3 { font-size: 22px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 14px; }
+  .cta-right ul { list-style: none; }
+  .cta-right ul li {
+    color: #fff; font-size: 13px; font-weight: 600;
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.25);
+    display: flex; gap: 8px;
+  }
+  .cta-right ul li::before { content: '→'; color: var(--ink); font-weight: 900; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: #aaa;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    gap: 16px; flex-wrap: wrap;
+  }
+  footer .g { color: var(--gold); }
+  footer .cities { color: #666; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 140px 1fr; }
+    .rank-card { grid-column: 1 / -1; margin-top: 8px; }
+    .stats { grid-template-columns: repeat(5, 1fr); padding: 24px 32px; }
+    .stats .n { font-size: 32px; }
+    .svc-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero, .services, .cta-band, nav, footer { padding-left: 32px; padding-right: 32px; }
+    .cta-band { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 12px 20px; }
+    nav ul { display: none; }
+    nav .phone { display: none; }
+    .hero { padding: 36px 20px 48px; }
+    .hero::before { font-size: 120px; top: 70%; }
+    .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    .badge-rail {
+      flex-direction: row; flex-wrap: wrap; gap: 8px;
+    }
+    .badge-rail .badge { flex: 1 1 calc(50% - 4px); padding: 8px 10px; font-size: 10px; box-shadow: 2px 2px 0 var(--ink); }
+    .badge-rail .badge .n { font-size: 16px; }
+    .hero-center h1 { font-size: clamp(34px, 9vw, 56px); }
+    .hero-trust { grid-template-columns: 1fr; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-secondary { flex: 1 1 100%; text-align: center; }
+    .stats { grid-template-columns: repeat(2, 1fr); padding: 20px; gap: 18px; }
+    .stats .s + .s::before { display: none; }
+    .stats .n { font-size: 28px; }
+    .services { padding: 48px 20px; }
+    .services-head { flex-direction: column; align-items: flex-start; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .cta-band { padding: 40px 20px; grid-template-columns: 1fr; }
+    .cta-band::before, .cta-band::after { display: none; }
+    .cta-band .actions { flex-direction: column; align-items: stretch; }
+    .cta-band .phone-big { justify-content: center; }
+    footer { padding: 20px; flex-direction: column; text-align: center; align-items: flex-start; }
+  }
+  @media (max-width: 400px) {
+    .hero-center h1 { font-size: 32px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .ticker-track { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span><span class="hl">◆</span> GOOGLE PREMIER PARTNER 2025</span>
+      <span><span class="dot">●</span> 26 YEARS IN BUSINESS</span>
+      <span><span class="hl2">▲</span> 4,000+ WEBSITES BUILT</span>
+      <span><span class="dot">●</span> 750+ SEO CAMPAIGNS</span>
+      <span><span class="hl3">◆</span> NEW ORLEANS</span>
+      <span><span class="dot">●</span> HOUSTON</span>
+      <span><span class="hl">◆</span> DALLAS</span>
+      <span><span class="dot">●</span> AUSTIN</span>
+      <span><span class="hl2">▲</span> SAN FRANCISCO</span>
+      <span><span class="dot">●</span> SEATTLE</span>
+      <span><span class="hl3">◆</span> ATLANTA</span>
+      <span><span class="dot">●</span> NEW YORK</span>
+      <span><span class="hl">◆</span> AS SEEN IN BUZZFEED · ENTREPRENEUR · INC.</span>
+      <span><span class="hl">◆</span> GOOGLE PREMIER PARTNER 2025</span>
+      <span><span class="dot">●</span> 26 YEARS IN BUSINESS</span>
+      <span><span class="hl2">▲</span> 4,000+ WEBSITES BUILT</span>
+      <span><span class="dot">●</span> 750+ SEO CAMPAIGNS</span>
+      <span><span class="hl3">◆</span> NEW ORLEANS</span>
+      <span><span class="dot">●</span> HOUSTON</span>
+      <span><span class="hl">◆</span> DALLAS</span>
+      <span><span class="dot">●</span> AUSTIN</span>
+      <span><span class="hl2">▲</span> SAN FRANCISCO</span>
+      <span><span class="dot">●</span> SEATTLE</span>
+      <span><span class="hl3">◆</span> ATLANTA</span>
+      <span><span class="dot">●</span> NEW YORK</span>
+      <span><span class="hl">◆</span> AS SEEN IN BUZZFEED · ENTREPRENEUR · INC.</span>
+    </div>
+  </div>
+
+  <nav>
+    <a class="logo" href="#"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
+    <ul>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Results</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span class="phone">504.547.6565</span>
+      <a href="#" class="cta-btn">Free Consult</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <aside class="badge-rail" aria-label="Trust badges">
+        <div class="badge"><span class="n">2025</span>Google Premier Partner</div>
+        <div class="badge"><span class="n">26 YRS</span>In Business</div>
+        <div class="badge"><span class="n">#1</span>NOLA Agency</div>
+        <div class="badge"><span class="n">PRESS</span>BuzzFeed · Inc. · HuffPost</div>
+      </aside>
+
+      <div class="hero-center">
+        <div class="eyebrow"><span class="pulse"></span> Full-Service Digital Marketing · Est. 1999</div>
+        <h1>
+          We Help Businesses<br>
+          <span class="rank">Rank Higher</span><span class="amp">,</span>
+          <span class="grow">Grow Faster</span><span class="amp"> &amp; </span>
+          <span class="convert">Convert Better</span><br>
+          <span class="better">to drive revenue.</span>
+        </h1>
+        <p class="sub">Our team <strong>innovated the Google Ranking Game</strong> and is committed that your business ranks on the <strong>highly coveted Top 3 spots</strong> of the Google Map Pack.</p>
+        <ul class="hero-trust">
+          <li>FREE consult with Founder &amp; CEO Brian Hong</li>
+          <li>26+ years experience — SEO &amp; web design</li>
+          <li>Real-time tracking dashboard included</li>
+          <li>Data-driven, measurable results</li>
+        </ul>
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary">Claim Your FREE Consultation →</a>
+          <a href="tel:5045476565" class="btn-secondary">☎ 504.547.6565</a>
+        </div>
+      </div>
+
+      <aside class="rank-card" aria-label="Ranking movement">
+        <span class="tag">Live Case</span>
+        <div class="label">Before &gt; After · 90 Days</div>
+        <h3>HVAC Client — Local Pack Movement</h3>
+        <div class="rank-row before"><span class="who">BEFORE</span><span class="bar"><span class="fill"></span></span><span class="v">#37</span></div>
+        <div class="rank-row after"><span class="who">AFTER</span><span class="bar"><span class="fill"></span></span><span class="v">#2</span></div>
+        <div class="rank-meta">Keyword volume <span class="up">↑ 412%</span> · Calls <span class="up">↑ 268%</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="s"><div class="n">26+</div><div class="l">Years Experience</div></div>
+    <div class="s"><div class="n">4,000+</div><div class="l">Websites Built</div></div>
+    <div class="s"><div class="n">750+</div><div class="l">SEO Campaigns</div></div>
+    <div class="s"><div class="n">7</div><div class="l">US Cities Served</div></div>
+    <div class="s"><div class="n">#1</div><div class="l">NOLA Agency</div></div>
+  </div>
+
+  <section class="services">
+    <div class="services-head">
+      <div>
+        <div class="eyebrow">What We Do · All Of It</div>
+        <h2>Every channel, <em>one team</em>, zero handoffs.</h2>
+      </div>
+      <p class="note">From SEO to PPC to full-stack builds — we ship integrated campaigns that actually move the revenue needle.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="num">01</div><h3>Full Stack Digital Marketing</h3><p>End-to-end strategy across SEO, paid, social and content — one team, one scorecard.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">02</div><h3>Web Design &amp; Development</h3><p>Custom WordPress and Wix Studio builds engineered to convert, not just look pretty.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">03</div><h3>SEO — Local &amp; On-Page</h3><p>Map-pack domination, on-page surgery, and white-hat link building that sticks.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">04</div><h3>PPC — Google &amp; Meta</h3><p>Premier-Partner ad strategy. Tight match types, tested creative, daily optimization.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">05</div><h3>Social Media Marketing</h3><p>Organic + paid social playbooks tuned for home services, legal, medical and food.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">06</div><h3>Content Marketing</h3><p>Topic-cluster content engineered for E-E-A-T, search intent and real conversions.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">07</div><h3>Conversion Rate Optimization</h3><p>Heatmaps, split tests, and page surgery to double the value of existing traffic.</p><div class="arrow">→</div></div>
+      <div class="svc"><div class="num">08</div><h3>AI Automation &amp; Leads</h3><p>Lead gen, reputation management and AI workflows that compound month over month.</p><div class="arrow">→</div></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div>
+      <h2><span class="a">Ready to rank,</span><br><span class="b">grow &amp; convert</span><br><span class="c">this quarter?</span></h2>
+      <p class="sub">Book a free 30-minute consultation with founder &amp; CEO Brian Hong. Locally owned in the Lower Garden District of New Orleans — serving home service, legal, medical and restaurant brands nationwide.</p>
+      <div class="actions">
+        <a href="#" class="btn-primary">Schedule Free Consultation →</a>
+        <a href="tel:5045476565" class="phone-big">☎ 504.547.6565</a>
+      </div>
+    </div>
+    <aside class="cta-right">
+      <div class="k">What you get — first 14 days</div>
+      <h3>A plan, not a pitch deck.</h3>
+      <ul>
+        <li>Full technical SEO audit</li>
+        <li>Competitor keyword gap map</li>
+        <li>Ad account teardown &amp; fix list</li>
+        <li>Revenue projection by channel</li>
+        <li>30-60-90 day execution roadmap</li>
+      </ul>
+    </aside>
+  </section>
+
+  <footer>
+    <span>Infintech Designs · <span class="g">Infintechdesigns.com</span> · New Orleans · © 2026</span>
+    <span class="cities">NOLA · HOU · DAL · AUS · SF · SEA · ATL · NYC</span>
+  </footer>
+
+</body>
+</html>

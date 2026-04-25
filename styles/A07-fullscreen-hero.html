@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--
+  Style: A07 — Full-Screen Hero
+  Category: Structural Layout
+  Infintech angle: 100vh cinematic hero on near-black with a drifting red-orange/pink/gold gradient blob. Display Raleway h1 with keyword emphasis in #EA4517, trust-signal row, single orange CTA. Services + stats + footer below the fold. Black-wordmark logo in a white pill reads cleanest on the dark hero.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Rank Higher, Grow Faster, Convert Better</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #EA4517;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --ink: #121212;
+    --body: #212529;
+    --paper: #FFFFFF;
+    --mute: #F5F5F5;
+    --dark: #0A0A0A;
+    --dark-2: #151515;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Raleway', sans-serif; color: var(--body); line-height: 1.6; background: var(--paper); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  nav .logo-pill { background: #fff; border-radius: 100px; padding: 8px 20px; display: inline-flex; align-items: center; }
+  nav .logo-pill img { height: 28px; width: auto; display: block; }
+  nav ul { list-style: none; display: flex; gap: 34px; align-items: center; }
+  nav ul a { color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
+  nav ul a:hover { color: var(--gold); }
+  nav .nav-cta { background: var(--orange); color: #fff !important; padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+  nav .nav-cta:hover { background: #c53a12; color: #fff !important; }
+
+  .hero {
+    height: 100vh;
+    min-height: 720px;
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 110px 48px 90px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 70vw; height: 70vw;
+    max-width: 1100px; max-height: 1100px;
+    background: radial-gradient(circle at 30% 30%, rgba(234,69,23,0.65), rgba(255,78,94,0.45) 40%, rgba(237,153,36,0.25) 70%, transparent 80%);
+    filter: blur(70px);
+    opacity: 0.6;
+    border-radius: 50%;
+    animation: drift-a 18s ease-in-out infinite alternate;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -25%; right: -15%;
+    width: 65vw; height: 65vw;
+    max-width: 1000px; max-height: 1000px;
+    background: radial-gradient(circle at 50% 50%, rgba(255,78,94,0.55), rgba(237,153,36,0.35) 45%, rgba(234,69,23,0.2) 70%, transparent 80%);
+    filter: blur(80px);
+    opacity: 0.55;
+    border-radius: 50%;
+    animation: drift-b 22s ease-in-out infinite alternate;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes drift-a {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(8vw, 6vh) scale(1.1); }
+    100% { transform: translate(-4vw, 10vh) scale(0.95); }
+  }
+  @keyframes drift-b {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-6vw, -4vh) scale(1.08); }
+    100% { transform: translate(4vw, -8vh) scale(0.92); }
+  }
+
+  .hero .grain {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.55) 100%);
+  }
+
+  .hero-content { position: relative; z-index: 3; max-width: 1180px; width: 100%; }
+  .hero .eyebrow {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+    padding: 7px 16px;
+    border: 1px solid rgba(237,153,36,0.4);
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 6.2vw, 96px);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 0 auto 28px;
+    max-width: 16ch;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .hero h1 .hl { color: var(--orange); }
+  .hero .trust-row {
+    display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-bottom: 36px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.72); font-weight: 600;
+  }
+  .hero .trust-row .dot { width: 4px; height: 4px; background: var(--orange); border-radius: 50%; display: inline-block; }
+  .hero .cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    padding: 20px 42px;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 999px;
+    box-shadow: 0 14px 40px -12px rgba(234,69,23,0.7);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-primary:hover { background: #c53a12; transform: translateY(-2px); box-shadow: 0 18px 44px -10px rgba(234,69,23,0.8); }
+  .hero .subline { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+  .hero .subline a { color: var(--gold); font-weight: 600; }
+
+  .scroll-ind {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 3; color: rgba(255,255,255,0.6); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    text-align: center;
+  }
+  .scroll-ind::after { content: ''; display: block; width: 1px; height: 28px; background: rgba(255,255,255,0.5); margin: 10px auto 0; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 0.25; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+  .services { padding: 110px 48px; background: var(--paper); }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .sec-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+  .sec-head .k { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(30px, 4vw, 48px); color: var(--ink); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; }
+  .sec-head p { color: #555; font-size: 16px; }
+
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .svc {
+    padding: 40px 32px;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    background: #fff;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .svc:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.15); border-color: var(--orange); }
+  .svc .ico {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(234,69,23,0.12), rgba(237,153,36,0.12));
+    color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .svc h3 { font-size: 22px; color: var(--ink); font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+  .svc p { color: #555; font-size: 15px; line-height: 1.65; }
+
+  .stat-band {
+    background: var(--ink);
+    color: #fff;
+    padding: 72px 48px;
+  }
+  .stat-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+  .stat { border-right: 1px solid rgba(255,255,255,0.08); padding: 8px 16px; }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-size: clamp(36px, 4.5vw, 60px); font-weight: 800; color: var(--orange); line-height: 1; letter-spacing: -0.02em; }
+  .stat .l { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 12px; font-weight: 600; }
+
+  .cta-band {
+    padding: 100px 48px;
+    background: linear-gradient(135deg, #EA4517 0%, #ED9924 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .cta-band h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.15; }
+  .cta-band p { font-size: 17px; opacity: 0.92; max-width: 620px; margin: 0 auto 36px; }
+  .cta-band .btn-inv {
+    display: inline-block; background: #fff; color: var(--orange);
+    padding: 20px 44px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: transform 0.2s;
+  }
+  .cta-band .btn-inv:hover { transform: translateY(-2px); }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 56px 48px 28px; }
+  footer .fg { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+  footer h4 { color: #fff; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; font-size: 14px; }
+  footer ul a:hover { color: var(--orange); }
+  footer .brand p { font-size: 14px; margin-top: 18px; line-height: 1.7; }
+  footer .brand .logo-pill { background: #fff; border-radius: 100px; padding: 8px 18px; display: inline-flex; }
+  footer .brand .logo-pill img { height: 28px; width: auto; }
+  footer .bar { max-width: 1200px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 18px 28px; }
+    nav ul { gap: 22px; }
+    .hero { padding: 110px 28px 70px; }
+    .services, .stat-band, .cta-band { padding-left: 28px; padding-right: 28px; }
+    footer { padding-left: 28px; padding-right: 28px; }
+    .svc-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    footer .fg { grid-template-columns: 1.2fr 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav ul li:not(:last-child) { display: none; }
+    .hero { padding: 100px 20px 70px; }
+    .hero h1 { letter-spacing: -0.02em; max-width: 100%; }
+    .hero .trust-row { gap: 10px 18px; font-size: 11px; letter-spacing: 0.18em; }
+    .hero .trust-row .dot { display: none; }
+    .services, .stat-band, .cta-band { padding-left: 20px; padding-right: 20px; }
+    footer { padding-left: 20px; padding-right: 20px; }
+    .svc-grid { grid-template-columns: 1fr; gap: 18px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
+    .stat:nth-child(2) { border-right: none; }
+    footer .fg { grid-template-columns: 1fr; gap: 30px; }
+    .btn-primary { padding: 18px 32px; font-size: 13px; width: 100%; max-width: 340px; text-align: center; }
+  }
+  @media (max-width: 400px) {
+    nav { padding: 14px 16px; }
+    .hero { padding: 96px 16px 60px; }
+    .hero .eyebrow { font-size: 10px; padding: 6px 14px; margin-bottom: 22px; }
+    .hero h1 { font-size: clamp(34px, 9vw, 46px); }
+    .hero .trust-row { font-size: 10px; letter-spacing: 0.15em; gap: 8px 14px; margin-bottom: 32px; }
+    .services, .cta-band { padding-top: 72px; padding-bottom: 72px; }
+    .stat-band { padding-top: 56px; padding-bottom: 56px; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo-pill" aria-label="Infintech Designs"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Free Consult</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="grain"></div>
+    <div class="hero-content">
+      <span class="eyebrow">Google Premier Partner 2025</span>
+      <h1>We Help Businesses <span class="hl">Rank Higher, Grow Faster</span> and <span class="hl">Convert Better</span> To Drive Revenue.</h1>
+      <div class="trust-row">
+        <span>26 Years</span>
+        <span class="dot"></span>
+        <span>4,000+ Websites</span>
+        <span class="dot"></span>
+        <span>Google Premier Partner 2025</span>
+      </div>
+      <div class="cta-wrap">
+        <a href="#contact" class="btn-primary">Claim Your Free Consultation</a>
+        <div class="subline">Or call <a href="tel:5045476565">(504) 547-6565</a> — New Orleans, LA</div>
+      </div>
+    </div>
+    <div class="scroll-ind">Scroll</div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="sec-head">
+        <div class="k">What We Do</div>
+        <h2>Full-stack digital marketing, built to move revenue.</h2>
+        <p>Twenty-six years of SEO, paid media, and conversion-tuned web design — delivered from New Orleans to home-services, legal, medical, and restaurant clients across eight US cities.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="ico">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </div>
+          <h3>Search Engine Optimization</h3>
+          <p>Local, on-page, off-page, and link-building programs engineered to claim the top three Google Map Pack positions in your market.</p>
+        </div>
+        <div class="svc">
+          <div class="ico">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
+          </div>
+          <h3>Paid Media &amp; PPC</h3>
+          <p>Google Ads and Meta campaigns managed by a Premier Partner team — built around measurable cost per acquisition, not vanity clicks.</p>
+        </div>
+        <div class="svc">
+          <div class="ico">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 4v14"/></svg>
+          </div>
+          <h3>Web Design &amp; CRO</h3>
+          <p>Websites designed to convert: fast load, clear CTAs, conversion-rate optimization baked in from the first wireframe forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stat-band">
+    <div class="stat-grid">
+      <div class="stat"><div class="n">26+</div><div class="l">Years in Business</div></div>
+      <div class="stat"><div class="n">4,000+</div><div class="l">Websites Built</div></div>
+      <div class="stat"><div class="n">750+</div><div class="l">SEO Campaigns</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">US Cities Served</div></div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="contact">
+    <h2>Ready to outrank, outgrow, and outconvert your competition?</h2>
+    <p>Book a free consultation with Founder &amp; CEO Brian Hong and get a real-time dashboard look at what your growth plan can do.</p>
+    <a href="#" class="btn-inv">Schedule a Free Consultation</a>
+  </section>
+
+  <footer>
+    <div class="fg">
+      <div class="brand">
+        <a href="#" class="logo-pill"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
+        <p>Full-service digital marketing, locally owned in the Lower Garden District of New Orleans. Serving clients in eight US cities.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">SEO</a></li>
+          <li><a href="#">PPC &amp; Paid Media</a></li>
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">CRO</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Work</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="tel:5045476565">(504) 547-6565</a></li>
+          <li>New Orleans, LA</li>
+          <li>Mon–Fri 9a–6p CT</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bar">
+      <div>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</div>
+      <div>Google Premier Partner 2025</div>
+    </div>
+  </footer>
+</body>
+</html>

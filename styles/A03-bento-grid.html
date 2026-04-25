@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--
+  Style: A03 — Bento Grid
+  Category: Structural Layout
+  Infintech angle: SEO flagship tile, multi-color rainbow accents across service/stat tiles, press logos tile.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Digital Marketing Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #EA4517;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --ink: #121212;
+    --body: #212529;
+    --paper: #FFFFFF;
+    --gray: #F5F5F5;
+    --green: #22A06B;
+    --blue: #2B7FD1;
+    --cyan: #24B7C9;
+    --card: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--gray); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 32px); }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 32px; gap: 16px; flex-wrap: wrap; }
+  nav .logo { height: 44px; width: auto; display: block; }
+  nav ul { display: flex; gap: 22px; list-style: none; font-size: 14px; font-weight: 500; color: var(--ink); }
+  nav ul a { padding: 8px 12px; border-radius: 999px; transition: background 0.2s; }
+  nav ul a:hover { background: rgba(0,0,0,0.06); }
+  .btn { background: var(--orange); color: #fff; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-block; transition: background 0.2s, transform 0.2s; }
+  .btn:hover { background: #c93910; transform: translateY(-1px); }
+
+  .bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 150px; gap: 14px; }
+  .tile {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .tile:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.08); }
+  .tile h2, .tile h3 { font-weight: 700; color: var(--ink); line-height: 1.15; letter-spacing: -0.01em; }
+  .tile h3 { font-size: 22px; }
+  .tile p { font-size: 14px; color: #4a5056; line-height: 1.5; }
+  .lbl { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+
+  .t-hero {
+    grid-column: span 4; grid-row: span 3;
+    background: linear-gradient(135deg, #151515, #0a0a0a);
+    color: #fff; padding: clamp(28px, 4vw, 44px);
+    justify-content: space-between;
+  }
+  .t-hero .eyebrow { color: var(--gold); }
+  .t-hero h1 {
+    font-size: clamp(36px, 5.2vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 14px 0 0;
+  }
+  .t-hero h1 .rank { color: var(--orange); }
+  .t-hero h1 .grow { color: var(--gold); }
+  .t-hero h1 .conv { color: var(--pink); }
+  .t-hero .sub { font-size: 16px; color: #c8c8c8; max-width: 520px; margin-top: 18px; }
+  .t-hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 22px; }
+  .t-hero .ghost { padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); color: #fff; font-weight: 600; font-size: 14px; }
+  .t-hero .ghost:hover { background: rgba(255,255,255,0.08); }
+
+  .t-stat { grid-column: span 2; grid-row: span 1; color: #fff; }
+  .t-stat .n { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+  .t-stat .l { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.95; font-weight: 600; }
+  .stat-orange { background: var(--orange); }
+  .stat-gold { background: var(--gold); color: var(--ink); }
+  .stat-pink { background: var(--pink); }
+
+  .t-flag {
+    grid-column: span 4; grid-row: span 2;
+    background: linear-gradient(135deg, #EA4517, #FF4E5E);
+    color: #fff;
+  }
+  .t-flag .lbl { color: rgba(255,255,255,0.85); }
+  .t-flag h3 { font-size: clamp(28px, 3.6vw, 40px); color: #fff; max-width: 560px; }
+  .t-flag p { color: rgba(255,255,255,0.92); max-width: 520px; font-size: 15px; }
+  .t-flag .pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .t-flag .pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; }
+
+  .t-svc { grid-column: span 2; grid-row: span 1; }
+  .t-svc .dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .t-svc .lbl-row { display: flex; align-items: center; gap: 8px; }
+  .svc-web .lbl, .svc-web .dot { color: var(--blue); background: var(--blue); }
+  .svc-web .lbl { background: transparent; }
+  .svc-ppc .lbl, .svc-ppc .dot { color: var(--green); background: var(--green); }
+  .svc-ppc .lbl { background: transparent; }
+  .svc-social .lbl, .svc-social .dot { color: var(--cyan); background: var(--cyan); }
+  .svc-social .lbl { background: transparent; }
+  .svc-content .lbl, .svc-content .dot { color: var(--gold); background: var(--gold); }
+  .svc-content .lbl { background: transparent; }
+  .svc-cro .lbl, .svc-cro .dot { color: var(--pink); background: var(--pink); }
+  .svc-cro .lbl { background: transparent; }
+  .svc-ai .lbl, .svc-ai .dot { color: var(--orange); background: var(--orange); }
+  .svc-ai .lbl { background: transparent; }
+
+  .t-press { grid-column: span 4; grid-row: span 1; background: var(--ink); color: #fff; }
+  .t-press .lbl { color: var(--gold); }
+  .t-press .logos { display: flex; gap: clamp(14px, 3vw, 28px); flex-wrap: wrap; align-items: center; margin-top: 6px; }
+  .t-press .logo-txt { font-size: clamp(14px, 1.4vw, 17px); font-weight: 700; letter-spacing: -0.01em; color: #eaeaea; font-style: italic; }
+
+  .t-cta { grid-column: span 2; grid-row: span 2; background: var(--ink); color: #fff; }
+  .t-cta .lbl { color: var(--pink); }
+  .t-cta h3 { color: #fff; font-size: 22px; line-height: 1.2; }
+  .t-cta .phone { font-size: 20px; font-weight: 700; color: var(--gold); margin-top: 6px; display: block; }
+  .t-cta .btn-full { display: block; text-align: center; background: var(--orange); color: #fff; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 14px; margin-top: 10px; }
+  .t-cta .btn-full:hover { background: #c93910; }
+
+  .t-location {
+    grid-column: span 2; grid-row: span 1;
+    background: #fff; border: 2px solid var(--ink);
+  }
+  .t-location h3 { font-size: 18px; }
+  .t-location .lbl { color: var(--orange); }
+  .t-location p { font-size: 13px; }
+
+  .t-partner {
+    grid-column: span 2; grid-row: span 1;
+    background: var(--gold); color: var(--ink);
+  }
+  .t-partner .lbl { color: rgba(0,0,0,0.7); }
+  .t-partner h3 { font-size: 18px; }
+  .t-partner p { color: rgba(0,0,0,0.78); font-size: 13px; }
+
+  footer { margin-top: 40px; padding: 28px 0 8px; border-top: 1px solid #d8d8d8; display: flex; justify-content: space-between; font-size: 13px; color: #666; gap: 16px; flex-wrap: wrap; }
+  footer .tag { font-weight: 700; color: var(--orange); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  @media (max-width: 1024px) {
+    .bento { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; }
+    .t-hero { grid-column: span 4; grid-row: span 3; }
+    .t-flag { grid-column: span 4; }
+    .t-press { grid-column: span 4; }
+    .t-cta { grid-column: span 2; }
+    .t-stat, .t-svc, .t-location, .t-partner { grid-column: span 2; }
+  }
+  @media (max-width: 768px) {
+    .wrap { padding: 20px 18px; }
+    nav { padding: 4px 0 20px; }
+    nav ul { display: none; }
+    .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; gap: 12px; }
+    .tile { min-height: 130px; padding: 22px; }
+    .t-hero, .t-flag, .t-press, .t-cta { grid-column: span 2; grid-row: auto; }
+    .t-hero { padding: 28px; }
+    .t-hero h1 { font-size: clamp(30px, 8vw, 44px); }
+    .t-stat, .t-svc, .t-location, .t-partner { grid-column: span 1; }
+    footer { flex-direction: column; text-align: left; }
+  }
+  @media (max-width: 400px) {
+    .wrap { padding: 16px 14px; }
+    nav .logo { height: 36px; }
+    .btn { padding: 10px 16px; font-size: 13px; }
+    .bento { grid-template-columns: 1fr; }
+    .t-hero, .t-flag, .t-press, .t-cta, .t-stat, .t-svc, .t-location, .t-partner { grid-column: span 1; }
+    .t-hero h1 { font-size: 30px; }
+    .t-hero .sub { font-size: 15px; }
+    .t-flag h3 { font-size: 24px; }
+    .tile h3 { font-size: 20px; }
+    .t-stat .n { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <img class="logo" src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
+      <ul>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Results</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a class="btn" href="#">Free Consultation</a>
+    </nav>
+
+    <div class="bento">
+      <div class="tile t-hero">
+        <div>
+          <div class="lbl eyebrow">Infintech Designs · Est. 2000</div>
+          <h1>We Help Businesses <span class="rank">Rank Higher</span>, <span class="grow">Grow Faster</span> &amp; <span class="conv">Convert Better</span>.</h1>
+        </div>
+        <div>
+          <p class="sub">Full-service digital marketing from New Orleans. SEO, web design, PPC, and the data-driven playbook that turns traffic into revenue.</p>
+          <div class="cta-row">
+            <a class="btn" href="#">Claim Your Free Consultation</a>
+            <a class="ghost" href="tel:5045476565">(504) 547-6565</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile t-stat stat-orange">
+        <div class="lbl">Websites Built</div>
+        <div class="n">4,000+</div>
+      </div>
+      <div class="tile t-stat stat-gold">
+        <div class="lbl">SEO Campaigns</div>
+        <div class="n">750+</div>
+      </div>
+
+      <div class="tile t-stat stat-pink">
+        <div class="lbl">Years in Business</div>
+        <div class="n">26+</div>
+      </div>
+      <div class="tile t-partner">
+        <div class="lbl">2025 Recognition</div>
+        <div>
+          <h3>Google Premier Partner</h3>
+          <p>Top 3% of agencies in North America.</p>
+        </div>
+      </div>
+
+      <div class="tile t-flag">
+        <div class="lbl">Flagship Service</div>
+        <div>
+          <h3>SEO That Lands You on the Google Map Pack.</h3>
+          <p>Local, on-page, off-page, and link building engineered around measurable ranking movement — not vanity metrics.</p>
+        </div>
+        <div class="pills">
+          <span class="pill">Local SEO</span>
+          <span class="pill">On-Page</span>
+          <span class="pill">Off-Page</span>
+          <span class="pill">Link Building</span>
+        </div>
+      </div>
+
+      <div class="tile t-cta">
+        <div class="lbl">Start Here</div>
+        <div>
+          <h3>Free consult with Founder &amp; CEO Brian Hong.</h3>
+          <a class="phone" href="tel:5045476565">(504) 547-6565</a>
+        </div>
+        <a class="btn-full" href="#">Schedule Now</a>
+      </div>
+
+      <div class="tile t-svc svc-web">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>Web Design &amp; Development</h3>
+          <p>Sites that turn visitors into customers.</p>
+        </div>
+      </div>
+      <div class="tile t-svc svc-ppc">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>PPC Advertising</h3>
+          <p>Google Ads &amp; Facebook Ads, managed to ROAS.</p>
+        </div>
+      </div>
+      <div class="tile t-svc svc-social">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>Social Media</h3>
+          <p>Brand-building across every major channel.</p>
+        </div>
+      </div>
+
+      <div class="tile t-svc svc-content">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>Content Marketing</h3>
+          <p>Editorial engines that compound organic reach.</p>
+        </div>
+      </div>
+      <div class="tile t-svc svc-cro">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>Conversion Rate Optimization</h3>
+          <p>Turn more of your existing traffic into revenue.</p>
+        </div>
+      </div>
+      <div class="tile t-svc svc-ai">
+        <div class="lbl-row"><span class="dot"></span><span class="lbl">Service</span></div>
+        <div>
+          <h3>AI Automation</h3>
+          <p>Marketing ops, lead routing, and workflow AI.</p>
+        </div>
+      </div>
+
+      <div class="tile t-press">
+        <div class="lbl">As Featured In</div>
+        <div class="logos">
+          <span class="logo-txt">BuzzFeed</span>
+          <span class="logo-txt">Entrepreneur</span>
+          <span class="logo-txt">HuffPost</span>
+          <span class="logo-txt">Inc.</span>
+          <span class="logo-txt">SME</span>
+        </div>
+      </div>
+
+      <div class="tile t-location">
+        <div class="lbl">Headquarters</div>
+        <div>
+          <h3>New Orleans, LA</h3>
+          <p>Locally owned in the Lower Garden District · Serving 7 US cities.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="tag">Rank · Grow · Convert</div>
+      <div>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</div>
+    </footer>
+  </div>
+</body>
+</html>

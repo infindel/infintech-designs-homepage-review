@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<!--
+  Style: B20 — Typographic
+  Category: Visual Style
+  Infintech angle: Type IS the hero. "RANK. / GROW. / CONVERT." stacked at 200px Raleway 900,
+  three accent colors (red-orange / gold / pink). Service list with numeric prefixes. Section
+  divider uses "2026" at 300px+ as typographic punctuation.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Type Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EA4517;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --ink: #121212;
+    --body: #212529;
+    --muted: #6a6a6a;
+    --paper: #FFFFFF;
+    --rule: #e5e5e5;
+    --gray-tint: #F5F5F5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body {
+    background: var(--paper);
+    color: var(--body);
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top utility ---------- */
+  .util {
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .util .right { display: flex; gap: 28px; }
+  .util strong { color: var(--ink); font-weight: 700; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--ink);
+  }
+  nav img { height: 40px; display: block; }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  nav a { color: var(--ink); padding-bottom: 3px; border-bottom: 1px solid transparent; }
+  nav a:hover { border-bottom-color: var(--red); color: var(--red); }
+  nav .cta-top {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1.5px solid var(--ink);
+    padding: 10px 20px;
+    transition: all 0.2s;
+  }
+  nav .cta-top:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ---------- Section scaffold ---------- */
+  .section { padding: 96px 48px; border-bottom: 1px solid var(--ink); position: relative; }
+  .label-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 56px;
+    font-weight: 600;
+  }
+  .label-row .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+  .label-row .time { margin-left: auto; }
+  .rule { height: 1px; background: var(--ink); width: 100%; margin: 40px 0; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: 72px; padding-bottom: 72px; }
+  .hero h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: clamp(64px, 17vw, 220px);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  .hero h1 .l1, .hero h1 .l2, .hero h1 .l3 { display: block; }
+  .hero h1 .l1 { color: var(--red); }
+  .hero h1 .l2 { color: var(--gold); margin-left: clamp(0px, 4vw, 60px); }
+  .hero h1 .l3 { color: var(--pink); }
+  .hero h1 .dot-sep { display: inline-block; color: var(--ink); margin-left: -0.02em; }
+
+  .hero .sub {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .hero .sub .left {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.35;
+    color: var(--ink);
+    max-width: 380px;
+  }
+  .hero .sub .right-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .hero .sub p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--body);
+    max-width: 560px;
+  }
+  .hero .sub p strong { color: var(--ink); font-weight: 700; }
+  .hero .cta-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero .cta-primary {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 32px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: 1.5px solid var(--ink);
+    transition: all 0.2s;
+  }
+  .hero .cta-primary:hover { background: var(--red); border-color: var(--red); }
+  .hero .cta-secondary {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 4px;
+  }
+  .hero .cta-secondary:hover { color: var(--red); }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    padding: 80px 48px;
+    border-bottom: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: 0 32px;
+    border-right: 1px solid var(--rule);
+  }
+  .stat:last-child { border-right: none; }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { padding-right: 0; }
+  .stat .num {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, 7vw, 104px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .stat .num em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .stat:nth-child(2) .num em { color: var(--gold); }
+  .stat:nth-child(3) .num em { color: var(--pink); }
+  .stat:nth-child(4) .num em { color: var(--ink); }
+  .stat .lbl {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  /* ---------- Section divider: giant "2026" ---------- */
+  .divider-year {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--ink);
+    overflow: hidden;
+    text-align: center;
+    background: var(--paper);
+    position: relative;
+  }
+  .divider-year .yr {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(160px, 34vw, 420px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--gray-tint);
+    margin: 0;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .divider-year .cap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 700;
+    background: var(--paper);
+    padding: 6px 18px;
+    border: 1px solid var(--ink);
+  }
+
+  /* ---------- Services ---------- */
+  .services h2 {
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin-bottom: 48px;
+    color: var(--ink);
+  }
+  .services h2 em {
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .svc-rows { border-top: 2px solid var(--ink); }
+  .svc-row {
+    display: grid;
+    grid-template-columns: 80px 2fr 2.6fr 80px;
+    gap: 28px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--ink);
+    transition: padding 0.25s, background 0.25s;
+    cursor: pointer;
+  }
+  .svc-row:hover { padding-left: 24px; padding-right: 0; background: rgba(234,69,23,0.04); }
+  .svc-row .idx {
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 0.18em;
+    font-weight: 700;
+  }
+  .svc-row .title {
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .svc-row .title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .svc-row:nth-child(2) .title em { color: var(--red); }
+  .svc-row:nth-child(4) .title em { color: var(--gold); }
+  .svc-row:nth-child(6) .title em { color: var(--pink); }
+  .svc-row .desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+  }
+  .svc-row .arrow {
+    text-align: right;
+    font-size: 22px;
+    color: var(--red);
+    font-weight: 300;
+  }
+
+  /* ---------- Method / Pillars ---------- */
+  .method h2 {
+    font-weight: 900;
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 48px;
+    color: var(--ink);
+  }
+  .method h2 .r { color: var(--red); }
+  .method h2 .g { color: var(--gold); }
+  .method h2 .p { color: var(--pink); }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .pillar {
+    padding: 36px 28px 40px 0;
+    border-right: 1px solid var(--ink);
+  }
+  .pillar:last-child { border-right: none; padding-right: 0; }
+  .pillar:not(:first-child) { padding-left: 28px; }
+  .pillar .n {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .pillar:nth-child(2) .n { color: var(--gold); }
+  .pillar:nth-child(3) .n { color: var(--pink); }
+  .pillar h3 {
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1;
+    margin-bottom: 20px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .pillar p { font-size: 16px; line-height: 1.6; color: var(--body); }
+
+  /* ---------- Proof / press ---------- */
+  .proof {
+    padding: 56px 48px;
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .proof .lbl {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .proof .names {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .proof .names span + span::before {
+    content: "·";
+    margin-right: 36px;
+    margin-left: -20px;
+    color: var(--red);
+  }
+
+  /* ---------- Contact ---------- */
+  .contact h2 {
+    font-weight: 900;
+    font-size: clamp(64px, 11vw, 180px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .contact h2 em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .contact .cta-line {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: end;
+  }
+  .contact .cta-line .a {
+    font-size: clamp(24px, 2.4vw, 34px);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .contact .cta-line .a a {
+    border-bottom: 3px solid var(--red);
+    padding-bottom: 4px;
+  }
+  .contact .cta-line .a a:hover { color: var(--red); }
+  .contact .cta-line .b {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    text-align: right;
+    letter-spacing: 0.04em;
+  }
+  .contact .cta-line .b strong { color: var(--ink); font-weight: 700; display: block; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 4px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    flex-wrap: wrap;
+  }
+  footer .tag { color: var(--red); font-weight: 800; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .section, nav, .util, .stats, .proof, footer { padding-left: 36px; padding-right: 36px; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 40px 0; }
+    .stat { border-right: none; padding: 0 20px; }
+    .stat:nth-child(odd) { border-right: 1px solid var(--rule); padding-left: 0; }
+    .stat:nth-child(even) { padding-right: 0; }
+    .hero .sub { grid-template-columns: 1fr; gap: 32px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--ink); padding: 28px 0; }
+    .pillar:last-child { border-bottom: none; }
+    .pillar:not(:first-child) { padding-left: 0; }
+  }
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .svc-row { grid-template-columns: 60px 1fr 40px; grid-template-rows: auto auto; gap: 10px 16px; }
+    .svc-row .desc { grid-column: 2 / 3; }
+    .svc-row .arrow { grid-row: 1 / 2; grid-column: 3 / 4; }
+  }
+  @media (max-width: 480px) {
+    .section, nav, .util, .stats, .proof, footer { padding-left: 20px; padding-right: 20px; }
+    .util .right { gap: 14px; }
+    .util .right span:last-child { display: none; }
+    nav .cta-top { padding: 8px 14px; font-size: 10px; }
+    .section { padding-top: 64px; padding-bottom: 64px; }
+    .hero { padding-top: 48px; padding-bottom: 48px; }
+    .hero .sub .left { font-size: 19px; }
+    .hero .sub p { font-size: 16px; }
+    .stats { grid-template-columns: 1fr; gap: 28px; }
+    .stat, .stat:nth-child(odd) { border-right: none; padding: 0; }
+    .hero .cta-row { flex-direction: column; align-items: stretch; }
+    .hero .cta-primary { text-align: center; }
+    .hero .cta-secondary { text-align: center; }
+    .svc-row { grid-template-columns: 40px 1fr 28px; }
+    .contact .cta-line { grid-template-columns: 1fr; }
+    .contact .cta-line .b { text-align: left; }
+    .proof .names { font-size: 18px; gap: 20px; }
+    .proof .names span + span::before { margin-right: 20px; margin-left: -12px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+  <div class="util">
+    <span><strong>INFINTECH DESIGNS</strong> — New Orleans, LA</span>
+    <span class="right">
+      <span>Google Premier Partner 2025</span>
+      <span>(504) 547-6565</span>
+      <span>EST. 2000</span>
+    </span>
+  </div>
+
+  <nav>
+    <a href="#"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
+    <ul>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Method</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a href="#" class="cta-top">Free Consult →</a>
+  </nav>
+
+  <section class="section hero">
+    <div class="label-row">
+      <span class="dot"></span>
+      <span>§ 01 — Manifesto</span>
+      <span>·</span>
+      <span>Full-Service Digital Marketing</span>
+      <span class="time">New Orleans · 2026</span>
+    </div>
+    <h1>
+      <span class="l1">RANK<span class="dot-sep">.</span></span>
+      <span class="l2">GROW<span class="dot-sep">.</span></span>
+      <span class="l3">CONVERT<span class="dot-sep">.</span></span>
+    </h1>
+    <div class="sub">
+      <div class="left">
+        …better to drive revenue.
+      </div>
+      <div class="right-block">
+        <p>We help businesses <strong>rank higher, grow faster,</strong> and <strong>convert better.</strong> Twenty-six years inside the Google ranking game, four thousand websites built, and a single obsession: putting your business in the top three spots of the map pack.</p>
+        <div class="cta-row">
+          <a href="#" class="cta-primary">Claim Your Free Consultation →</a>
+          <a href="#" class="cta-secondary">Call (504) 547-6565</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="num"><em>26</em>+</div>
+      <div class="lbl">Years<br>in Business</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>4,000</em>+</div>
+      <div class="lbl">Websites<br>Built</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>750</em>+</div>
+      <div class="lbl">Sites Optimized<br>For SEO</div>
+    </div>
+    <div class="stat">
+      <div class="num"><em>7</em></div>
+      <div class="lbl">US Cities<br>Served</div>
+    </div>
+  </section>
+
+  <section class="divider-year" aria-hidden="true">
+    <span class="yr">2026</span>
+    <span class="cap">§ Services — The Stack</span>
+  </section>
+
+  <section class="section services">
+    <div class="label-row">
+      <span class="dot"></span>
+      <span>§ 02 — Capabilities</span>
+      <span class="time">Eleven Services · One Stack</span>
+    </div>
+    <h2>Eleven services. <em>One revenue stack.</em></h2>
+    <div class="svc-rows">
+      <div class="svc-row">
+        <span class="idx">01</span>
+        <span class="title">SEO</span>
+        <span class="desc">Local · On-Page · Off-Page · Link Building — the discipline that put us on the Premier Partner list</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">02</span>
+        <span class="title"><em>PPC</em></span>
+        <span class="desc">Google Ads &amp; Facebook Ads — paid acquisition structured for measurable ROAS</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">03</span>
+        <span class="title">CRO</span>
+        <span class="desc">Conversion Rate Optimization — turning the traffic you already pay for into booked jobs</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">04</span>
+        <span class="title"><em>Web Design</em></span>
+        <span class="desc">Design &amp; development — 4,000+ sites, built to convert not just to look good</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">05</span>
+        <span class="title">Content</span>
+        <span class="desc">Content marketing tuned to the keywords that actually bring in customers</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">06</span>
+        <span class="title"><em>Social</em></span>
+        <span class="desc">Social media marketing — organic presence and paid social that compounds</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">07</span>
+        <span class="title">Reputation</span>
+        <span class="desc">Online reputation management — reviews, listings, local trust signals</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">08</span>
+        <span class="title">Lead Gen</span>
+        <span class="desc">Lead generation systems that feed sales, not just forms that disappear into an inbox</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">09</span>
+        <span class="title">White Label</span>
+        <span class="desc">White-label services for agencies that need a production partner they can trust</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">10</span>
+        <span class="title">AI Automation</span>
+        <span class="desc">Automation services — AI applied where it actually moves pipeline</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="svc-row">
+        <span class="idx">11</span>
+        <span class="title">Full Stack</span>
+        <span class="desc">End-to-end digital marketing — one team, every channel, one dashboard</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section method">
+    <div class="label-row">
+      <span class="dot"></span>
+      <span>§ 03 — Method</span>
+      <span class="time">Three moves, in order</span>
+    </div>
+    <h2><span class="r">Rank.</span> <span class="g">Grow.</span> <span class="p">Convert.</span></h2>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="n">// 01 — Rank</div>
+        <h3>Rank</h3>
+        <p>Twenty-six years inside the Google ranking game. Local SEO built around the Top 3 map-pack seats that actually drive phone calls in home services, legal, medical, and restaurants.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">// 02 — Grow</div>
+        <h3>Grow</h3>
+        <p>Paid acquisition on Google and Meta, content that targets buyer-intent keywords, and social that compounds. Growth built on measurable traffic sources, not vanity metrics.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">// 03 — Convert</div>
+        <h3>Convert</h3>
+        <p>Web design &amp; CRO tuned to turn visitors into customers. A real-time tracking dashboard so every dollar you put in is accounted for on the way out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <span class="lbl">As featured in</span>
+    <div class="names">
+      <span>BuzzFeed</span>
+      <span>Entrepreneur</span>
+      <span>HuffPost</span>
+      <span>Inc.</span>
+      <span>SME</span>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <div class="label-row">
+      <span class="dot"></span>
+      <span>§ 04 — Contact</span>
+      <span class="time">Free consult · with the founder</span>
+    </div>
+    <h2>Let's make your phone <em>ring.</em></h2>
+    <div class="cta-line">
+      <div class="a">
+        → <a href="tel:5045476565">(504) 547-6565</a>
+      </div>
+      <div class="b">
+        <strong>Headquarters</strong>
+        Locally owned in the Lower Garden District of New Orleans<br>
+        Serving Houston, Dallas, Austin, San Francisco, Seattle, Atlanta &amp; New York
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Infintech Designs · infintechdesigns.com · New Orleans · © 2026</span>
+    <span class="tag">/ RANK · GROW · CONVERT</span>
+  </footer>
+</body>
+</html>

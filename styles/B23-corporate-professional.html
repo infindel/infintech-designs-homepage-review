@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--
+  Style: B23 — Corporate / Professional
+  Infintech angle: Deep navy (#1A237E) + single red-orange accent (#EA4517).
+  Tier-1 enterprise restraint. Serif headings (Lora) + Raleway body. No icons.
+  Press bar as text labels. Trust stats band. Formal, dignified.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Full-Service Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A237E;
+    --navy-deep: #111A5E;
+    --navy-ink: #0B1240;
+    --accent: #EA4517;
+    --accent-dark: #B5340F;
+    --ink: #111827;
+    --body: #374151;
+    --muted: #6B7280;
+    --paper: #FFFFFF;
+    --line: #E5E7EB;
+    --soft: #F7F8FB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--paper); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+
+  .utility { background: var(--navy-ink); color: #C7CCE6; padding: 9px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; letter-spacing: 0.04em; }
+  .utility strong { color: #fff; font-weight: 600; }
+  .utility .divider { display: inline-block; width: 1px; height: 10px; background: #3A4280; margin: 0 10px; vertical-align: middle; }
+
+  nav { padding: 20px 40px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 30; }
+  nav .brand { display: flex; align-items: center; gap: 14px; }
+  nav img { height: 36px; width: auto; display: block; }
+  nav ul { list-style: none; display: flex; gap: 34px; font-size: 13px; font-weight: 600; letter-spacing: 0.03em; }
+  nav ul a { color: var(--navy); transition: color 0.2s; }
+  nav ul a:hover { color: var(--accent); }
+  nav .cta-wrap { display: flex; align-items: center; gap: 18px; }
+  nav .phone { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.03em; }
+  nav .phone strong { color: var(--navy); }
+
+  .btn { display: inline-block; background: var(--accent); color: #fff; padding: 13px 26px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s; border: 2px solid var(--accent); cursor: pointer; }
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
+  .btn-outline:hover { background: var(--navy); color: #fff; }
+  .btn-outline-light { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+  .btn-outline-light:hover { background: #fff; color: var(--navy); border-color: #fff; }
+
+  .hero { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); color: #fff; padding: 96px 40px 88px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; right: -10%; width: 55%; height: 100%; background: radial-gradient(circle at 30% 50%, rgba(234,69,23,0.18) 0%, transparent 60%); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #fff; font-weight: 600; margin-bottom: 22px; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.28); }
+  .hero .eyebrow .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  .hero h1 { font-family: 'Lora', serif; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.08; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 22px; }
+  .hero h1 em { font-style: normal; color: var(--accent); font-weight: 600; }
+  .hero .lede { font-size: 17px; color: rgba(255,255,255,0.82); max-width: 560px; margin-bottom: 34px; line-height: 1.65; }
+  .hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .hero .meta { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; }
+  .hero .meta span { color: var(--accent); margin: 0 8px; }
+
+  .hero-card { background: #fff; color: var(--ink); padding: 38px 34px; border-top: 4px solid var(--accent); box-shadow: 0 30px 80px rgba(0,0,0,0.35); }
+  .hero-card .label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+  .hero-card h3 { font-family: 'Lora', serif; font-size: 22px; line-height: 1.35; font-weight: 500; color: var(--navy); margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .hero-card ul { list-style: none; }
+  .hero-card li { font-size: 13px; color: var(--body); padding: 9px 0 9px 22px; position: relative; line-height: 1.5; }
+  .hero-card li::before { content: ''; position: absolute; left: 0; top: 16px; width: 10px; height: 1px; background: var(--accent); }
+  .hero-card .foot { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+  .press { background: var(--soft); padding: 40px 40px; border-bottom: 1px solid var(--line); }
+  .press-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+  .press .label { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 22px; }
+  .press-row { display: flex; justify-content: space-around; align-items: center; gap: 36px; flex-wrap: wrap; }
+  .press-name { font-family: 'Lora', serif; font-style: italic; font-size: 22px; color: var(--navy); font-weight: 500; letter-spacing: 0.02em; opacity: 0.78; }
+
+  .stats { background: #fff; padding: 72px 40px; border-bottom: 1px solid var(--line); }
+  .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .stat { padding: 20px 28px; border-right: 1px solid var(--line); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-family: 'Lora', serif; font-size: 58px; color: var(--navy); font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+  .stat .n sup { font-size: 30px; color: var(--accent); font-weight: 600; }
+  .stat .l { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 14px; font-weight: 700; }
+
+  .section { padding: 96px 40px; border-bottom: 1px solid var(--line); }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .sec-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: end; margin-bottom: 56px; padding-bottom: 26px; border-bottom: 2px solid var(--navy); }
+  .sec-head .kicker { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+  .sec-head h2 { font-family: 'Lora', serif; font-size: 42px; color: var(--navy); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+  .sec-head .desc { font-size: 15px; color: var(--body); line-height: 1.7; }
+
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .svc { padding: 34px 32px 38px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; transition: background 0.2s; }
+  .svc:hover { background: var(--soft); }
+  .svc .num { font-family: 'Lora', serif; font-size: 14px; color: var(--accent); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .svc h3 { font-family: 'Lora', serif; font-size: 21px; color: var(--navy); font-weight: 500; margin-bottom: 10px; line-height: 1.3; }
+  .svc p { font-size: 14px; color: var(--body); line-height: 1.6; }
+
+  .cta-band { background: var(--navy); color: #fff; padding: 72px 40px; position: relative; overflow: hidden; }
+  .cta-band::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+  .cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
+  .cta-band .kicker { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+  .cta-band h3 { font-family: 'Lora', serif; font-size: 36px; line-height: 1.2; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .cta-band p { color: rgba(255,255,255,0.75); font-size: 15px; max-width: 560px; line-height: 1.65; }
+  .cta-band .ctas { display: flex; flex-direction: column; gap: 12px; justify-self: end; }
+
+  .contact { background: var(--soft); padding: 80px 40px; border-bottom: 1px solid var(--line); }
+  .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
+  .contact .block h4 { font-family: 'Lora', serif; font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .contact .block .line { font-size: 15px; color: var(--ink); line-height: 1.75; font-weight: 500; }
+  .contact .block .line strong { color: var(--navy); font-weight: 700; }
+  .contact .block .sub { font-size: 13px; color: var(--muted); margin-top: 6px; letter-spacing: 0.04em; }
+
+  footer { background: var(--navy-ink); color: #A6ACC8; padding: 52px 40px 28px; }
+  .foot-inner { max-width: 1200px; margin: 0 auto; }
+  .foot-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid #1E2657; margin-bottom: 22px; }
+  .foot-top .about { max-width: 360px; }
+  .foot-top .about .logo-pill { background: #fff; border-radius: 100px; padding: 8px 18px; display: inline-block; margin-bottom: 16px; }
+  .foot-top .about .logo-pill img { height: 30px; display: block; }
+  .foot-top .about p { font-size: 13px; line-height: 1.7; color: #A6ACC8; }
+  .foot-top h5 { color: #fff; font-family: 'Lora', serif; font-size: 15px; font-weight: 500; margin-bottom: 14px; letter-spacing: 0.02em; }
+  .foot-top a, .foot-top .li { display: block; color: #A6ACC8; font-size: 13px; padding: 4px 0; transition: color 0.2s; }
+  .foot-top a:hover { color: var(--accent); }
+  .foot-bottom { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #7078A0; }
+
+  @media (max-width: 1024px) {
+    .hero { padding: 72px 32px 64px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 44px; min-width: 0; }
+    .hero-inner > * { min-width: 0; }
+    .hero-card { max-width: 520px; }
+    .sec-head { grid-template-columns: 1fr; gap: 22px; }
+    .svc-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); padding-bottom: 32px; margin-bottom: 8px; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .cta-band .ctas { justify-self: start; flex-direction: row; flex-wrap: wrap; }
+    .contact-inner { grid-template-columns: 1fr 1fr; }
+    .foot-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .utility { padding: 8px 20px; font-size: 11px; flex-direction: column; gap: 4px; text-align: center; }
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    nav .phone { display: none; }
+    .hero { padding: 56px 20px 52px; }
+    .hero .lede { font-size: 15px; }
+    .hero .ctas { flex-direction: column; align-items: stretch; }
+    .hero .btn { text-align: center; }
+    .press { padding: 32px 20px; }
+    .press-row { gap: 22px; }
+    .press-name { font-size: 18px; }
+    .stats { padding: 48px 20px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 18px 12px; }
+    .stat .n { font-size: 44px; }
+    .section { padding: 64px 20px; }
+    .sec-head h2 { font-size: 30px; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .cta-band { padding: 56px 20px; }
+    .cta-band h3 { font-size: 26px; }
+    .cta-band .ctas { flex-direction: column; align-items: stretch; width: 100%; }
+    .cta-band .btn { text-align: center; }
+    .contact { padding: 56px 20px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+    footer { padding: 40px 20px 24px; }
+    .foot-top { grid-template-columns: 1fr; gap: 28px; }
+    .foot-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 28px; overflow-wrap: break-word; }
+    .sec-head h2 { font-size: 26px; overflow-wrap: break-word; }
+    .stat .n { font-size: 38px; }
+    .press-name { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+  <div class="utility">
+    <span>Google Premier Partner 2025<span class="divider"></span>Full-Service Digital Marketing<span class="divider"></span><strong>New Orleans, LA</strong></span>
+    <span><strong>(504) 547-6565</strong><span class="divider"></span>infintechdesigns.com</span>
+  </div>
+
+  <nav>
+    <div class="brand"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Case Studies</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="cta-wrap">
+      <div class="phone"><strong>(504) 547-6565</strong></div>
+      <a class="btn" href="#contact">Schedule Consultation</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Established 2000 · 26 Years of Measurable Growth</div>
+        <h1>Digital marketing that moves <em>enterprise revenue</em>, not vanity metrics.</h1>
+        <p class="lede">Infintech Designs is a full-service digital marketing agency partnering with ambitious businesses across the United States. A Google Premier Partner, with more than 4,000 websites built and 750 optimized for search — we bring 26 years of discipline to every engagement.</p>
+        <div class="ctas">
+          <a class="btn" href="#contact">Schedule a Free Consultation</a>
+          <a class="btn btn-outline-light" href="#services">View Our Services</a>
+        </div>
+        <div class="meta">New Orleans<span>·</span>Houston<span>·</span>Dallas<span>·</span>Austin<span>·</span>San Francisco<span>·</span>Seattle<span>·</span>Atlanta<span>·</span>New York</div>
+      </div>
+      <div class="hero-card">
+        <div class="label">Engagement Principles</div>
+        <h3>A considered, partnership-led approach to measurable digital performance.</h3>
+        <ul>
+          <li>Free initial consultation with Founder & CEO Brian Hong</li>
+          <li>Real-time performance tracking dashboard</li>
+          <li>Data-driven SEO with measurable quarterly outcomes</li>
+          <li>Web design engineered for conversion, not applause</li>
+          <li>Senior strategists on every account, every month</li>
+        </ul>
+        <div class="foot">Founder-led · No junior hand-offs</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="press">
+    <div class="press-inner">
+      <div class="label">As Featured In</div>
+      <div class="press-row">
+        <div class="press-name">BuzzFeed</div>
+        <div class="press-name">Entrepreneur</div>
+        <div class="press-name">HuffPost</div>
+        <div class="press-name">Inc.</div>
+        <div class="press-name">SME</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat"><div class="n">4,000<sup>+</sup></div><div class="l">Websites Built</div></div>
+      <div class="stat"><div class="n">750<sup>+</sup></div><div class="l">SEO Engagements</div></div>
+      <div class="stat"><div class="n">26<sup>+</sup></div><div class="l">Years Operating</div></div>
+      <div class="stat"><div class="n">2025</div><div class="l">Google Premier Partner</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div>
+          <div class="kicker">Capabilities</div>
+          <h2>A full-service practice, delivered with the rigor of a strategic partner.</h2>
+        </div>
+        <div class="desc">Our eleven integrated disciplines are sequenced to compound — strategy informs SEO, SEO informs web, web informs CRO. Every engagement begins with a measurable hypothesis and ends with attributable revenue.</div>
+      </div>
+      <div class="svc-grid">
+        <div class="svc"><div class="num">01</div><h3>Full-Stack Digital Marketing</h3><p>An integrated program spanning SEO, paid media, content, and CRO — coordinated under one senior strategist.</p></div>
+        <div class="svc"><div class="num">02</div><h3>Web Design & Development</h3><p>Conversion-engineered websites built for performance, accessibility, and measurable commercial outcomes.</p></div>
+        <div class="svc"><div class="num">03</div><h3>Search Engine Optimization</h3><p>Local, on-page, off-page, and link acquisition programs calibrated to produce durable organic visibility.</p></div>
+        <div class="svc"><div class="num">04</div><h3>Paid Media</h3><p>Google Ads and Meta campaign management built on first-party data, disciplined testing, and ROAS reporting.</p></div>
+        <div class="svc"><div class="num">05</div><h3>Social Media Marketing</h3><p>Brand-led channel strategy and editorial execution across the platforms your audience actually uses.</p></div>
+        <div class="svc"><div class="num">06</div><h3>Content Marketing</h3><p>Research-grounded editorial that earns organic authority and supports the full buyer journey.</p></div>
+        <div class="svc"><div class="num">07</div><h3>Conversion Rate Optimization</h3><p>Rigorous experimentation and UX refinement to increase revenue per visitor, without increasing spend.</p></div>
+        <div class="svc"><div class="num">08</div><h3>Reputation Management</h3><p>Review strategy, response infrastructure, and search-surface control for category-leading businesses.</p></div>
+        <div class="svc"><div class="num">09</div><h3>Lead Generation</h3><p>Funnel design, offer architecture, and nurture systems engineered to produce qualified pipeline at scale.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-inner">
+      <div>
+        <div class="kicker">A Considered First Step</div>
+        <h3>Schedule a complimentary consultation with Founder & CEO Brian Hong.</h3>
+        <p>A candid, 45-minute conversation about your revenue goals, current performance, and the highest-leverage next move. No obligation. No junior intermediaries.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn" href="#contact">Schedule Consultation</a>
+        <a class="btn btn-outline-light" href="tel:5045476565">Call (504) 547-6565</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="block">
+        <h4>Headquarters</h4>
+        <div class="line"><strong>Infintech Designs</strong></div>
+        <div class="line">Lower Garden District</div>
+        <div class="line">New Orleans, Louisiana</div>
+        <div class="sub">Locally owned and operated</div>
+      </div>
+      <div class="block">
+        <h4>Direct Contact</h4>
+        <div class="line"><strong>(504) 547-6565</strong></div>
+        <div class="line">info@infintechdesigns.com</div>
+        <div class="sub">Monday – Friday · 9:00 AM – 6:00 PM CT</div>
+      </div>
+      <div class="block">
+        <h4>Markets Served</h4>
+        <div class="line">New Orleans · Houston · Dallas</div>
+        <div class="line">Austin · Atlanta · New York</div>
+        <div class="line">San Francisco · Seattle</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-top">
+        <div class="about">
+          <div class="logo-pill"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+          <p>A full-service digital marketing agency partnering with ambitious businesses since 2000. Google Premier Partner. New Orleans based, national in reach.</p>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <a href="#">Digital Marketing</a>
+          <a href="#">Web Design</a>
+          <a href="#">SEO</a>
+          <a href="#">Paid Media</a>
+        </div>
+        <div>
+          <h5>Firm</h5>
+          <a href="#">About</a>
+          <a href="#">Leadership</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Careers</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <div class="li">(504) 547-6565</div>
+          <div class="li">info@infintechdesigns.com</div>
+          <div class="li">New Orleans, LA</div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</span>
+        <span>Google Premier Partner 2025</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

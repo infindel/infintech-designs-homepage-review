@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+  Infintech Designs — Client Review Landing Page
+  Entry point for the 10-direction homepage exploration.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Homepage Design Review</title>
+<meta name="description" content="Review 10 homepage design directions for Infintech Designs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --orange: #EA4517; --gold: #ED9924; --pink: #FF4E5E; --ink: #0E0E0E; --body: #1A1A1A; --muted: #737373; --line: #E5E5E5; --paper: #FFFFFF; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.55; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; top: -15%; left: -10%; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(234,69,23,0.12), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none; }
+  body::after { content: ''; position: fixed; bottom: -20%; right: -12%; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(circle, rgba(255,78,94,0.10), transparent 70%); filter: blur(80px); z-index: 0; pointer-events: none; }
+
+  nav { position: relative; z-index: 10; padding: 32px 56px; display: flex; justify-content: space-between; align-items: center; }
+  nav .brand { display: flex; align-items: center; gap: 16px; }
+  nav .logo-pill { background: #fff; padding: 8px 14px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid var(--line); }
+  nav .logo-pill img { height: 40px; display: block; }
+  nav .name { font-family: 'Raleway', sans-serif; font-size: 18px; letter-spacing: 0.01em; line-height: 1; font-weight: 700; color: var(--ink); }
+  nav .name small { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--orange); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 6px; font-weight: 500; }
+  nav .ts { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; text-align: right; }
+  nav .ts strong { color: var(--orange); }
+
+  main { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; padding: 32px 56px 80px; }
+
+  .hero { text-align: center; padding: 64px 0 48px; }
+  .hero .kicker { display: inline-block; background: rgba(234,69,23,0.09); border: 1px solid rgba(234,69,23,0.25); color: var(--ink); padding: 8px 18px; border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 28px; font-weight: 500; }
+  .hero .kicker .dot { color: var(--orange); }
+  .hero h1 { font-family: 'Raleway', sans-serif; font-size: clamp(40px, 7vw, 92px); line-height: 1; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 20px; color: var(--ink); }
+  .hero h1 .r { color: var(--orange); }
+  .hero h1 .g { color: var(--gold); }
+  .hero h1 .p { color: var(--pink); }
+
+  .primary-cta { text-align: center; margin: 40px 0 32px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 14px; background: var(--orange); color: #fff; padding: 22px 48px; text-decoration: none; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; border-radius: 8px; box-shadow: 0 12px 32px rgba(234,69,23,0.28); transition: all 0.2s; font-family: 'Raleway', sans-serif; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(234,69,23,0.38); background: #d13d13; }
+  .btn-primary .arrow { font-size: 20px; transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .primary-cta .hint { display: block; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 780px; margin: 0 auto 72px; padding: 28px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.6); backdrop-filter: blur(8px); }
+  .stat { text-align: center; border-right: 1px solid var(--line); padding: 4px 8px; }
+  .stat:last-child { border: none; }
+  .stat .n { font-family: 'Raleway', sans-serif; font-size: 46px; color: var(--orange); font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+  .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.22em; text-transform: uppercase; margin-top: 10px; font-weight: 500; }
+
+  .how { margin: 72px auto; max-width: 1000px; }
+  .how h2 { font-family: 'Raleway', sans-serif; font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; letter-spacing: -0.02em; color: var(--ink); }
+  .how h2 .r { color: var(--orange); }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .how-card { padding: 28px 24px; background: #fff; border: 1px solid var(--line); border-radius: 12px; transition: all 0.2s; }
+  .how-card:hover { border-color: var(--orange); box-shadow: 0 8px 24px rgba(234,69,23,0.08); transform: translateY(-2px); }
+  .how-card .num { font-family: 'Raleway', sans-serif; font-size: 42px; color: var(--orange); font-weight: 800; line-height: 1; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .how-card h3 { font-family: 'Raleway', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; color: var(--ink); letter-spacing: -0.01em; }
+  .how-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  footer { position: relative; z-index: 2; padding: 40px 56px; border-top: 1px solid var(--line); text-align: center; background: #fff; }
+  footer .tag { font-family: 'Raleway', sans-serif; font-weight: 700; color: var(--ink); font-size: 18px; margin-bottom: 8px; letter-spacing: -0.01em; }
+  footer .tag .r { color: var(--orange); }
+  footer .meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 24px 28px; }
+    main { padding: 24px 28px 64px; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 20px 20px; flex-direction: column; gap: 14px; text-align: center; }
+    nav .brand { justify-content: center; }
+    nav .ts { text-align: center; font-size: 10px; }
+    main { padding: 20px 16px 56px; }
+    .hero { padding: 40px 0 36px; }
+    .hero .kicker { padding: 7px 14px; font-size: 11px; letter-spacing: 0.15em; }
+    .hero h1 { font-size: clamp(32px, 10vw, 56px); margin-bottom: 16px; }
+    .primary-cta { margin: 28px 0 20px; }
+    .btn-primary { padding: 18px 28px; font-size: 13px; gap: 10px; }
+    .primary-cta .hint { font-size: 10px; letter-spacing: 0.15em; margin-top: 12px; }
+    .stats { grid-template-columns: 1fr 1fr; padding: 20px; gap: 14px; margin-bottom: 48px; }
+    .stat { border-right: none; border-bottom: 1px solid var(--line); padding: 14px 6px; }
+    .stat:last-child, .stat:nth-last-child(2) { border-bottom: none; }
+    .stat .n { font-size: 36px; }
+    .stat .l { font-size: 9px; letter-spacing: 0.15em; }
+    .how { margin: 40px auto; }
+    .how h2 { font-size: 26px; margin-bottom: 24px; }
+    .how-grid { grid-template-columns: 1fr; gap: 12px; }
+    .how-card { padding: 22px 20px; }
+    .how-card .num { font-size: 36px; }
+    footer { padding: 28px 20px; }
+    footer .tag { font-size: 16px; }
+  }
+  @media (max-width: 400px) {
+    .hero h1 { font-size: clamp(28px, 11vw, 44px); }
+    .stats { padding: 16px; }
+    .stat .n { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="brand">
+      <div class="logo-pill"><img src="Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+      <div class="name">INFINTECH DESIGNS<small>Homepage Design Review · 2026</small></div>
+    </div>
+    <div class="ts"><strong>Prepared for client review</strong><br>Spring 2026 · New Orleans, LA</div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="kicker"><span class="dot">●</span> 10 directions · 1 gallery</div>
+      <h1>Pick the <span class="r">look</span> that <span class="g">ranks</span>, <span class="p">grows</span>, converts.</h1>
+    </section>
+
+    <div class="primary-cta">
+      <a class="btn-primary" href="gallery.html">Start Reviewing <span class="arrow">→</span></a>
+      <span class="hint">Opens the gallery · All 10 directions · No login needed</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">10</div><div class="l">Directions</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Categories</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Review Page</div></div>
+    </div>
+
+    <section class="how">
+      <h2>How to <span class="r">review</span></h2>
+      <div class="how-grid">
+        <div class="how-card"><div class="num">01</div><h3>Browse</h3><p>Filter by Structural, Visual, or Functional. Each card shows a live preview thumbnail.</p></div>
+        <div class="how-card"><div class="num">02</div><h3>Preview</h3><p>Click <strong>Preview</strong> to open any style full-screen. Use ← → arrows to cycle through.</p></div>
+        <div class="how-card"><div class="num">03</div><h3>Compare</h3><p>Toggle <strong>Compare Two</strong> top-right, check any two, and see them side-by-side.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="tag">Rank <span class="r">higher</span>. Grow faster. Convert better.</div>
+    <div class="meta">INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</div>
+  </footer>
+</body>
+</html>

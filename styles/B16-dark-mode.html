@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!--
+  Style: B16 — Dark Mode
+  Infintech angle: Dark-tech SaaS/B2B pitch. #0B0B0B body, orange glow CTA, mono labels, tri-color hero split.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Rank Higher. Grow Faster. Convert Better.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0B0B;
+    --card: #141414;
+    --card-2: #181818;
+    --fg: #F4F4F4;
+    --fg-dim: #9A9A9A;
+    --line: rgba(255,255,255,0.08);
+    --line-2: rgba(255,255,255,0.14);
+    --orange: #EA4517;
+    --pink: #FF4E5E;
+    --gold: #ED9924;
+    --glow: 0 0 28px rgba(234,69,23,0.4), 0 0 60px rgba(234,69,23,0.18);
+    --glow-strong: 0 0 40px rgba(234,69,23,0.6), 0 0 90px rgba(234,69,23,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 800px 400px at 15% 0%, rgba(234,69,23,0.08), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 90% 20%, rgba(255,78,94,0.05), transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    padding: 18px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(11,11,11,0.78);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .brand { display: flex; align-items: center; gap: 14px; }
+  nav .brand img { height: 44px; width: auto; display: block; }
+  nav .brand .wordmark {
+    font-weight: 700; letter-spacing: 0.14em; font-size: 13px;
+    text-transform: uppercase;
+  }
+  nav ul {
+    list-style: none;
+    display: flex; gap: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  nav ul a { color: var(--fg-dim); transition: color .2s; }
+  nav ul a:hover { color: var(--fg); }
+  nav .nav-cta {
+    background: var(--orange);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em;
+    box-shadow: 0 0 20px rgba(234,69,23,0.35);
+    transition: box-shadow .25s, transform .25s;
+  }
+  nav .nav-cta:hover { box-shadow: var(--glow-strong); transform: translateY(-1px); }
+  nav .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  nav .hamburger span { width: 24px; height: 2px; background: var(--fg); }
+
+  .container { max-width: 1220px; margin: 0 auto; padding: 0 56px; position: relative; z-index: 2; }
+
+  .hero { padding: 96px 0 72px; position: relative; }
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.18em;
+    color: var(--fg-dim);
+    margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hero .kicker::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 12px var(--orange);
+  }
+  .hero h1 {
+    font-weight: 600;
+    font-size: clamp(44px, 8vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+  }
+  .hero h1 .l1 { display: block; color: var(--orange); text-shadow: 0 0 40px rgba(234,69,23,0.35); }
+  .hero h1 .l2 { display: block; color: var(--pink); text-shadow: 0 0 40px rgba(255,78,94,0.3); }
+  .hero h1 .l3 { display: block; color: var(--gold); text-shadow: 0 0 40px rgba(237,153,36,0.3); }
+  .hero h1 .tail { display: block; color: var(--fg); font-weight: 500; font-size: 0.55em; letter-spacing: -0.01em; margin-top: 14px; }
+
+  .hero p.lede {
+    font-size: 18px; color: var(--fg-dim);
+    max-width: 620px; margin-bottom: 40px;
+    line-height: 1.55;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 28px;
+    border-radius: 6px;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 0.04em;
+    transition: all .25s;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--orange); color: #fff;
+    box-shadow: var(--glow);
+  }
+  .btn-primary:hover { box-shadow: var(--glow-strong); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--fg);
+    border: 1px solid var(--line-2);
+  }
+  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+  .btn .arrow { display: inline-block; transition: transform .2s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    overflow: hidden;
+  }
+  .stat { padding: 26px 28px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .stat .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 34px; font-weight: 500;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .stat .num .u { color: var(--orange); }
+  .stat .sub { font-size: 12px; color: var(--fg-dim); margin-top: 6px; }
+
+  section { padding: 88px 0; position: relative; z-index: 2; }
+  .sec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .sec-head { margin-bottom: 48px; max-width: 780px; }
+  .sec-head h2 {
+    font-weight: 600;
+    font-size: clamp(30px, 4.2vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .sec-head p { color: var(--fg-dim); font-size: 16px; max-width: 620px; }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .svc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 26px 24px;
+    transition: border-color .25s, transform .25s, background .25s;
+    position: relative;
+  }
+  .svc:hover {
+    border-color: rgba(234,69,23,0.4);
+    background: var(--card-2);
+    transform: translateY(-2px);
+  }
+  .svc .idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+  .svc h3 {
+    font-weight: 600; font-size: 18px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .svc p { color: var(--fg-dim); font-size: 13.5px; line-height: 1.55; }
+  .svc .chev {
+    position: absolute; top: 24px; right: 24px;
+    width: 28px; height: 28px;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--fg-dim);
+    transition: all .2s;
+  }
+  .svc:hover .chev { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  .trust {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 40px 0;
+  }
+  .trust-row {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .trust-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+  }
+  .trust-logos {
+    display: flex; gap: 34px; flex-wrap: wrap;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600; letter-spacing: 0.05em;
+    color: var(--fg-dim);
+    font-size: 15px;
+  }
+  .trust-logos span { transition: color .2s; }
+  .trust-logos span:hover { color: var(--fg); }
+
+  .ai-section {
+    background: linear-gradient(180deg, var(--bg) 0%, #0E0B0A 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .ai-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center;
+  }
+  .ai-copy h2 {
+    font-weight: 600;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .ai-copy h2 .hl { color: var(--orange); }
+  .ai-copy p { color: var(--fg-dim); font-size: 16px; margin-bottom: 26px; max-width: 520px; }
+  .ai-list { display: grid; gap: 14px; margin-bottom: 32px; }
+  .ai-list li {
+    list-style: none;
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: #D4D4D4;
+  }
+  .ai-list li::before {
+    content: '▸';
+    color: var(--orange);
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+  }
+  .ai-vis {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+    padding: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .ai-vis::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: 10px;
+    box-shadow: inset 0 0 60px rgba(234,69,23,0.06);
+    pointer-events: none;
+  }
+  .ai-vis .line-h { color: var(--fg-dim); margin-bottom: 8px; }
+  .ai-vis .prompt { color: var(--orange); }
+  .ai-vis .ok { color: #5FD39A; }
+  .ai-vis .val { color: var(--pink); }
+  .ai-vis .key { color: var(--gold); }
+  .ai-vis .cursor { display: inline-block; width: 8px; height: 14px; background: var(--orange); vertical-align: middle; animation: blink 1s steps(2) infinite; margin-left: 2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .cta-band {
+    padding: 96px 0;
+    text-align: center;
+    position: relative;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 600px 300px at 50% 50%, rgba(234,69,23,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-band h2 {
+    font-weight: 600;
+    font-size: clamp(32px, 4.4vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .cta-band h2 .hl { color: var(--orange); text-shadow: 0 0 40px rgba(234,69,23,0.5); }
+  .cta-band p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.12em;
+    color: var(--fg-dim);
+    margin-bottom: 36px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+  }
+  footer .tag { color: var(--orange); }
+
+  @media (max-width: 1024px) {
+    nav { padding: 16px 32px; }
+    .container { padding: 0 32px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .svc-grid { grid-template-columns: repeat(2, 1fr); }
+    .ai-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    nav .nav-cta { display: none; }
+    nav .hamburger { display: flex; }
+    .hero { padding: 56px 0 48px; }
+    .hero h1 { font-size: clamp(36px, 11vw, 56px); }
+    .hero p.lede { font-size: 16px; }
+    section { padding: 64px 0; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--line); }
+    .stat:last-child { border-bottom: none; }
+    .btn { width: 100%; justify-content: center; }
+    .hero-ctas { flex-direction: column; width: 100%; }
+    footer { padding: 24px 32px; flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 400px) {
+    nav { padding: 14px 20px; }
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 42px; }
+    .sec-head h2 { font-size: 28px; }
+    .ai-vis { font-size: 11px; padding: 20px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="brand">
+      <img src="../Logos/infintech-logo-color.png" alt="Infintech Designs">
+      <span class="wordmark">Infintech<span style="color:var(--fg-dim);"> / Designs</span></span>
+    </div>
+    <ul>
+      <li><a href="#services">// services</a></li>
+      <li><a href="#ai">// ai_automation</a></li>
+      <li><a href="#stats">// proof</a></li>
+      <li><a href="#contact">// contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Free Consultation →</a>
+    <div class="hamburger" aria-label="menu"><span></span><span></span><span></span></div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="kicker">NEW ORLEANS · EST. 2000 · GOOGLE PREMIER PARTNER 2025</div>
+      <h1>
+        <span class="l1">Rank Higher,</span>
+        <span class="l2">Grow Faster,</span>
+        <span class="l3">Convert Better.</span>
+        <span class="tail">We help businesses drive revenue with data-driven SEO, web, and AI.</span>
+      </h1>
+      <p class="lede">
+        A full-stack digital marketing agency building measurable growth for home services, legal, medical,
+        and restaurant brands across 7 US cities. 26 years in. 4,000+ websites shipped.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Claim Your FREE Consultation <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="tel:5045476565">Call (504) 547-6565</a>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stat">
+          <div class="label">// EXPERIENCE</div>
+          <div class="num">26<span class="u">+</span></div>
+          <div class="sub">years in business</div>
+        </div>
+        <div class="stat">
+          <div class="label">// BUILT</div>
+          <div class="num">4,000<span class="u">+</span></div>
+          <div class="sub">websites shipped</div>
+        </div>
+        <div class="stat">
+          <div class="label">// SEO</div>
+          <div class="num">750<span class="u">+</span></div>
+          <div class="sub">sites optimized</div>
+        </div>
+        <div class="stat">
+          <div class="label">// MARKETS</div>
+          <div class="num">07</div>
+          <div class="sub">US cities served</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="container">
+      <div class="trust-row">
+        <div class="trust-label">// AS_SEEN_IN</div>
+        <div class="trust-logos">
+          <span>BuzzFeed</span>
+          <span>Entrepreneur</span>
+          <span>HuffPost</span>
+          <span>Inc.</span>
+          <span>SME</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="sec-head">
+        <div class="sec-label">// SERVICES</div>
+        <h2>Full-stack digital marketing, engineered for measurable revenue.</h2>
+        <p>Seven pillars, one accountable team. Every engagement starts with a free consultation with founder &amp; CEO Brian Hong.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="idx">[001]</div>
+          <div class="chev">→</div>
+          <h3>Full Stack Digital Marketing</h3>
+          <p>Integrated strategy across SEO, paid, content, social, and CRO — one team, one dashboard.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[002]</div>
+          <div class="chev">→</div>
+          <h3>Web Design &amp; Development</h3>
+          <p>Conversion-focused sites engineered to turn qualified traffic into booked customers.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[003]</div>
+          <div class="chev">→</div>
+          <h3>SEO</h3>
+          <p>Local, on-page, off-page, and link building — built to rank in the coveted Google Map Pack.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[004]</div>
+          <div class="chev">→</div>
+          <h3>PPC</h3>
+          <p>Google Ads and Facebook Ads campaigns tuned for cost-per-lead, not clicks.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[005]</div>
+          <div class="chev">→</div>
+          <h3>Social Media Marketing</h3>
+          <p>Organic presence and paid social that builds a local following that actually converts.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[006]</div>
+          <div class="chev">→</div>
+          <h3>Content Marketing</h3>
+          <p>Topical authority, evergreen pages, and brand editorial that search engines reward.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[007]</div>
+          <div class="chev">→</div>
+          <h3>Conversion Rate Optimization</h3>
+          <p>Heatmaps, A/B tests, form friction audits — squeeze more revenue from traffic you already pay for.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[008]</div>
+          <div class="chev">→</div>
+          <h3>Online Reputation Mgmt</h3>
+          <p>Review generation, response automation, and brand monitoring across the review ecosystem.</p>
+        </div>
+        <div class="svc">
+          <div class="idx">[009]</div>
+          <div class="chev">→</div>
+          <h3>Lead Generation</h3>
+          <p>Multi-channel lead programs with a real-time tracking dashboard so you see every dollar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-section" id="ai">
+    <div class="container">
+      <div class="ai-grid">
+        <div class="ai-copy">
+          <div class="sec-label">// AI_AUTOMATION_SERVICES</div>
+          <h2>The <span class="hl">AI layer</span> your marketing stack is missing.</h2>
+          <p>
+            Our newest offering. We build custom automations that plug into your CRM, ad platforms,
+            and review feeds — so your team stops doing manual work that software should be doing.
+          </p>
+          <ul class="ai-list">
+            <li>Automated lead qualification + routing to the right rep in under 60 seconds</li>
+            <li>AI-drafted review responses reviewed by a human before they post</li>
+            <li>Custom dashboards that pull SEO, ads, and call-tracking into one view</li>
+            <li>White-label AI workflows for agencies reselling Infintech capabilities</li>
+          </ul>
+          <a class="btn btn-primary" href="#contact">Schedule a Free Consultation <span class="arrow">→</span></a>
+        </div>
+        <div class="ai-vis" aria-hidden="true">
+          <div class="line-h">$ infintech/automation --init</div>
+          <div><span class="prompt">&gt;</span> connecting <span class="key">crm</span>, <span class="key">ads</span>, <span class="key">gbp</span>...</div>
+          <div><span class="prompt">&gt;</span> authenticating... <span class="ok">OK</span></div>
+          <div><span class="prompt">&gt;</span> syncing leads... <span class="val">312</span> imported</div>
+          <div><span class="prompt">&gt;</span> scoring... <span class="val">97.4%</span> confidence</div>
+          <div><span class="prompt">&gt;</span> routing to <span class="key">brian@infintech</span></div>
+          <div><span class="prompt">&gt;</span> notify <span class="key">slack#revenue</span>... <span class="ok">OK</span></div>
+          <div class="line-h" style="margin-top:10px;">// status: live · 24/7 · human-in-the-loop</div>
+          <div><span class="prompt">$</span><span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="contact">
+    <div class="container">
+      <h2>Ready to <span class="hl">rank, grow, and convert?</span></h2>
+      <p>FREE INITIAL CONSULTATION WITH FOUNDER &amp; CEO BRIAN HONG</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#">Claim Your Free Consultation <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="tel:5045476565">(504) 547-6565</a>
+      </div>
+      <p style="margin-top:28px; letter-spacing:0.08em;">LOCALLY OWNED IN THE LOWER GARDEN DISTRICT OF NEW ORLEANS</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</span>
+    <span class="tag">// rank_higher.grow_faster.convert_better</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--
+  Style: C25 — Landing Page
+  Infintech Designs angle: Single-conversion lander. Above fold = tagline + trust + sticky consult form.
+  Below fold = 5-card objection-handling grid. Sticky right-rail "Claim Free Consultation" tab.
+  One persistent orange CTA color. No nav, no blog, no distractions — one path to form submit.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infintech Designs — Claim Your FREE Consultation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #EA4517;
+    --orange-dark: #c5370f;
+    --gold: #ED9924;
+    --pink: #FF4E5E;
+    --ink: #121212;
+    --body: #212529;
+    --paper: #FFFFFF;
+    --gray: #F5F5F5;
+    --line: #e4e4e4;
+    --muted: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { background: var(--paper); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
+  a { color: var(--orange); text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .utility-bar { background: var(--ink); color: #fff; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 500; }
+  .utility-bar .u-left { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+  .utility-bar .u-left span { display: flex; align-items: center; gap: 6px; color: #d8d8d8; }
+  .utility-bar .u-left .dot { color: var(--gold); }
+  .utility-bar .u-right a { color: #fff; font-weight: 600; letter-spacing: 0.02em; }
+  .utility-bar .u-right a::before { content: '☎ '; color: var(--gold); }
+
+  .header { background: #fff; border-bottom: 1px solid var(--line); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 40; }
+  .header img.logo { height: 42px; width: auto; }
+  .header .h-right { display: flex; align-items: center; gap: 20px; }
+  .header .h-right .loc { font-size: 13px; color: var(--muted); }
+  .header .h-right .loc strong { color: var(--ink); display: block; font-size: 14px; }
+  .btn { display: inline-block; background: var(--orange); color: #fff; padding: 14px 26px; border-radius: 4px; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; font-family: inherit; text-align: center; line-height: 1.3; }
+  .btn:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(234,69,23,0.35); color: #fff; }
+  .btn.lg { padding: 18px 32px; font-size: 15px; }
+
+  .hero { padding: 54px 40px 72px; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: start; }
+  .hero .kicker { display: inline-flex; align-items: center; gap: 8px; background: rgba(234,69,23,0.08); color: var(--orange); padding: 8px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 22px; }
+  .hero .kicker::before { content: ''; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; display: inline-block; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 { color: var(--ink); font-size: clamp(32px, 4.2vw, 54px); line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .hero h1 .hl { color: var(--orange); }
+  .hero h1 .hl2 { color: var(--pink); }
+  .hero .lede { font-size: 17px; color: #444; margin-bottom: 28px; max-width: 560px; }
+  .trust-list { list-style: none; margin-bottom: 32px; }
+  .trust-list li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: flex-start; font-size: 15px; color: var(--body); font-weight: 500; }
+  .trust-list li::before { content: '✓'; flex: 0 0 24px; height: 24px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
+  .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .phone-cta { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; font-size: 17px; }
+  .phone-cta .p-ic { width: 38px; height: 38px; border-radius: 50%; background: var(--gray); display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 16px; }
+  .phone-cta small { display: block; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .form-wrap { position: sticky; top: 100px; }
+  .form-card { background: #fff; border: 1px solid var(--line); border-top: 5px solid var(--orange); border-radius: 6px; padding: 32px 28px 30px; box-shadow: 0 20px 50px rgba(18,18,18,0.10); }
+  .form-card .f-head { text-align: center; margin-bottom: 20px; }
+  .form-card .f-head .tag { display: inline-block; background: var(--gold); color: #fff; padding: 5px 12px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+  .form-card h3 { font-size: 24px; font-weight: 800; color: var(--ink); line-height: 1.2; letter-spacing: -0.01em; }
+  .form-card h3 .hl { color: var(--orange); }
+  .form-card .f-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .form-row { margin-bottom: 12px; }
+  .form-row.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-card label { display: block; font-size: 11px; font-weight: 700; color: var(--ink); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .form-card label .opt { color: var(--muted); font-weight: 500; text-transform: none; letter-spacing: 0; }
+  .form-card input, .form-card select, .form-card textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 4px; font-family: inherit; font-size: 14px; background: #fafafa; color: var(--ink); outline: none; transition: all 0.15s; }
+  .form-card input::placeholder, .form-card textarea::placeholder { color: #aaa; }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus { border-color: var(--orange); background: #fff; box-shadow: 0 0 0 3px rgba(234,69,23,0.12); }
+  .form-card input:invalid:not(:placeholder-shown) { border-color: #d04040; }
+  .form-card textarea { resize: vertical; min-height: 88px; font-family: inherit; }
+  .form-card .tc { display: flex; gap: 10px; align-items: flex-start; font-size: 12px; color: var(--muted); margin: 14px 0 16px; line-height: 1.5; }
+  .form-card .tc input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--orange); cursor: pointer; }
+  .form-card .tc a { font-weight: 600; text-decoration: underline; }
+  .form-card button.submit { width: 100%; padding: 16px; font-size: 15px; font-weight: 800; }
+  .form-card .secure { text-align: center; font-size: 11px; color: var(--muted); margin-top: 12px; letter-spacing: 0.04em; }
+  .form-card .secure::before { content: '🔒 '; }
+
+  .social-strip { background: var(--gray); padding: 28px 40px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .social-strip-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .social-strip .lbl { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+  .social-strip .press { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+  .social-strip .press span { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; opacity: 0.75; }
+  .social-strip .press span em { color: var(--orange); font-style: normal; }
+
+  .objections { padding: 72px 40px 80px; max-width: 1280px; margin: 0 auto; }
+  .sec-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+  .sec-head .eyebrow { display: inline-block; color: var(--orange); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+  .sec-head h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.15; }
+  .sec-head h2 .hl { color: var(--orange); }
+
+  .obj-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .obj-grid .card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 26px 22px; transition: all 0.2s; }
+  .obj-grid .card:hover { border-color: var(--orange); box-shadow: 0 14px 32px rgba(18,18,18,0.08); transform: translateY(-3px); }
+  .obj-grid .card.a { grid-column: span 2; background: var(--ink); color: #fff; border-color: var(--ink); }
+  .obj-grid .card.b { grid-column: span 2; }
+  .obj-grid .card.c { grid-column: span 2; }
+  .obj-grid .card.d { grid-column: span 3; }
+  .obj-grid .card.e { grid-column: span 3; background: linear-gradient(135deg, var(--orange), #ff6a3a); color: #fff; border-color: var(--orange); }
+  .obj-grid .card .icn { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; margin-bottom: 16px; background: rgba(234,69,23,0.1); color: var(--orange); }
+  .obj-grid .card.a .icn, .obj-grid .card.e .icn { background: rgba(255,255,255,0.16); color: #fff; }
+  .obj-grid .card h4 { font-size: 17px; font-weight: 800; margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em; }
+  .obj-grid .card p { font-size: 14px; line-height: 1.55; color: var(--body); }
+  .obj-grid .card.a p, .obj-grid .card.e p { color: rgba(255,255,255,0.88); }
+  .obj-grid .card ul { list-style: none; margin-top: 10px; }
+  .obj-grid .card ul li { font-size: 13px; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.15); display: flex; gap: 8px; }
+  .obj-grid .card ul li::before { content: '→'; color: var(--gold); font-weight: 700; }
+  .obj-grid .card.b ul li, .obj-grid .card.c ul li, .obj-grid .card.d ul li { border-bottom-color: var(--line); }
+  .obj-grid .card.b ul li::before, .obj-grid .card.c ul li::before, .obj-grid .card.d ul li::before { color: var(--orange); }
+  .obj-grid .card .big-stat { font-size: 48px; font-weight: 800; line-height: 1; color: var(--orange); letter-spacing: -0.03em; margin-bottom: 4px; }
+  .obj-grid .card.a .big-stat { color: var(--gold); }
+
+  .final-cta { background: var(--ink); color: #fff; padding: 72px 40px; text-align: center; }
+  .final-cta .inner { max-width: 740px; margin: 0 auto; }
+  .final-cta h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 800; margin-bottom: 14px; letter-spacing: -0.02em; line-height: 1.15; }
+  .final-cta h2 .hl { color: var(--orange); }
+  .final-cta p { font-size: 16px; color: #c8c8c8; margin-bottom: 28px; }
+  .final-cta .ctas { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .final-cta .phone-line { color: #fff; font-weight: 700; font-size: 20px; }
+  .final-cta .phone-line small { display: block; font-size: 12px; font-weight: 500; color: #999; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+
+  footer { background: #0a0a0a; color: #7a7a7a; padding: 28px 40px; font-size: 12px; }
+  footer .f-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+  footer a { color: #aaa; margin-left: 18px; }
+  footer a:hover { color: var(--orange); }
+  footer .credit { letter-spacing: 0.04em; }
+
+  .side-tab { position: fixed; right: 0; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: right top; background: var(--orange); color: #fff; padding: 12px 22px; font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 4px 4px 0 0; cursor: pointer; z-index: 50; box-shadow: -4px -4px 14px rgba(0,0,0,0.15); white-space: nowrap; transition: background 0.2s; }
+  .side-tab:hover { background: var(--orange-dark); color: #fff; }
+  .side-tab::before { content: '▸ '; color: var(--gold); }
+
+  .mobile-sticky-cta { display: none; }
+
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 44px 28px 60px; }
+    .form-wrap { position: static; }
+    .obj-grid { grid-template-columns: repeat(4, 1fr); }
+    .obj-grid .card.a, .obj-grid .card.b, .obj-grid .card.c { grid-column: span 2; }
+    .obj-grid .card.d, .obj-grid .card.e { grid-column: span 2; }
+  }
+
+  @media (max-width: 768px) {
+    .utility-bar { padding: 9px 18px; font-size: 12px; }
+    .utility-bar .u-left { gap: 14px; }
+    .utility-bar .u-left span:nth-child(3) { display: none; }
+    .header { padding: 14px 18px; }
+    .header img.logo { height: 34px; }
+    .header .h-right .loc { display: none; }
+    .hero { padding: 32px 20px 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 36px); }
+    .hero .lede { font-size: 15px; }
+    .trust-list li { font-size: 14px; }
+    .hero-ctas { flex-direction: column; align-items: stretch; gap: 16px; }
+    .hero-ctas .btn { width: 100%; }
+    .phone-cta { justify-content: center; }
+    .form-card { padding: 24px 20px 22px; }
+    .form-row.two { grid-template-columns: 1fr; }
+    .social-strip { padding: 22px 18px; }
+    .social-strip-inner { gap: 16px; }
+    .social-strip .press { gap: 16px; }
+    .social-strip .press span { font-size: 13px; }
+    .objections { padding: 54px 20px 60px; }
+    .obj-grid { grid-template-columns: 1fr; gap: 14px; }
+    .obj-grid .card.a, .obj-grid .card.b, .obj-grid .card.c, .obj-grid .card.d, .obj-grid .card.e { grid-column: span 1; }
+    .final-cta { padding: 54px 20px; }
+    .final-cta .ctas { flex-direction: column; gap: 20px; }
+    .final-cta .ctas .btn { width: 100%; }
+    footer { padding: 22px 18px 90px; }
+    footer .f-inner { flex-direction: column; text-align: center; gap: 10px; }
+    footer a { margin: 0 8px; }
+
+    .side-tab { display: none; }
+    .mobile-sticky-cta { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: var(--orange); color: #fff; padding: 14px 18px; justify-content: center; align-items: center; gap: 10px; font-size: 14px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; z-index: 50; box-shadow: 0 -6px 18px rgba(0,0,0,0.2); }
+    .mobile-sticky-cta::before { content: '☎'; color: var(--gold); font-size: 16px; }
+  }
+
+  @media (max-width: 400px) {
+    .utility-bar .u-left span:nth-child(2) { display: none; }
+    .hero h1 { font-size: 28px; }
+    .form-card h3 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="u-left">
+    <span><span class="dot">●</span> 2025 Google Premier Partner</span>
+    <span><span class="dot">●</span> 26+ Years Experience</span>
+    <span><span class="dot">●</span> New Orleans, LA</span>
+  </div>
+  <div class="u-right"><a href="tel:5045476565">(504) 547-6565</a></div>
+</div>
+
+<header class="header">
+  <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs" class="logo">
+  <div class="h-right">
+    <div class="loc"><strong>(504) 547-6565</strong>Mon–Fri · 9a–6p CT</div>
+    <a href="#consult" class="btn">Free Consultation</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="kicker">Limited — Founder-Led Consultations</div>
+    <h1>We Help Businesses <span class="hl">Rank Higher, Grow Faster</span> and <span class="hl2">Convert Better</span> To Drive Revenue.</h1>
+    <p class="lede">Book a free strategy call with Founder &amp; CEO Brian Hong. We'll audit your site, your competitors, and your ad spend — and send you a written action plan. No obligation, no sales theatre.</p>
+
+    <ul class="trust-list">
+      <li>FREE Initial Consultation directly with Founder &amp; CEO Brian Hong</li>
+      <li>Over 26 Years Experience In SEO and Web Design</li>
+      <li>Real-Time Tracking Dashboard — see your rankings live</li>
+      <li>Data-Driven SEO Marketing With Measurable Results</li>
+      <li>Web Design That Turns Visitors Into Paying Customers</li>
+    </ul>
+
+    <div class="hero-ctas">
+      <a href="#consult" class="btn lg">Claim Your FREE Consultation →</a>
+      <a href="tel:5045476565" class="phone-cta">
+        <span class="p-ic">☎</span>
+        <span><small>Or call now</small>(504) 547-6565</span>
+      </a>
+    </div>
+  </div>
+
+  <aside class="form-wrap">
+    <form class="form-card" id="consult" novalidate>
+      <div class="f-head">
+        <span class="tag">No Cost · No Obligation</span>
+        <h3>Claim Your <span class="hl">FREE</span> Consultation</h3>
+        <p class="f-sub">Takes 60 seconds. Brian responds personally within 1 business day.</p>
+      </div>
+
+      <div class="form-row">
+        <label for="f-name">Full Name</label>
+        <input id="f-name" type="text" placeholder="Jane Doe" required>
+      </div>
+
+      <div class="form-row two">
+        <div>
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" type="tel" placeholder="(504) 555-0199" required>
+        </div>
+        <div>
+          <label for="f-email">Email</label>
+          <input id="f-email" type="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="f-company">Company Name <span class="opt">(optional)</span></label>
+        <input id="f-company" type="text" placeholder="Your business">
+      </div>
+
+      <div class="form-row">
+        <label for="f-budget">Monthly Budget <span class="opt">(optional)</span></label>
+        <select id="f-budget">
+          <option value="">Select a range…</option>
+          <option>Under $1,500/mo</option>
+          <option>$1,500 – $3,000/mo</option>
+          <option>$3,000 – $7,500/mo</option>
+          <option>$7,500 – $15,000/mo</option>
+          <option>$15,000+/mo</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="f-msg">Project Details</label>
+        <textarea id="f-msg" rows="3" placeholder="Briefly — what are you trying to fix or grow? (e.g. 'HVAC company in Houston, need local SEO and a new site')" required></textarea>
+      </div>
+
+      <label class="tc">
+        <input type="checkbox" id="f-tc" required>
+        <span>I agree to the <a href="#">Terms &amp; Privacy Policy</a> and consent to Infintech contacting me about my project.</span>
+      </label>
+
+      <button type="submit" class="btn submit">Claim My FREE Consultation →</button>
+      <div class="secure">Your information is 100% secure &amp; never shared</div>
+    </form>
+  </aside>
+</section>
+
+<div class="social-strip">
+  <div class="social-strip-inner">
+    <span class="lbl">As Featured In</span>
+    <div class="press">
+      <span><em>Buzz</em>Feed</span>
+      <span>Entrepreneur</span>
+      <span><em>Huff</em>Post</span>
+      <span>Inc.</span>
+      <span>SME</span>
+    </div>
+  </div>
+</div>
+
+<section class="objections">
+  <div class="sec-head">
+    <span class="eyebrow">Before You Book — Read This</span>
+    <h2>Here's exactly what happens when you <span class="hl">claim your free call.</span></h2>
+  </div>
+
+  <div class="obj-grid">
+    <div class="card a">
+      <div class="icn">★</div>
+      <h4>Why Infintech Designs</h4>
+      <p>We innovated the Google ranking game. Locally owned in the Lower Garden District of New Orleans — serving 7 US cities with a team that still picks up the phone.</p>
+    </div>
+
+    <div class="card b">
+      <div class="icn">✓</div>
+      <h4>What You Get On The Call</h4>
+      <ul>
+        <li>Live competitor audit</li>
+        <li>SEO gap analysis</li>
+        <li>Written 90-day action plan</li>
+        <li>Honest budget guidance</li>
+      </ul>
+    </div>
+
+    <div class="card c">
+      <div class="icn">26</div>
+      <h4>26 Years, 4,000+ Sites Built</h4>
+      <div class="big-stat">750+</div>
+      <p>Websites optimized for SEO. 2025 Google Premier Partner. Proof over promises — every stat is verifiable.</p>
+    </div>
+
+    <div class="card d">
+      <div class="icn">📰</div>
+      <h4>Press &amp; Recognition</h4>
+      <ul>
+        <li>BuzzFeed · Entrepreneur · HuffPost</li>
+        <li>Inc. Magazine feature</li>
+        <li>SME spotlight</li>
+        <li>Google Premier Partner 2025</li>
+      </ul>
+    </div>
+
+    <div class="card e">
+      <div class="icn">→</div>
+      <h4>What Happens Next</h4>
+      <p><strong>1.</strong> Submit the form · <strong>2.</strong> Brian reviews your site personally · <strong>3.</strong> We book a 30-min call · <strong>4.</strong> You get a written action plan. Zero pressure.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="inner">
+    <h2>Ready to rank on Google's <span class="hl">Top 3 Map Pack</span>?</h2>
+    <p>One form. One call. One honest plan. No contracts to sign before the call, no pitch deck, no pressure.</p>
+    <div class="ctas">
+      <a href="#consult" class="btn lg">Claim Your FREE Consultation →</a>
+      <div class="phone-line"><small>Or call direct</small>(504) 547-6565</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-inner">
+    <span class="credit">INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</span>
+    <span>
+      <a href="tel:5045476565">(504) 547-6565</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </span>
+  </div>
+</footer>
+
+<a href="#consult" class="side-tab">Claim Free Consultation</a>
+<a href="tel:5045476565" class="mobile-sticky-cta">Call (504) 547-6565</a>
+
+<script>
+  document.getElementById('consult').addEventListener('submit', function(e) {
+    e.preventDefault();
+  });
+</script>
+
+</body>
+</html>
