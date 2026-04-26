@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <!--
-  Style: A03 — Bento Grid
-  Category: Structural Layout
+  Style: A03 — Bento Grid (v3 rebuild)
+  Category: Structural Layout — Data-Dense Dashboard
   Client: Infintech Designs — New Orleans digital marketing agency
   Design notes:
-    - Variable-size tile grid; largest tile heroes SEO as flagship service
-    - Bloomberg terminal density: metrics + credibility spatially organized
-    - Above-fold grid includes: SEO hero tile, all 3 stat tiles, PP badge tile, press tile, CTA tile
-    - Jon Silkin testimonial in dedicated tile; service area dot grid; all 11 services
-    - Color-coded tiles using brand palette only — no grays
-    - Mobile-first responsive: 375px and 768px breakpoints
+    - Live intelligence briefing: every tile is a fact about Infintech's 26-year track record
+    - 12-column CSS grid; hero tile col 1–8 rows 1–3; stats col 9–12 rows 1–3
+    - All press logos as actual <img> tags; all award logos as <img> tags
+    - Google Premier Partner official SVG from gstatic.com
+    - hero-bg.webp as tile background with rgba(0,0,0,0.65) overlay
+    - brian-hong.png circular portrait in CTA tile
+    - JetBrains Mono for stat labels, kicker text, badge text
+    - Staggered tile reveal: animation-delay calc(0.05s * var(--i))
+    - No lorem ipsum, no invented stats, no #ccc colors, no "120 days" claim
+    - Mobile: 768px → 2-col; 375px → single-col
 -->
 <html lang="en">
 <head>
@@ -18,42 +22,32 @@
 <title>Infintech Designs — Digital Marketing Agency | New Orleans</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ── BRAND TOKENS ── */
   :root {
-    /* Primary CTA — red-orange */
-    --orange: #EA4517;
-    --orange-glow: rgba(234, 69, 23, 0.45);
-    --orange-soft: rgba(234, 69, 23, 0.12);
-
-    /* Secondary accent — gold-orange */
-    --gold: #ED9924;
-
-    /* Emphasis — hot pink-coral */
-    --pink: #FF4E5E;
-
-    /* Body ink */
-    --ink: #212529;
+    --orange:      #EA4517;
+    --orange-glow: rgba(234,69,23,0.45);
+    --orange-soft: rgba(234,69,23,0.12);
+    --gold:        #ED9924;
+    --pink:        #FF4E5E;
+    --ink:         #212529;
     --ink-heading: #121212;
-
-    /* Backgrounds */
-    --paper: #FFFFFF;
-    --paper-alt: #F9F9FA;
-    --cream: #F5F0E8;
-
-    /* Dark theme */
-    --dark-0: #050507;
-    --dark-1: #0A0A0F;
-    --dark-2: #11111A;
-    --dark-text: #E8E8F0;
+    --paper:       #FFFFFF;
+    --paper-alt:   #F8FAFC;
+    --cream:       #F5F0E8;
+    --dark-0:      #050507;
+    --dark-1:      #0A0A0F;
+    --dark-2:      #11111A;
+    --dark-text:   #E8E8F0;
     --dark-text-dim: #9A9AAB;
-
-    /* Extended */
-    --neon: #4F8FFF;
-    --violet: #9D5CFF;
-    --green: #20E5A0;
+    --neon:        #4F8FFF;
+    --violet:      #9D5CFF;
+    --green:       #20E5A0;
+    --border:      #E5E7EB;
   }
 
+  /* ── RESET ── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { overflow-x: hidden; }
   body {
@@ -63,60 +57,76 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  a { text-decoration: none; color: inherit; }
+  a { text-decoration: none; color: inherit; cursor: pointer; }
 
-  /* ---- UTILITY BAR ---- */
+  /* ── TILE REVEAL ANIMATION ── */
+  @keyframes tileReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tile {
+      opacity: 0;
+      animation: tileReveal 0.5s ease forwards;
+      animation-delay: calc(0.05s * var(--i, 0));
+    }
+  }
+
+  /* ── UTILITY BAR ── */
   .utility-bar {
     background: var(--ink-heading);
     color: var(--dark-text-dim);
-    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-align: center;
     padding: 8px 20px;
   }
-  .utility-bar a { color: var(--gold); font-weight: 700; }
+  .utility-bar a { color: var(--gold); font-weight: 600; transition: color 0.2s; }
   .utility-bar a:hover { color: #fff; }
 
-  /* ---- NAV ---- */
-  .wrap { max-width: 1380px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 36px); }
+  /* ── WRAPPER + NAV ── */
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 36px); }
+
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 0 28px;
+    padding: 18px 0 26px;
     gap: 16px;
     flex-wrap: wrap;
   }
   nav .logo { height: 40px; width: auto; display: block; }
   nav ul {
     display: flex;
-    gap: 6px;
+    gap: 4px;
     list-style: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
   }
   nav ul a {
-    padding: 8px 14px;
+    padding: 8px 13px;
     border-radius: 999px;
     color: var(--ink);
     transition: background 0.2s, color 0.2s;
   }
   nav ul a:hover { background: var(--orange-soft); color: var(--orange); }
-  .btn {
+  .nav-cta {
     background: var(--orange);
     color: #fff;
-    padding: 11px 22px;
+    padding: 10px 20px;
     border-radius: 999px;
     font-weight: 700;
-    font-size: 14px;
-    display: inline-block;
+    font-size: 13px;
     letter-spacing: 0.02em;
+    display: inline-block;
     transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
   }
-  .btn:hover { background: #c93910; transform: translateY(-2px); }
+  .nav-cta:hover { background: #c93910; transform: translateY(-2px); }
 
-  /* ---- BENTO GRID ---- */
+  /* ── BENTO GRID ── */
   .bento {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -124,27 +134,36 @@
     gap: 14px;
   }
 
+  /* ── BASE TILE ── */
   .tile {
     background: var(--paper);
     border-radius: 20px;
+    border: 1px solid var(--border);
     padding: 26px 28px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
     position: relative;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
-  .tile:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0,0,0,0.1); }
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    border-color: rgba(234,69,23,0.35);
+  }
 
+  /* ── TYPOGRAPHY HELPERS ── */
   .lbl {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 600;
     display: inline-block;
   }
   .tile h2, .tile h3 {
+    font-family: 'Raleway', sans-serif;
     font-weight: 800;
     color: var(--ink-heading);
     line-height: 1.12;
@@ -152,99 +171,93 @@
   }
   .tile p { font-size: 13px; color: #4a5056; line-height: 1.5; }
 
-  /* =====================
-     HERO TILE (SEO flagship)
-     col 1–8, row 1–3
-     ===================== */
+  /* ══════════════════════════════════════
+     ① HERO TILE
+     col 1–8, rows 1–3
+     hero-bg.webp + rgba(0,0,0,0.65) overlay
+     ══════════════════════════════════════ */
   .t-hero {
+    --i: 0;
     grid-column: span 8;
     grid-row: span 3;
-    background: linear-gradient(145deg, #0d0d0d 0%, #1a0805 100%);
+    background: url('../Images/hero-bg.webp') center/cover no-repeat;
+    position: relative;
     color: #fff;
-    padding: clamp(28px, 4vw, 48px);
+    padding: clamp(28px, 4vw, 50px);
     justify-content: space-between;
+    border: none;
   }
+  /* dark overlay */
+  .t-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    border-radius: 20px;
+    z-index: 0;
+  }
+  .t-hero > * { position: relative; z-index: 1; }
+
   .t-hero .eyebrow {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    margin-bottom: 14px;
   }
   .t-hero .eyebrow .lbl { color: var(--gold); }
-  .t-hero .eyebrow .sep { color: rgba(255,255,255,0.2); font-size: 14px; }
-  .t-hero .eyebrow .est { font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .t-hero .eyebrow .sep { color: rgba(255,255,255,0.2); }
+  .t-hero .eyebrow .est {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
   .t-hero h1 {
-    font-size: clamp(32px, 4.4vw, 60px);
+    font-size: clamp(30px, 3.8vw, 58px);
     font-weight: 900;
     line-height: 1.04;
     letter-spacing: -0.025em;
     color: #fff;
-    margin: 16px 0 0;
-    max-width: 680px;
+    max-width: 640px;
   }
   .t-hero h1 .rank { color: var(--orange); }
   .t-hero h1 .grow { color: var(--gold); }
   .t-hero h1 .conv { color: var(--pink); }
   .t-hero .sub {
-    font-size: 15px;
-    color: rgba(255,255,255,0.72);
-    max-width: 540px;
-    margin-top: 16px;
-    line-height: 1.6;
-  }
-  .t-hero .outcome-copy {
-    display: inline-block;
-    background: var(--orange-soft);
-    border: 1px solid rgba(234,69,23,0.3);
-    border-radius: 8px;
-    padding: 10px 16px;
-    margin-top: 16px;
     font-size: 14px;
+    color: rgba(255,255,255,0.72);
+    max-width: 520px;
+    margin-top: 14px;
+    line-height: 1.65;
+  }
+  .t-hero .outcome-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(234,69,23,0.18);
+    border: 1px solid rgba(234,69,23,0.4);
+    border-radius: 8px;
+    padding: 9px 15px;
+    margin-top: 14px;
+    font-size: 13px;
     font-weight: 700;
-    color: #ff8c6b;
+    color: #ff9070;
+    font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0.02em;
   }
-  .t-hero .cta-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 22px;
-  }
-  .t-hero .btn-hero {
-    background: var(--orange);
-    color: #fff;
-    padding: 14px 26px;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    display: inline-block;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .t-hero .btn-hero:hover { background: #c93910; transform: translateY(-2px); }
-  .t-hero .ghost {
-    padding: 13px 22px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.22);
-    color: rgba(255,255,255,0.9);
-    font-weight: 600;
-    font-size: 14px;
-    display: inline-block;
-    transition: background 0.2s;
-  }
-  .t-hero .ghost:hover { background: rgba(255,255,255,0.08); }
   .t-hero .bullets {
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
-    margin-top: 20px;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
   }
   .t-hero .bullets li {
     font-size: 13px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.72);
     display: flex;
     align-items: flex-start;
     gap: 8px;
@@ -254,62 +267,97 @@
     color: var(--green);
     font-weight: 900;
     flex-shrink: 0;
-    margin-top: 1px;
   }
+  .t-hero .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .btn-hero {
+    background: var(--orange);
+    color: #fff;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .btn-hero:hover { background: #c93910; transform: translateY(-2px); }
+  .btn-ghost {
+    padding: 13px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-block;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.09); }
 
-  /* =====================
-     STAT TILES
-     col 9–12, row 1-3 (each span 4 col, 1 row)
-     ===================== */
+  /* ══════════════════════════════════════
+     ② ③ ④ STAT TILES
+     col 9–12, rows 1 / 2 / 3
+     ══════════════════════════════════════ */
   .t-stat {
     grid-column: span 4;
     grid-row: span 1;
     color: #fff;
-    padding: 22px 26px;
+    padding: 20px 24px;
     justify-content: space-between;
+    border: none;
+  }
+  .t-stat .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.9;
   }
   .t-stat .n {
-    font-size: 48px;
+    font-size: 52px;
     font-weight: 900;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
+    font-family: 'Raleway', sans-serif;
   }
-  .t-stat .stat-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; opacity: 0.95; }
-  .t-stat .stat-context { font-size: 11px; line-height: 1.45; opacity: 0.82; font-weight: 500; margin-top: 4px; }
-  .stat-orange { background: var(--orange); }
-  .stat-gold { background: var(--gold); color: var(--ink-heading); }
-  .stat-gold .stat-context { opacity: 0.72; }
-  .stat-pink { background: var(--pink); }
+  .t-stat .stat-ctx {
+    font-size: 11px;
+    line-height: 1.45;
+    opacity: 0.85;
+    font-weight: 500;
+  }
+  .t-stat-orange { --i: 1; background: var(--orange); }
+  .t-stat-gold   { --i: 2; background: var(--gold); color: var(--ink-heading); }
+  .t-stat-gold .stat-ctx { opacity: 0.7; }
+  .t-stat-pink   { --i: 3; background: var(--pink); }
 
-  /* =====================
-     PP BADGE TILE — col 9–12, row 4
-     ===================== */
+  /* ══════════════════════════════════════
+     ⑤ GOOGLE PP BADGE TILE
+     col 9–12, row 4
+     ══════════════════════════════════════ */
   .t-pp {
+    --i: 4;
     grid-column: span 4;
     grid-row: span 1;
-    background: linear-gradient(135deg, var(--ink-heading) 0%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #0d1b35 0%, #1a2a50 100%);
     color: #fff;
-    padding: 20px 24px;
+    padding: 16px 20px;
     flex-direction: row;
     align-items: center;
     gap: 14px;
     justify-content: flex-start;
+    border: 1px solid rgba(255,255,255,0.06);
   }
-  .t-pp .pp-badge {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.04em;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  }
+  .t-pp img.pp-svg { flex-shrink: 0; height: 60px; width: auto; }
   .t-pp .pp-text .pp-title {
     font-size: 13px;
     font-weight: 800;
@@ -317,141 +365,166 @@
     line-height: 1.2;
   }
   .t-pp .pp-text .pp-sub {
-    font-size: 11px;
-    color: rgba(255,255,255,0.58);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
     font-weight: 500;
-    margin-top: 2px;
-    line-height: 1.4;
-  }
-
-  /* =====================
-     SEO FLAGSHIP TILE (outcome copy, pills) — col 1–4, row 4–5
-     ===================== */
-  .t-flag {
-    grid-column: span 4;
-    grid-row: span 2;
-    background: linear-gradient(140deg, var(--orange) 0%, #c93910 100%);
-    color: #fff;
-    padding: 28px;
-  }
-  .t-flag .lbl { color: rgba(255,255,255,0.8); margin-bottom: 8px; }
-  .t-flag h3 {
-    font-size: clamp(22px, 2.6vw, 30px);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .t-flag p { color: rgba(255,255,255,0.88); font-size: 13px; margin-top: 8px; line-height: 1.55; }
-  .t-flag .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
-  .t-flag .pill {
-    background: rgba(255,255,255,0.18);
-    border: 1px solid rgba(255,255,255,0.28);
-    border-radius: 999px;
-    padding: 5px 11px;
-    font-size: 11px;
-    font-weight: 700;
+    margin-top: 3px;
+    line-height: 1.45;
     letter-spacing: 0.04em;
   }
 
-  /* =====================
-     PRESS TILE — col 5–8, row 4
-     ===================== */
+  /* ══════════════════════════════════════
+     ⑥ PRESS TILE — "As Seen On"
+     col 1–4, row 4
+     ══════════════════════════════════════ */
   .t-press {
+    --i: 5;
     grid-column: span 4;
     grid-row: span 1;
-    background: var(--ink-heading);
-    color: #fff;
-    padding: 20px 26px;
+    background: var(--paper);
+    padding: 18px 22px;
     justify-content: space-between;
   }
-  .t-press .lbl { color: var(--gold); }
-  .t-press .logos {
+  .t-press .lbl { color: var(--orange); }
+  .t-press .press-logos {
     display: flex;
-    gap: clamp(12px, 2vw, 22px);
+    gap: clamp(8px, 1.5vw, 16px);
     flex-wrap: wrap;
     align-items: center;
     margin-top: 8px;
   }
-  .t-press .logo-txt {
-    font-size: clamp(13px, 1.3vw, 16px);
-    font-weight: 800;
-    color: rgba(255,255,255,0.88);
-    font-style: italic;
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
+  .t-press .press-logos img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.7);
+    transition: filter 0.2s;
   }
-  .t-press .logo-txt:hover { color: var(--gold); }
+  .t-press .press-logos img:hover { filter: grayscale(0) opacity(1); }
 
-  /* =====================
-     TESTIMONIAL TILE — col 5–8, row 5
-     ===================== */
+  /* ══════════════════════════════════════
+     ⑦ TESTIMONIAL TILE — Jon Silkin
+     col 5–8, row 4
+     ══════════════════════════════════════ */
   .t-testimonial {
+    --i: 6;
     grid-column: span 4;
     grid-row: span 1;
     background: var(--cream);
     padding: 20px 24px;
     justify-content: space-between;
+    border-color: rgba(234,69,23,0.15);
   }
   .t-testimonial .lbl { color: var(--orange); }
   .t-testimonial blockquote {
-    font-size: 13px;
+    font-size: 12px;
     font-style: italic;
     color: var(--ink);
-    line-height: 1.5;
+    line-height: 1.55;
     border-left: 3px solid var(--orange);
-    padding-left: 12px;
+    padding-left: 11px;
+    margin-top: 6px;
+  }
+  .t-testimonial .attrib-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-top: 8px;
+  }
+  .t-testimonial .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
   .t-testimonial .attrib {
     font-size: 11px;
     font-weight: 700;
     color: var(--orange);
-    margin-top: 8px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+  .t-testimonial .stars {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 1px;
+    letter-spacing: 1px;
+  }
 
-  /* =====================
-     CTA TILE — col 9–12, row 5–6
-     ===================== */
+  /* ══════════════════════════════════════
+     ⑧ CTA TILE — orange, Brian Hong
+     col 9–12, rows 5–6
+     ══════════════════════════════════════ */
   .t-cta {
+    --i: 7;
     grid-column: span 4;
     grid-row: span 2;
-    background: var(--ink-heading);
+    background: var(--orange);
     color: #fff;
     padding: 26px 28px;
+    border: none;
   }
-  .t-cta .lbl { color: var(--pink); }
-  .t-cta h3 {
-    font-size: clamp(18px, 1.8vw, 22px);
+  .t-cta .lbl { color: rgba(255,255,255,0.8); }
+  .t-cta .founder-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .t-cta .founder-portrait {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.4);
+    flex-shrink: 0;
+  }
+  .t-cta .founder-copy .goes-to {
+    font-size: 14px;
     font-weight: 800;
     color: #fff;
-    margin-top: 8px;
     line-height: 1.2;
+  }
+  .t-cta .founder-copy .goes-to span {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.72);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
   }
   .t-cta .cta-sub {
     font-size: 12px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 6px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 8px;
     line-height: 1.5;
   }
-  .t-cta .phone {
+  .t-cta .phone-link {
+    display: block;
     font-size: 20px;
     font-weight: 800;
-    color: var(--gold);
+    color: #fff;
     margin-top: 10px;
-    display: block;
     letter-spacing: -0.01em;
-    transition: color 0.2s;
+    transition: opacity 0.2s;
   }
-  .t-cta .phone:hover { color: #fff; }
-  .t-cta .btn-full {
+  .t-cta .phone-link:hover { opacity: 0.82; }
+  .t-cta .btn-cta {
     display: block;
     text-align: center;
-    background: var(--orange);
-    color: #fff;
-    padding: 14px 16px;
+    background: #fff;
+    color: var(--orange);
+    padding: 13px 16px;
     border-radius: 12px;
     font-weight: 800;
     font-size: 12px;
@@ -460,157 +533,199 @@
     margin-top: 12px;
     transition: background 0.2s, transform 0.15s;
   }
-  .t-cta .btn-full:hover { background: #c93910; transform: translateY(-1px); }
+  .t-cta .btn-cta:hover { background: var(--ink-heading); color: #fff; transform: translateY(-1px); }
 
-  /* =====================
-     SERVICE TILES — rows 6–9
-     Each: span 4, span 1 row (3 per row × 4 rows for 11 services; last row 2 tiles + location)
-     ===================== */
+  /* ══════════════════════════════════════
+     ⑨ SERVICE TILES — 11 services
+     rows 5–8 (col 1–8); each span 4 cols, 1 row
+     ══════════════════════════════════════ */
   .t-svc {
     grid-column: span 4;
     grid-row: span 1;
     background: var(--paper);
-    padding: 20px 24px;
+    padding: 18px 22px;
     justify-content: space-between;
+    border-left: 4px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
   }
-  .t-svc:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0,0,0,0.08); }
+  .t-svc:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
   .t-svc .svc-top { display: flex; align-items: center; gap: 8px; }
-  .t-svc .dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-  .t-svc h3 { font-size: 15px; font-weight: 800; color: var(--ink-heading); margin-top: 8px; }
+  .t-svc h3 { font-size: 14px; font-weight: 800; color: var(--ink-heading); margin-top: 6px; }
   .t-svc .outcome { font-size: 12px; color: #5a6068; line-height: 1.45; margin-top: 4px; }
 
-  .svc-seo .lbl { color: var(--orange); }
-  .svc-seo .dot { background: var(--orange); }
-  .svc-web .lbl { color: var(--neon); }
-  .svc-web .dot { background: var(--neon); }
-  .svc-ppc .lbl { color: var(--green); }
-  .svc-ppc .dot { background: var(--green); }
-  .svc-fsm .lbl { color: var(--violet); }
-  .svc-fsm .dot { background: var(--violet); }
+  /* Service color variants */
+  .svc-seo   { --i: 8;  border-left-color: var(--orange); }
+  .svc-seo   .lbl { color: var(--orange); }
+  .svc-seo:hover { border-left-color: var(--orange); }
+
+  .svc-web   { --i: 9;  border-left-color: var(--neon); }
+  .svc-web   .lbl { color: var(--neon); }
+  .svc-web:hover { border-left-color: var(--neon); }
+
+  .svc-ppc   { --i: 10; border-left-color: var(--green); }
+  .svc-ppc   .lbl { color: var(--green); }
+  .svc-ppc:hover { border-left-color: var(--green); }
+
+  .svc-fsm   { --i: 11; border-left-color: var(--violet); }
+  .svc-fsm   .lbl { color: var(--violet); }
+  .svc-fsm:hover { border-left-color: var(--violet); }
+
+  .svc-social { --i: 12; border-left-color: #24B7C9; }
   .svc-social .lbl { color: #24B7C9; }
-  .svc-social .dot { background: #24B7C9; }
+  .svc-social:hover { border-left-color: #24B7C9; }
+
+  .svc-content { --i: 13; border-left-color: var(--gold); }
   .svc-content .lbl { color: var(--gold); }
-  .svc-content .dot { background: var(--gold); }
-  .svc-cro .lbl { color: var(--pink); }
-  .svc-cro .dot { background: var(--pink); }
-  .svc-orm .lbl { color: #5a9e6f; }
-  .svc-orm .dot { background: #5a9e6f; }
-  .svc-lead .lbl { color: var(--orange); }
-  .svc-lead .dot { background: var(--orange); }
-  .svc-wl .lbl { color: var(--dark-text-dim); color: #8e99a4; }
-  .svc-wl .dot { background: #8e99a4; }
-  .svc-ai .lbl { color: var(--neon); }
-  .svc-ai .dot { background: var(--neon); }
+  .svc-content:hover { border-left-color: var(--gold); }
 
-  /* =====================
-     SERVICE AREA TILE — col 9–12, row 6–7 spans into service section
-     ===================== */
-  .t-location {
-    grid-column: span 4;
-    grid-row: span 2;
-    background: var(--ink-heading);
-    color: #fff;
-    padding: 24px 26px;
-  }
-  .t-location .lbl { color: var(--orange); }
-  .t-location h3 {
-    font-size: 16px;
-    font-weight: 800;
-    color: #fff;
-    margin-top: 6px;
-    margin-bottom: 12px;
-  }
-  .city-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 12px;
-  }
-  .city-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.8);
-  }
-  .city-item .city-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--orange-soft);
-    border: 1px solid var(--orange);
-    flex-shrink: 0;
-  }
-  .city-item.hq .city-dot { background: var(--orange); border-color: var(--orange); }
-  .city-item.hq { color: var(--gold); font-weight: 800; }
+  .svc-cro   { --i: 14; border-left-color: var(--pink); }
+  .svc-cro   .lbl { color: var(--pink); }
+  .svc-cro:hover { border-left-color: var(--pink); }
 
-  /* =====================
-     FOUNDER TILE — col 1–4, row (last)
-     ===================== */
-  .t-founder {
-    grid-column: span 4;
-    grid-row: span 1;
-    background: var(--orange-soft);
-    border: 1px solid rgba(234,69,23,0.2);
-    padding: 20px 24px;
-  }
-  .t-founder .lbl { color: var(--orange); }
-  .t-founder h3 { font-size: 15px; font-weight: 800; color: var(--ink-heading); margin-top: 6px; }
-  .t-founder p { font-size: 12px; color: var(--ink); margin-top: 4px; line-height: 1.5; }
+  .svc-orm   { --i: 15; border-left-color: #5a9e6f; }
+  .svc-orm   .lbl { color: #5a9e6f; }
+  .svc-orm:hover { border-left-color: #5a9e6f; }
 
-  /* =====================
-     PROCESS TILE — col 5–8, last row
-     ===================== */
-  .t-process {
+  .svc-lead  { --i: 16; border-left-color: var(--orange); }
+  .svc-lead  .lbl { color: var(--orange); }
+  .svc-lead:hover { border-left-color: var(--orange); }
+
+  .svc-wl    { --i: 17; border-left-color: #8e99a4; }
+  .svc-wl    .lbl { color: #8e99a4; }
+  .svc-wl:hover { border-left-color: #8e99a4; }
+
+  .svc-ai    { --i: 18; border-left-color: var(--neon); }
+  .svc-ai    .lbl { color: var(--neon); }
+  .svc-ai:hover { border-left-color: var(--neon); }
+
+  /* ══════════════════════════════════════
+     ⑩ AWARD TILE
+     col 9–12, row 7
+     ══════════════════════════════════════ */
+  .t-awards {
+    --i: 19;
     grid-column: span 4;
     grid-row: span 1;
     background: var(--paper-alt);
-    border: 1px solid rgba(0,0,0,0.06);
-    padding: 20px 24px;
+    padding: 18px 22px;
+    justify-content: space-between;
   }
-  .t-process .lbl { color: var(--violet); }
-  .t-process .steps { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
-  .t-process .step {
-    font-size: 12px;
-    color: var(--ink);
-    font-weight: 600;
+  .t-awards .lbl { color: var(--gold); }
+  .t-awards .award-logos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .t-awards .award-logos img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s;
+  }
+  .t-awards .award-logos img:hover { transform: scale(1.06); }
+
+  /* ══════════════════════════════════════
+     ⑪ CITY GRID TILE
+     col 1–8, rows 8–9
+     ══════════════════════════════════════ */
+  .t-cities {
+    --i: 20;
+    grid-column: span 8;
+    grid-row: span 2;
+    background: var(--ink-heading);
+    color: #fff;
+    padding: 28px 32px;
+    justify-content: flex-start;
+    border: none;
+  }
+  .t-cities .lbl { color: var(--orange); }
+  .t-cities h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    margin: 8px 0 16px;
+  }
+  .city-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 16px;
+  }
+  .city-item {
     display: flex;
     align-items: flex-start;
     gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.35;
   }
-  .t-process .step-n {
-    width: 18px;
-    height: 18px;
-    border-radius: 5px;
-    background: var(--violet);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 900;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  .city-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(234,69,23,0.3);
+    border: 1.5px solid var(--orange);
     flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .city-item.hq .city-dot { background: var(--orange); }
+  .city-item.hq { color: var(--gold); font-weight: 800; }
+  .city-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.38);
+    display: block;
+    font-weight: 400;
     margin-top: 1px;
   }
 
-  /* ---- SECTION LABEL (between sections) ---- */
-  .section-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.22em;
+  /* ══════════════════════════════════════
+     ⑫ FOUNDER TILE — col 9–12, rows 8–9
+     (fills right side of city row)
+     ══════════════════════════════════════ */
+  .t-founder {
+    --i: 21;
+    grid-column: span 4;
+    grid-row: span 2;
+    background: var(--orange-soft);
+    border: 1px solid rgba(234,69,23,0.22);
+    padding: 24px 26px;
+  }
+  .t-founder .lbl { color: var(--orange); }
+  .t-founder h3 { font-size: 15px; font-weight: 800; color: var(--ink-heading); margin-top: 8px; line-height: 1.25; }
+  .t-founder p { font-size: 12px; color: var(--ink); margin-top: 6px; line-height: 1.6; }
+  .t-founder .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--orange);
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(0,0,0,0.3);
+    margin-top: 10px;
+  }
+
+  /* ── SECTION DIVIDER LABEL ── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.28);
     padding: 20px 0 6px;
   }
 
-  /* ---- FOOTER ---- */
+  /* ── FOOTER ── */
   footer {
-    margin-top: 40px;
+    margin-top: 44px;
     padding: 28px 0 24px;
     border-top: 2px solid rgba(0,0,0,0.07);
   }
@@ -622,17 +737,18 @@
     flex-wrap: wrap;
   }
   .footer-brand .tagline {
-    font-size: 13px;
-    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--orange);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
   .footer-brand .address {
     font-size: 12px;
     color: #6c757d;
     margin-top: 6px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
   .footer-nav {
     display: flex;
@@ -663,7 +779,7 @@
     font-size: 11px;
     color: #9a9aaa;
   }
-  .footer-social { display: flex; gap: 12px; }
+  .footer-social { display: flex; gap: 14px; }
   .footer-social a {
     font-size: 11px;
     font-weight: 700;
@@ -674,27 +790,27 @@
   }
   .footer-social a:hover { color: var(--orange); }
 
-  /* =====================
-     RESPONSIVE — 768px
-     ===================== */
+  /* ══════════════════════════════════════
+     RESPONSIVE — 768px (tablet)
+     ══════════════════════════════════════ */
   @media (max-width: 900px) {
     .bento {
       grid-template-columns: repeat(6, 1fr);
       grid-auto-rows: auto;
       gap: 12px;
     }
-    .tile { min-height: 130px; }
-    .t-hero { grid-column: span 6; grid-row: auto; }
-    .t-stat { grid-column: span 3; grid-row: auto; }
-    .t-pp { grid-column: span 6; grid-row: auto; }
-    .t-flag { grid-column: span 6; grid-row: auto; }
-    .t-press { grid-column: span 4; grid-row: auto; }
-    .t-testimonial { grid-column: span 4; grid-row: auto; }
-    .t-cta { grid-column: span 2; grid-row: auto; }
-    .t-svc { grid-column: span 3; grid-row: auto; }
-    .t-location { grid-column: span 3; grid-row: auto; }
-    .t-founder { grid-column: span 3; grid-row: auto; }
-    .t-process { grid-column: span 3; grid-row: auto; }
+    .tile { min-height: 120px; }
+    .t-hero   { grid-column: span 6; grid-row: auto; min-height: 340px; }
+    .t-stat   { grid-column: span 3; grid-row: auto; }
+    .t-pp     { grid-column: span 6; grid-row: auto; }
+    .t-press  { grid-column: span 3; grid-row: auto; }
+    .t-testimonial { grid-column: span 3; grid-row: auto; }
+    .t-cta    { grid-column: span 6; grid-row: auto; }
+    .t-svc    { grid-column: span 3; grid-row: auto; }
+    .t-awards { grid-column: span 6; grid-row: auto; }
+    .t-cities { grid-column: span 6; grid-row: auto; }
+    .t-founder { grid-column: span 6; grid-row: auto; }
+    .city-grid { grid-template-columns: repeat(2, 1fr); }
     nav ul { display: none; }
   }
 
@@ -704,52 +820,309 @@
       grid-auto-rows: auto;
       gap: 10px;
     }
-    .t-hero { grid-column: span 4; }
-    .t-hero h1 { font-size: clamp(26px, 7vw, 40px); }
-    .t-stat { grid-column: span 2; }
-    .t-pp { grid-column: span 4; }
-    .t-flag { grid-column: span 4; }
-    .t-press { grid-column: span 4; }
-    .t-testimonial { grid-column: span 4; }
-    .t-cta { grid-column: span 4; grid-row: auto; }
-    .t-svc { grid-column: span 2; }
-    .t-location { grid-column: span 4; grid-row: auto; }
-    .t-founder { grid-column: span 2; }
-    .t-process { grid-column: span 2; }
+    .t-hero   { grid-column: span 4; min-height: 300px; }
+    .t-hero h1 { font-size: clamp(24px, 7vw, 38px); }
+    .t-stat   { grid-column: span 2; }
+    .t-pp     { grid-column: span 4; }
+    .t-press  { grid-column: span 2; }
+    .t-testimonial { grid-column: span 2; }
+    .t-cta    { grid-column: span 4; }
+    .t-svc    { grid-column: span 2; }
+    .t-awards { grid-column: span 4; }
+    .t-cities { grid-column: span 4; }
+    .t-founder { grid-column: span 4; }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     .wrap { padding: 0 14px; }
-    nav { padding: 16px 0 20px; }
+    nav { padding: 14px 0 18px; }
     nav .logo { height: 34px; }
-    .btn { padding: 10px 16px; font-size: 13px; }
+    .nav-cta { padding: 9px 15px; font-size: 12px; }
     .bento {
       grid-template-columns: 1fr;
       gap: 10px;
     }
     .tile { grid-column: span 1 !important; min-height: 100px; padding: 20px; }
-    .t-hero h1 { font-size: 28px; }
-    .t-stat .n { font-size: 40px; }
-    .t-flag h3 { font-size: 22px; }
+    .t-hero { min-height: 260px; }
+    .t-hero h1 { font-size: 26px; }
+    .t-stat .n { font-size: 44px; }
+    .t-cta .founder-portrait { width: 56px; height: 56px; }
     .city-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-  <!-- UTILITY BAR -->
-  <div class="utility-bar">
-    Google Premier Partner 2025 &nbsp;·&nbsp; Serving 8 US Cities &nbsp;·&nbsp;
-    <a href="tel:5045476565">(504) 547-6565</a>
-    &nbsp;·&nbsp; 24/7
-  </div>
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  // Google Premier Partner 2025 &nbsp;&middot;&nbsp; Serving 8 US Cities &nbsp;&middot;&nbsp;
+  <a href="tel:5045476565">(504) 547-6565</a>
+  &nbsp;&middot;&nbsp; Available 24/7
+</div>
 
-  <div class="wrap">
+<div class="wrap">
 
-    <!-- NAV -->
-    <nav>
-      <img class="logo" src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
-      <ul>
+  <!-- NAV -->
+  <nav>
+    <img class="logo" src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Case Studies</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Service Areas</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#">Free Consultation</a>
+  </nav>
+
+  <!-- BENTO GRID -->
+  <div class="bento">
+
+    <!-- ① HERO TILE — hero-bg.webp + overlay, col 1-8, rows 1-3 -->
+    <div class="tile t-hero">
+      <div>
+        <div class="eyebrow">
+          <span class="lbl">Infintech Designs</span>
+          <span class="sep">/</span>
+          <span class="est">Est. 2000 · New Orleans, LA</span>
+        </div>
+        <h1>We Help Businesses <span class="rank">Rank Higher</span>, <span class="grow">Grow Faster</span> And <span class="conv">Convert Better</span> To Drive Revenue</h1>
+        <p class="sub">Our Team Innovated The Google Ranking Game And Is Committed That Your Business Ranks On The Highly Coveted Top 3 Spots Of The Google Map Pack</p>
+        <div class="outcome-box">// Map-pack first. Top 3 of Google. That's the only scoreboard that matters.</div>
+      </div>
+      <div>
+        <ul class="bullets">
+          <li>FREE Initial Consultation With Founder &amp; CEO Brian Hong</li>
+          <li>Over 26 Years Experience In SEO And Web Design</li>
+          <li>Real-Time Tracking Dashboard</li>
+          <li>Data-Driven SEO Marketing With Measurable Results</li>
+          <li>Web Design That Turns Visitors Into Customers</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn-hero" href="#">CLAIM YOUR FREE CONSULTATION NOW!</a>
+          <a class="btn-ghost" href="tel:5045476565">(504) 547-6565</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② STAT — 26+ Years (col 9-12, row 1) -->
+    <div class="tile t-stat t-stat-orange">
+      <div class="stat-label">// Experience</div>
+      <div class="n">26+</div>
+      <div class="stat-ctx">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
+    </div>
+
+    <!-- ③ STAT — 4,000+ Websites (col 9-12, row 2) -->
+    <div class="tile t-stat t-stat-gold">
+      <div class="stat-label">// Websites Built</div>
+      <div class="n">4,000+</div>
+      <div class="stat-ctx">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
+    </div>
+
+    <!-- ④ STAT — 750+ SEO (col 9-12, row 3) -->
+    <div class="tile t-stat t-stat-pink">
+      <div class="stat-label">// SEO Campaigns</div>
+      <div class="n">750+</div>
+      <div class="stat-ctx">Sites engineered for ranking — not just shipped, then trained on results data.</div>
+    </div>
+
+    <!-- ⑤ GOOGLE PP BADGE TILE (col 9-12, row 4) -->
+    <div class="tile t-pp">
+      <img
+        class="pp-svg"
+        src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg"
+        alt="Google Premier Partner 2025"
+        style="height:60px; width:auto;">
+      <div class="pp-text">
+        <div class="pp-title">Google Premier Partner 2025</div>
+        <div class="pp-sub">Top 3% of all Google Ads agencies<br>in the United States. Audited annually.</div>
+      </div>
+    </div>
+
+    <!-- ⑥ PRESS TILE — 5 actual <img> tags (col 1-4, row 4) -->
+    <div class="tile t-press">
+      <div class="lbl">// As Seen On</div>
+      <div class="press-logos">
+        <img src="../Images/buzz-feed-logo.png" alt="BuzzFeed">
+        <img src="../Images/entrepreneur-logo.png" alt="Entrepreneur">
+        <img src="../Images/inc-logo.png" alt="Inc.">
+        <img src="../Images/huffpost-logo.png" alt="HuffPost">
+        <img src="../Images/sme-logo.png" alt="SME">
+      </div>
+    </div>
+
+    <!-- ⑦ TESTIMONIAL TILE — Jon Silkin (col 5-8, row 4) -->
+    <div class="tile t-testimonial">
+      <div class="lbl">// Real Stories From Real Clients</div>
+      <blockquote>"I contacted Infintech Designs 2 months ago to create and build a creative website for my company. The web design service from Brian and his team has been great from the start."</blockquote>
+      <div class="attrib-row">
+        <div class="avatar">JS</div>
+        <div>
+          <div class="attrib">— Jon Silkin · 5-Star Verified Review</div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑧ CTA TILE — orange, brian-hong.png (col 9-12, rows 5-6) -->
+    <div class="tile t-cta">
+      <div class="lbl">// Start Here</div>
+      <div class="founder-row">
+        <img
+          class="founder-portrait"
+          src="../Images/brian-hong.png"
+          alt="Brian Hong"
+          style="width:72px;height:72px;border-radius:50%;object-fit:cover;">
+        <div class="founder-copy">
+          <div class="goes-to">
+            <span>// This call goes to</span>
+            Brian Hong — not a sales rep.
+          </div>
+        </div>
+      </div>
+      <p class="cta-sub">Founder &amp; CEO · Infintech Designs · New Orleans. No bots, no junior hand-offs.</p>
+      <a class="phone-link" href="tel:5045476565">(504) 547-6565</a>
+      <a class="btn-cta" href="#">CLAIM YOUR FREE CONSULTATION NOW!</a>
+    </div>
+
+    <!-- ══ SERVICES — ALL 11 ══ -->
+    <!-- Row A: SEO / Web Design / PPC (col 1-12 each span 4) -->
+    <div class="tile t-svc svc-seo">
+      <div class="svc-top"><span class="lbl">SEO</span></div>
+      <h3>Search Engine Optimization</h3>
+      <p class="outcome">Map-pack first. Rank in the Top 3 of Google.</p>
+    </div>
+    <div class="tile t-svc svc-web">
+      <div class="svc-top"><span class="lbl">Web Design</span></div>
+      <h3>Web Design &amp; Development</h3>
+      <p class="outcome">Built to convert. Engineered to rank. 4,000+ shipped.</p>
+    </div>
+    <div class="tile t-svc svc-ppc">
+      <div class="svc-top"><span class="lbl">Paid Ads</span></div>
+      <h3>PPC &amp; Google Ads</h3>
+      <p class="outcome">Premier-Partner audited campaigns. Every dollar tracked.</p>
+    </div>
+
+    <!-- Row B: Full Stack / Social / Content -->
+    <div class="tile t-svc svc-fsm">
+      <div class="svc-top"><span class="lbl">Full-Service</span></div>
+      <h3>Full Stack Digital Marketing</h3>
+      <p class="outcome">One agency owning every channel. No vendor relay-race.</p>
+    </div>
+    <div class="tile t-svc svc-social">
+      <div class="svc-top"><span class="lbl">Social</span></div>
+      <h3>Social Media Marketing</h3>
+      <p class="outcome">Organic + paid social tuned for your business pipeline.</p>
+    </div>
+    <div class="tile t-svc svc-content">
+      <div class="svc-top"><span class="lbl">Content</span></div>
+      <h3>Content Marketing</h3>
+      <p class="outcome">SEO-led editorial that ranks and reads like a human wrote it.</p>
+    </div>
+
+    <!-- Row C: CRO / ORM / Lead Gen -->
+    <div class="tile t-svc svc-cro">
+      <div class="svc-top"><span class="lbl">CRO</span></div>
+      <h3>Conversion Rate Optimization</h3>
+      <p class="outcome">A/B test the funnel until the math wins.</p>
+    </div>
+    <div class="tile t-svc svc-orm">
+      <div class="svc-top"><span class="lbl">Reputation</span></div>
+      <h3>Online Reputation Management</h3>
+      <p class="outcome">Reviews, citations, and brand sentiment management.</p>
+    </div>
+    <div class="tile t-svc svc-lead">
+      <div class="svc-top"><span class="lbl">Lead Gen</span></div>
+      <h3>Lead Generation</h3>
+      <p class="outcome">Qualified-lead pipelines, not vanity-form fills.</p>
+    </div>
+
+    <!-- Row D: White Label / AI + Award tile in col 9-12 -->
+    <div class="tile t-svc svc-wl">
+      <div class="svc-top"><span class="lbl">White Label</span></div>
+      <h3>White Label Services</h3>
+      <p class="outcome">Agency-to-agency partnerships under your brand.</p>
+    </div>
+    <div class="tile t-svc svc-ai">
+      <div class="svc-top"><span class="lbl">AI Automation</span></div>
+      <h3>AI Automation Services</h3>
+      <p class="outcome">Workflow automation and agent integration for the modern SMB.</p>
+    </div>
+
+    <!-- ⑩ AWARD TILE — 3 award imgs (col 9-12, row 7) -->
+    <div class="tile t-awards">
+      <div class="lbl">// Awards &amp; Recognition</div>
+      <div class="award-logos">
+        <img src="../Images/award-upcity.png" alt="UpCity National &amp; Local Excellence Award">
+        <img src="../Images/award-kicksta.png" alt="Kicksta Top Social Media Agencies in Louisiana">
+        <img src="../Images/award-seolium.png" alt="Seolium #1 Agency in New Orleans">
+      </div>
+    </div>
+
+    <!-- ⑪ CITY GRID TILE — 8 cities (col 1-8, rows 8-9) -->
+    <div class="tile t-cities">
+      <div class="lbl">// Service Areas</div>
+      <h3>8 US Cities. One Standard of Excellence.</h3>
+      <div class="city-grid">
+        <div class="city-item hq">
+          <span class="city-dot"></span>
+          <div>New Orleans, LA<span class="city-meta">(504) 547-6565 · HQ</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>Houston, TX<span class="city-meta">(713) 843-7501</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>Dallas, TX<span class="city-meta">(469) 815-7570</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>Austin, TX<span class="city-meta">(512) 890-0845</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>San Francisco, CA<span class="city-meta">(628) 900-9377</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>Seattle, WA<span class="city-meta">(425) 386-1649</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>Atlanta, GA<span class="city-meta">(404) 590-6256</span></div>
+        </div>
+        <div class="city-item">
+          <span class="city-dot"></span>
+          <div>New York, NY<span class="city-meta">(347) 234-5963</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑫ FOUNDER TILE — col 9-12, rows 8-9 -->
+    <div class="tile t-founder">
+      <div class="lbl">// The Person You'll Talk To</div>
+      <h3>This call goes to Brian Hong — not a sales rep.</h3>
+      <p>I started Infintech in 2000 because the agencies I'd worked at were treating SEO like a billable mystery. We've since built more than 4,000 websites and ranked 750+ businesses on the back of one principle: every account gets senior strategists, every month, no junior hand-offs. If you're tired of agency churn, get on the line.</p>
+      <div class="sig">— Brian Hong · Founder &amp; CEO · Infintech Designs · New Orleans</div>
+    </div>
+
+  </div><!-- /bento -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="tagline">Rank Higher. Grow Faster. Convert Better.</div>
+        <div class="address">
+          3436 Magazine St, #120, New Orleans, LA 70115<br>
+          <a href="tel:5045476565" style="color:var(--orange); font-weight:700;">(504) 547-6565</a>
+          &nbsp;&middot;&nbsp; Available 24/7
+        </div>
+      </div>
+      <ul class="footer-nav">
         <li><a href="#">Home</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Case Studies</a></li>
@@ -758,249 +1131,17 @@
         <li><a href="#">Service Areas</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
-      <a class="btn" href="#">Free Consultation</a>
-    </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 InfintechDesigns &nbsp;&middot;&nbsp; Google Premier Partner 2025 &nbsp;&middot;&nbsp; New Orleans, LA</div>
+      <div class="footer-social">
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+  </footer>
 
-    <!-- BENTO GRID -->
-    <div class="bento">
-
-      <!-- ① HERO TILE — SEO flagship, col 1-8, row 1-3 -->
-      <div class="tile t-hero">
-        <div>
-          <div class="eyebrow">
-            <span class="lbl">Infintech Designs</span>
-            <span class="sep">|</span>
-            <span class="est">Est. 2000 · New Orleans, LA</span>
-          </div>
-          <h1>We Help Businesses <span class="rank">Rank Higher</span>, <span class="grow">Grow Faster</span> And <span class="conv">Convert Better</span> To Drive Revenue</h1>
-          <p class="sub">Our Team Innovated The Google Ranking Game And Is Committed That Your Business Ranks On The Highly Coveted Top 3 Spots Of The Google Map Pack</p>
-          <div class="outcome-copy">Map-pack first. Top 3 of Google. That's the only scoreboard that matters.</div>
-        </div>
-        <div>
-          <ul class="bullets">
-            <li>FREE Initial Consultation With Founder &amp; CEO Brian Hong</li>
-            <li>Over 26 Years Experience In SEO And Web Design</li>
-            <li>Real-Time Tracking Dashboard</li>
-            <li>Data-Driven SEO Marketing With Measurable Results</li>
-          </ul>
-          <div class="cta-row">
-            <a class="btn-hero" href="#">CLAIM YOUR FREE CONSULTATION NOW!</a>
-            <a class="ghost" href="tel:5045476565">(504) 547-6565</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ② STAT — 26+ Years (col 9-12, row 1) -->
-      <div class="tile t-stat stat-orange">
-        <div class="stat-label">Experience</div>
-        <div class="n">26+</div>
-        <div class="stat-context">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
-      </div>
-
-      <!-- ③ STAT — 4,000+ Websites (col 9-12, row 2) -->
-      <div class="tile t-stat stat-gold">
-        <div class="stat-label">Websites Built</div>
-        <div class="n">4,000+</div>
-        <div class="stat-context">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
-      </div>
-
-      <!-- ④ STAT — 750+ SEO (col 9-12, row 3) -->
-      <div class="tile t-stat stat-pink">
-        <div class="stat-label">SEO Campaigns</div>
-        <div class="n">750+</div>
-        <div class="stat-context">Sites engineered for ranking — not just shipped, then trained on results data.</div>
-      </div>
-
-      <!-- ⑤ PP BADGE TILE — col 9-12, row 4 -->
-      <div class="tile t-pp">
-        <div class="pp-badge">G</div>
-        <div class="pp-text">
-          <div class="pp-title">Google Premier Partner 2025</div>
-          <div class="pp-sub">Top 3% of all Google Ads agencies in the United States. Audited annually.</div>
-        </div>
-      </div>
-
-      <!-- ⑥ SEO FLAGSHIP TILE — col 1-4, row 4-5 -->
-      <div class="tile t-flag">
-        <div class="lbl">Flagship Service</div>
-        <div>
-          <h3>Search Engine Optimization — Map-pack first. Rank in the Top 3 of Google.</h3>
-          <p>Local, on-page, off-page, and link building engineered around measurable ranking movement. Every account gets senior strategists, every month, no junior hand-offs.</p>
-        </div>
-        <div class="pills">
-          <span class="pill">Local SEO</span>
-          <span class="pill">On-Page</span>
-          <span class="pill">Off-Page</span>
-          <span class="pill">Link Building</span>
-          <span class="pill">Map Pack</span>
-        </div>
-      </div>
-
-      <!-- ⑦ PRESS TILE — col 5-8, row 4 -->
-      <div class="tile t-press">
-        <div class="lbl">As Seen On</div>
-        <div class="logos">
-          <span class="logo-txt">BuzzFeed</span>
-          <span class="logo-txt">Entrepreneur</span>
-          <span class="logo-txt">HuffPost</span>
-          <span class="logo-txt">Inc.</span>
-          <span class="logo-txt">SME</span>
-        </div>
-      </div>
-
-      <!-- ⑧ TESTIMONIAL TILE — col 5-8, row 5 -->
-      <div class="tile t-testimonial">
-        <div class="lbl">Real Stories From Real Clients</div>
-        <blockquote>"I contacted Infintech Designs 2 months ago to create and build a creative website for my company. The web design service from Brian and his team has been great from the start."</blockquote>
-        <div class="attrib">— Jon Silkin &nbsp;·&nbsp; 5-Star Verified Review</div>
-      </div>
-
-      <!-- ⑨ CTA TILE — col 9-12, row 5-6 (bottom-right of hero grid area) -->
-      <div class="tile t-cta">
-        <div class="lbl">Start Here</div>
-        <div>
-          <h3>Free consult with Founder &amp; CEO Brian Hong. Not a sales rep.</h3>
-          <p class="cta-sub">No bots, no junior hand-offs. This call goes directly to Brian.</p>
-          <a class="phone" href="tel:5045476565">(504) 547-6565</a>
-        </div>
-        <a class="btn-full" href="#">CLAIM YOUR FREE CONSULTATION NOW!</a>
-      </div>
-
-      <!-- ───────────────────────────────
-           SERVICES — ALL 11
-           (3 per row × 3 rows + 2 + location)
-           Each tile: span 4, 1 row
-           ─────────────────────────────── -->
-
-      <!-- Row A: SEO / Web Design / PPC -->
-      <div class="tile t-svc svc-seo">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">SEO</span></div>
-        <h3>Search Engine Optimization</h3>
-        <p class="outcome">Map-pack first. Rank in the Top 3 of Google.</p>
-      </div>
-      <div class="tile t-svc svc-web">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Web Design</span></div>
-        <h3>Web Design &amp; Development</h3>
-        <p class="outcome">Built to convert. Engineered to rank. 4,000+ shipped.</p>
-      </div>
-      <div class="tile t-svc svc-ppc">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Paid Ads</span></div>
-        <h3>PPC &amp; Google Ads</h3>
-        <p class="outcome">Premier-Partner audited campaigns. Every dollar tracked.</p>
-      </div>
-
-      <!-- Row B: Full Stack / Social / Content -->
-      <div class="tile t-svc svc-fsm">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Full-Service</span></div>
-        <h3>Full Stack Digital Marketing</h3>
-        <p class="outcome">One agency owning every channel. No vendor relay-race.</p>
-      </div>
-      <div class="tile t-svc svc-social">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Social</span></div>
-        <h3>Social Media Marketing</h3>
-        <p class="outcome">Organic + paid social tuned for your business pipeline.</p>
-      </div>
-      <div class="tile t-svc svc-content">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Content</span></div>
-        <h3>Content Marketing</h3>
-        <p class="outcome">SEO-led editorial that ranks and reads like a human wrote it.</p>
-      </div>
-
-      <!-- Row C: CRO / ORM / Lead Gen -->
-      <div class="tile t-svc svc-cro">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">CRO</span></div>
-        <h3>Conversion Rate Optimization</h3>
-        <p class="outcome">A/B test the funnel until the math wins.</p>
-      </div>
-      <div class="tile t-svc svc-orm">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Reputation</span></div>
-        <h3>Online Reputation Management</h3>
-        <p class="outcome">Reviews, citations, and brand sentiment management.</p>
-      </div>
-      <div class="tile t-svc svc-lead">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">Lead Gen</span></div>
-        <h3>Lead Generation</h3>
-        <p class="outcome">Qualified-lead pipelines, not vanity-form fills.</p>
-      </div>
-
-      <!-- Row D: White Label / AI / Service Areas -->
-      <div class="tile t-svc svc-wl">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">White Label</span></div>
-        <h3>White Label Services</h3>
-        <p class="outcome">Agency-to-agency partnerships under your brand.</p>
-      </div>
-      <div class="tile t-svc svc-ai">
-        <div class="svc-top"><span class="dot"></span><span class="lbl">AI</span></div>
-        <h3>AI Automation Services</h3>
-        <p class="outcome">Workflow automation and agent integration for the modern SMB.</p>
-      </div>
-
-      <!-- ⑩ SERVICE AREA TILE — col 9-12, last 2 rows of service section -->
-      <div class="tile t-location">
-        <div class="lbl">Service Areas</div>
-        <h3>8 US Cities</h3>
-        <div class="city-grid">
-          <div class="city-item hq"><span class="city-dot"></span>New Orleans, LA</div>
-          <div class="city-item"><span class="city-dot"></span>Houston, TX</div>
-          <div class="city-item"><span class="city-dot"></span>Dallas, TX</div>
-          <div class="city-item"><span class="city-dot"></span>Austin, TX</div>
-          <div class="city-item"><span class="city-dot"></span>San Francisco, CA</div>
-          <div class="city-item"><span class="city-dot"></span>Seattle, WA</div>
-          <div class="city-item"><span class="city-dot"></span>Atlanta, GA</div>
-          <div class="city-item"><span class="city-dot"></span>New York, NY</div>
-        </div>
-      </div>
-
-      <!-- ⑪ FOUNDER TILE -->
-      <div class="tile t-founder">
-        <div class="lbl">The Person You'll Talk To</div>
-        <h3>This call goes to Brian Hong — not a sales rep.</h3>
-        <p>Founder &amp; CEO · Infintech Designs · New Orleans. Every account gets senior strategists, every month, no junior hand-offs.</p>
-      </div>
-
-      <!-- ⑫ PROCESS TILE -->
-      <div class="tile t-process">
-        <div class="lbl">How It Works</div>
-        <div class="steps">
-          <div class="step"><span class="step-n">1</span>Discover — We map your digital landscape and untapped potential.</div>
-          <div class="step"><span class="step-n">2</span>Blueprint — A plan combining your goals with what's working now.</div>
-          <div class="step"><span class="step-n">3</span>Execute — SEO, web design, and campaigns launched in parallel.</div>
-        </div>
-      </div>
-
-    </div><!-- /bento -->
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="tagline">Rank Higher. Grow Faster. Convert Better.</div>
-          <div class="address">
-            3436 Magazine St, #120, New Orleans, LA 70115<br>
-            <a href="tel:5045476565" style="color:var(--orange); font-weight:700;">(504) 547-6565</a>
-            &nbsp;·&nbsp; Available 24/7
-          </div>
-        </div>
-        <ul class="footer-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Case Studies</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Service Areas</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2026 InfintechDesigns &nbsp;·&nbsp; Google Premier Partner 2025 &nbsp;·&nbsp; New Orleans, LA</div>
-        <div class="footer-social">
-          <a href="#">Facebook</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Instagram</a>
-        </div>
-      </div>
-    </footer>
-
-  </div><!-- /wrap -->
+</div><!-- /wrap -->
 </body>
 </html>

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <!--
-  Style: B16 — Dark Mode
-  Category: Visual
+  Style: B16 — Dark Mode (v3 Rebuild)
+  Category: Visual — Data-Dense Dashboard
   Client: Infintech Designs (New Orleans, LA)
   Design notes:
-    - Data-dashboard aesthetic. Near-black bg (#050507), orange is THE primary accent throughout.
-    - Warmer and tighter than B25 — fewer ambient orbs, no violet/green neon palette.
-    - Feels like an analytics platform, not a sci-fi cockpit.
-    - B16 vs B25: B16 uses orange primary + gold/pink as secondary; B25 uses orange + neon + violet + green.
-    - JetBrains Mono for labels, indexes, mono values only. Raleway 800 for H1.
-    - Reference: WebFX dark sections; Go Fish Digital analytics-forward presentation.
+    - The analytics war room. #050507 near-black background.
+    - Orange is THE ONLY accent color — no neon blue, no violet, no green.
+    - Fira Code (NOT JetBrains Mono) for all data labels, kickers, badge text.
+    - hero-bg.webp at 8% opacity creates texture without distraction.
+    - DISTINCT from B25: B16 = orange + gold only; B25 = neon multi-color.
+    - Animated data bars on scroll; brian-hong.png with white pill bg.
+    - Reference: WebFX dark sections; Go Fish Digital analytics-forward.
 -->
 <html lang="en">
 <head>
@@ -18,38 +19,38 @@
 <title>Infintech Designs — Rank Higher. Grow Faster. Convert Better.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ─── Brand Tokens ─────────────────────────────────────────── */
+
+  /* ─── Brand Tokens ─────────────────────────────────────────────────── */
   :root {
     /* Dark theme */
-    --dark-0: #050507;
-    --dark-1: #0A0A0F;
-    --dark-2: #11111A;
-    --dark-card: #0E0E16;
+    --dark-0:  #050507;
+    --dark-1:  #0A0A0F;
+    --dark-2:  #11111A;
+    --dark-card:   #0E0E16;
     --dark-card-2: #13131E;
-    --dark-text: #E8E8F0;
-    --dark-text-dim: #9A9AAB;
+    --dark-text:       #E8E8F0;
+    --dark-text-dim:   #9A9AAB;
     --dark-text-muted: #5C5C70;
 
-    /* Brand palette */
-    --orange: #EA4517;
+    /* Brand palette — orange + gold ONLY as accents */
+    --orange:      #EA4517;
     --orange-glow: rgba(234, 69, 23, 0.45);
     --orange-soft: rgba(234, 69, 23, 0.12);
-    --gold: #ED9924;
-    --pink: #FF4E5E;
-    --neon: #4F8FFF;
+    --gold:        #ED9924;
+    --gold-soft:   rgba(237, 153, 36, 0.15);
 
     /* Dividers */
-    --line: rgba(255,255,255,0.06);
+    --line:        rgba(255,255,255,0.06);
     --line-bright: rgba(255,255,255,0.12);
 
     /* Glows — restrained vs B25 */
-    --glow-orange: 0 0 22px rgba(234,69,23,0.38), 0 0 48px rgba(234,69,23,0.16);
+    --glow-orange:        0 0 22px rgba(234,69,23,0.38), 0 0 48px rgba(234,69,23,0.16);
     --glow-orange-strong: 0 0 32px rgba(234,69,23,0.58), 0 0 72px rgba(234,69,23,0.22);
   }
 
-  /* ─── Reset ─────────────────────────────────────────────────── */
+  /* ─── Reset ─────────────────────────────────────────────────────────── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { overflow-x: hidden; }
   body {
@@ -61,18 +62,22 @@
     -webkit-font-smoothing: antialiased;
     position: relative;
   }
-  /* Single, warm ambient gradient — much quieter than B25 */
+
+  /* Single warm ambient glow — much quieter than B25 */
   body::before {
     content: '';
     position: fixed; inset: 0;
-    background: radial-gradient(ellipse 900px 500px at 10% 0%, rgba(234,69,23,0.07), transparent 55%);
+    background: radial-gradient(ellipse 900px 500px at 10% 0%, rgba(234,69,23,0.06), transparent 55%);
     pointer-events: none;
     z-index: 0;
   }
+
   a { color: inherit; text-decoration: none; }
 
-  /* ─── Utility ────────────────────────────────────────────────── */
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  /* ─── Typography Utilities ──────────────────────────────────────────── */
+  .mono { font-family: 'Fira Code', monospace; }
+
+  /* ─── Layout ─────────────────────────────────────────────────────────── */
   .container {
     max-width: 1220px;
     margin: 0 auto;
@@ -80,8 +85,10 @@
     position: relative;
     z-index: 2;
   }
+
+  /* ─── Section Chrome ─────────────────────────────────────────────────── */
   .sec-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     color: var(--orange);
@@ -103,7 +110,7 @@
     max-width: 600px;
   }
 
-  /* ─── Utility Bar ────────────────────────────────────────────── */
+  /* ─── Utility Bar ────────────────────────────────────────────────────── */
   .utility-bar {
     background: var(--dark-1);
     border-bottom: 1px solid var(--line);
@@ -111,7 +118,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
     color: var(--dark-text-muted);
@@ -119,14 +126,37 @@
     z-index: 11;
   }
   .utility-bar .ub-left { display: flex; gap: 28px; align-items: center; }
+  .ub-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--orange);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+  }
+  .ub-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 8px var(--orange);
+    flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
   .utility-bar .ub-phone {
     color: var(--orange);
     font-weight: 600;
     letter-spacing: 0.1em;
+    transition: opacity 0.2s;
+    cursor: pointer;
   }
-  .utility-bar .ub-phone:hover { text-decoration: underline; }
+  .utility-bar .ub-phone:hover { opacity: 0.75; text-decoration: underline; }
 
-  /* ─── Nav ────────────────────────────────────────────────────── */
+  /* ─── Nav ────────────────────────────────────────────────────────────── */
   nav {
     position: sticky;
     top: 0;
@@ -135,8 +165,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5,5,7,0.88);
+    background: rgba(5,5,7,0.85);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--line);
   }
   .nav-logo-wrap {
@@ -147,13 +178,9 @@
     line-height: 0;
   }
   .nav-logo-wrap img { height: 30px; width: auto; display: block; }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 28px;
-  }
+  nav ul { list-style: none; display: flex; gap: 28px; }
   nav ul a {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11.5px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -166,6 +193,7 @@
     color: #fff;
     padding: 10px 20px;
     border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
     font-size: 12.5px;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -173,16 +201,32 @@
     box-shadow: var(--glow-orange);
     transition: box-shadow .25s, transform .2s;
     white-space: nowrap;
+    cursor: pointer;
   }
   .nav-cta:hover { box-shadow: var(--glow-orange-strong); transform: translateY(-1px); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
   .hamburger span { width: 24px; height: 2px; background: var(--dark-text); display: block; }
 
-  /* ─── Hero ───────────────────────────────────────────────────── */
+  /* ─── Hero ──────────────────────────────────────────────────────────── */
   .hero {
     padding: 80px 0 72px;
     position: relative;
+    overflow: hidden;
   }
+
+  /* hero-bg.webp texture at 8% opacity */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('../Images/hero-bg.webp') center/cover;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero .container { position: relative; z-index: 1; }
+
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr 420px;
@@ -194,7 +238,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11px;
     letter-spacing: 0.18em;
     color: var(--dark-text-dim);
@@ -245,7 +289,7 @@
   .hero-bullets li::before {
     content: '✓';
     color: var(--orange);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-weight: 600;
     flex-shrink: 0;
     margin-top: 1px;
@@ -257,6 +301,8 @@
     flex-wrap: wrap;
     margin-bottom: 36px;
   }
+
+  /* ─── Buttons ────────────────────────────────────────────────────────── */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -271,38 +317,34 @@
     border: 1px solid transparent;
     text-transform: uppercase;
     line-height: 1;
+    font-family: 'Raleway', sans-serif;
   }
   .btn-primary {
     background: var(--orange);
     color: #fff;
     box-shadow: var(--glow-orange);
   }
-  .btn-primary:hover {
-    box-shadow: var(--glow-orange-strong);
-    transform: translateY(-2px);
-  }
+  .btn-primary:hover { box-shadow: var(--glow-orange-strong); transform: translateY(-2px); }
   .btn-outline {
     background: transparent;
     color: var(--dark-text);
     border-color: var(--line-bright);
   }
-  .btn-outline:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
   .btn .arrow { display: inline-block; transition: transform .18s; font-style: normal; }
   .btn:hover .arrow { transform: translateX(3px); }
 
-  /* PP badge in hero */
+  /* ─── PP Badge (hero) ───────────────────────────────────────────────── */
   .pp-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: rgba(14,14,22,0.85);
     border: 1px solid rgba(234,69,23,0.35);
     border-radius: 6px;
     padding: 10px 16px;
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .pp-badge .pp-dot {
     width: 9px; height: 9px;
@@ -310,19 +352,17 @@
     background: var(--orange);
     box-shadow: 0 0 8px var(--orange);
     flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
   }
   .pp-badge .pp-text {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
     color: var(--dark-text-dim);
   }
-  .pp-badge .pp-text strong {
-    color: var(--orange);
-    font-weight: 600;
-  }
+  .pp-badge .pp-text strong { color: var(--orange); font-weight: 600; }
 
-  /* Hero form card */
+  /* ─── Hero Form Card ─────────────────────────────────────────────────── */
   .hero-form-card {
     background: var(--dark-card);
     border: 1px solid var(--line-bright);
@@ -337,13 +377,11 @@
     top: 0; left: 0; right: 0;
     height: 3px;
     border-radius: 10px 10px 0 0;
-    background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 60%, var(--pink) 100%);
+    background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 100%);
   }
-  .form-card-head {
-    margin-bottom: 22px;
-  }
+  .form-card-head { margin-bottom: 22px; }
   .form-card-head .form-kicker {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--orange);
@@ -397,7 +435,7 @@
     margin-bottom: 16px;
     line-height: 1.5;
   }
-  .form-check input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: var(--orange); }
+  .form-check input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: var(--orange); cursor: pointer; }
   .form-submit {
     width: 100%;
     background: var(--orange);
@@ -416,7 +454,7 @@
   }
   .form-submit:hover { box-shadow: var(--glow-orange-strong); transform: translateY(-1px); }
 
-  /* ─── Press Strip ────────────────────────────────────────────── */
+  /* ─── Press Strip ────────────────────────────────────────────────────── */
   .press-strip {
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -431,33 +469,45 @@
     flex-wrap: wrap;
   }
   .press-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10px;
     letter-spacing: 0.22em;
     color: var(--dark-text-muted);
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .press-pills {
+  .press-logos-row {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
+    align-items: center;
   }
-  .press-pill {
+  .press-logo-pill {
     background: rgba(14,14,22,0.9);
     border: 1px solid var(--line-bright);
     border-radius: 4px;
-    padding: 7px 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.08em;
-    color: var(--dark-text-dim);
-    font-weight: 500;
-    transition: border-color .2s, color .2s;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s, background .2s;
+    cursor: default;
   }
-  .press-pill:hover { border-color: var(--orange); color: var(--orange); }
+  .press-logo-pill:hover {
+    border-color: rgba(234,69,23,0.4);
+    background: rgba(234,69,23,0.04);
+  }
+  .press-logo-pill img {
+    height: 22px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.55;
+    display: block;
+    transition: opacity .2s;
+  }
+  .press-logo-pill:hover img { opacity: 1; }
 
-  /* ─── Stats Bento ────────────────────────────────────────────── */
+  /* ─── Stats Bento ────────────────────────────────────────────────────── */
   .stats-section { padding: 80px 0; position: relative; z-index: 2; }
   .stats-bento {
     display: grid;
@@ -472,10 +522,12 @@
     background: var(--dark-card);
     padding: 28px 26px;
     transition: background .2s;
+    position: relative;
   }
   .stat-card:hover { background: var(--dark-card-2); }
+
   .stat-card .s-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--dark-text-muted);
@@ -483,23 +535,47 @@
     margin-bottom: 12px;
   }
   .stat-card .s-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
     margin-bottom: 10px;
   }
   .stat-card .s-num.c-orange { color: var(--orange); }
   .stat-card .s-num.c-gold   { color: var(--gold); }
-  .stat-card .s-num.c-pink   { color: var(--pink); }
-  .stat-card .s-num.c-neon   { color: var(--neon); }
+
   .stat-card .s-ctx {
     font-size: 12.5px;
     color: var(--dark-text-muted);
     line-height: 1.55;
+    margin-bottom: 16px;
   }
 
-  /* ─── Services ───────────────────────────────────────────────── */
+  /* Data bar container */
+  .data-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .data-bar-fill {
+    height: 4px;
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.4s cubic-bezier(.4,0,.2,1);
+  }
+  .data-bar-fill.orange-bar { background: var(--orange); }
+  .data-bar-fill.gold-bar   { background: var(--gold); }
+  .data-bar-fill.animated   { width: var(--bar-target, 70%); }
+
+  /* prefers-reduced-motion — skip transitions */
+  @media (prefers-reduced-motion: reduce) {
+    .data-bar-fill { transition: none; }
+    .ub-status::before, .pp-badge .pp-dot { animation: none; }
+  }
+
+  /* ─── Services Grid ──────────────────────────────────────────────────── */
   .services-section { padding: 80px 0; position: relative; z-index: 2; }
   .svc-grid {
     display: grid;
@@ -513,18 +589,27 @@
     padding: 24px 22px;
     transition: border-color .22s, background .22s, transform .22s;
     position: relative;
+    cursor: default;
   }
   .svc-card:hover {
     border-color: rgba(234,69,23,0.35);
     background: var(--dark-card-2);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
   .svc-card .svc-idx {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10.5px;
     letter-spacing: 0.12em;
     color: var(--dark-text-muted);
     margin-bottom: 14px;
+  }
+  .svc-card .svc-icon {
+    width: 32px; height: 32px;
+    margin-bottom: 12px;
+    color: var(--orange);
+    opacity: 0.85;
+    font-size: 20px;
+    line-height: 1;
   }
   .svc-card .svc-arrow {
     position: absolute;
@@ -538,6 +623,7 @@
     font-size: 12px;
     color: var(--dark-text-muted);
     transition: all .2s;
+    cursor: pointer;
   }
   .svc-card:hover .svc-arrow {
     background: var(--orange);
@@ -558,12 +644,100 @@
     line-height: 1.55;
   }
 
-  /* ─── Testimonial ────────────────────────────────────────────── */
+  /* ─── Founder Card ───────────────────────────────────────────────────── */
+  .founder-section {
+    padding: 80px 0;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(180deg, transparent, rgba(234,69,23,0.03) 50%, transparent);
+  }
+  .founder-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    align-items: start;
+    background: var(--dark-card);
+    border: 1px solid var(--line-bright);
+    border-radius: 12px;
+    padding: 44px 48px;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .founder-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+  }
+  .founder-portrait {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .founder-portrait .portrait-pill {
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px;
+    display: inline-block;
+    line-height: 0;
+  }
+  .founder-portrait .portrait-pill img {
+    width: 160px;
+    height: 160px;
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+  }
+  .founder-portrait .portrait-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--dark-text-muted);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .founder-copy .founder-kicker {
+    font-family: 'Fira Code', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .founder-copy h2 {
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+  }
+  .founder-copy .founder-body {
+    font-size: 15px;
+    color: var(--dark-text-dim);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    white-space: pre-line;
+  }
+  .founder-copy .founder-sig {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--dark-text-muted);
+    text-transform: uppercase;
+  }
+  .founder-copy .founder-sig strong { color: var(--orange); }
+
+  /* ─── Testimonial ────────────────────────────────────────────────────── */
   .testimonial-section {
     padding: 80px 0;
     position: relative;
     z-index: 2;
-    background: linear-gradient(180deg, transparent, rgba(234,69,23,0.04) 50%, transparent);
   }
   .testimonial-card {
     max-width: 760px;
@@ -573,6 +747,7 @@
     border-radius: 10px;
     padding: 40px 44px;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
   }
   .testimonial-card::before {
@@ -604,15 +779,15 @@
   .testimonial-avatar {
     width: 42px; height: 42px;
     border-radius: 50%;
-    background: rgba(79,143,255,0.18);
-    border: 1px solid var(--neon);
+    background: rgba(234,69,23,0.15);
+    border: 1px solid rgba(234,69,23,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 13px;
     font-weight: 600;
-    color: var(--neon);
+    color: var(--orange);
     flex-shrink: 0;
   }
   .testimonial-meta .t-name {
@@ -621,7 +796,7 @@
     color: var(--dark-text);
   }
   .testimonial-meta .t-verified {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10.5px;
     letter-spacing: 0.12em;
     color: var(--dark-text-muted);
@@ -635,7 +810,34 @@
     letter-spacing: 2px;
   }
 
-  /* ─── Service Areas ──────────────────────────────────────────── */
+  /* ─── Awards Row ─────────────────────────────────────────────────────── */
+  .awards-section { padding: 56px 0; position: relative; z-index: 2; border-top: 1px solid var(--line); }
+  .awards-inner {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .awards-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--dark-text-muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .award-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .2s;
+    cursor: default;
+  }
+  .award-item:hover { opacity: 0.85; }
+  .award-item img { display: block; }
+
+  /* ─── Service Areas ──────────────────────────────────────────────────── */
   .areas-section { padding: 80px 0; position: relative; z-index: 2; }
   .areas-grid {
     display: grid;
@@ -648,6 +850,7 @@
     border-radius: 8px;
     padding: 18px 20px;
     transition: border-color .2s, background .2s;
+    cursor: default;
   }
   .area-card:hover { border-color: var(--line-bright); background: var(--dark-card-2); }
   .area-card.hq {
@@ -656,7 +859,7 @@
   }
   .area-card.hq:hover { border-color: var(--orange); }
   .area-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 9.5px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -677,16 +880,16 @@
     margin-bottom: 8px;
   }
   .area-phone {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--dark-text-muted);
   }
   .area-card.hq .area-phone { color: var(--orange); }
 
-  /* ─── CTA Band ───────────────────────────────────────────────── */
+  /* ─── CTA Band ───────────────────────────────────────────────────────── */
   .cta-band {
-    padding: 88px 0;
+    padding: 96px 0;
     position: relative;
     z-index: 2;
     text-align: center;
@@ -698,26 +901,26 @@
     pointer-events: none;
   }
   .cta-kicker {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     color: var(--orange);
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .cta-band h2 {
     font-weight: 800;
-    font-size: clamp(28px, 4vw, 50px);
+    font-size: clamp(28px, 4vw, 52px);
     line-height: 1.1;
     letter-spacing: -0.025em;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     color: var(--dark-text);
   }
   .cta-band h2 .hl { color: var(--orange); }
   .cta-band .cta-sub {
-    font-size: 15px;
+    font-size: 15.5px;
     color: var(--dark-text-dim);
-    margin-bottom: 36px;
+    margin-bottom: 40px;
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
@@ -730,24 +933,22 @@
     margin-bottom: 28px;
   }
   .cta-footnote {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 11px;
     letter-spacing: 0.14em;
     color: var(--dark-text-muted);
     text-transform: uppercase;
   }
 
-  /* ─── Footer ─────────────────────────────────────────────────── */
+  /* ─── Footer ─────────────────────────────────────────────────────────── */
   footer {
     position: relative;
     z-index: 2;
     background: var(--dark-1);
     border-top: 3px solid transparent;
-    border-image: linear-gradient(90deg, var(--orange), var(--gold), var(--pink)) 1;
+    border-image: linear-gradient(90deg, var(--orange), var(--gold), #FF4E5E) 1;
   }
-  .footer-inner {
-    padding: 40px 56px 28px;
-  }
+  .footer-inner { padding: 40px 56px 28px; }
   .footer-top {
     display: grid;
     grid-template-columns: 1.6fr 1fr 1fr;
@@ -770,7 +971,7 @@
     max-width: 300px;
   }
   .footer-col h4 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -790,13 +991,15 @@
     line-height: 1.7;
   }
   .footer-contact .f-phone {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 14px;
     font-weight: 600;
     color: var(--orange);
     display: block;
     margin-bottom: 4px;
+    transition: opacity .2s;
   }
+  .footer-contact .f-phone:hover { opacity: 0.8; }
   .footer-bottom {
     border-top: 1px solid var(--line);
     padding-top: 22px;
@@ -807,7 +1010,7 @@
     gap: 12px;
   }
   .footer-bottom span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -815,7 +1018,7 @@
   }
   .footer-bottom .f-tag { color: var(--orange); }
 
-  /* ─── Responsive ─────────────────────────────────────────────── */
+  /* ─── Responsive ─────────────────────────────────────────────────────── */
   @media (max-width: 1024px) {
     nav { padding: 14px 32px; }
     .utility-bar { padding: 8px 32px; }
@@ -827,12 +1030,16 @@
     .areas-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .footer-brand { grid-column: 1 / -1; }
+    .founder-card { grid-template-columns: 1fr; gap: 32px; }
+    .founder-portrait { flex-direction: row; align-items: center; gap: 20px; }
+    .founder-portrait .portrait-pill img { width: 120px; height: 120px; }
   }
   @media (max-width: 768px) {
     nav ul { display: none; }
     nav .nav-cta { display: none; }
     .hamburger { display: flex; }
     .utility-bar { padding: 8px 20px; font-size: 10px; }
+    .ub-status { font-size: 10px; }
     .container { padding: 0 20px; }
     .hero { padding: 48px 0 40px; }
     .hero h1 { font-size: clamp(34px, 10vw, 52px); }
@@ -847,7 +1054,10 @@
     .footer-bottom { padding-top: 16px; }
     .hero-ctas { flex-direction: column; }
     .btn { width: 100%; justify-content: center; }
-    .press-inner { flex-direction: column; gap: 16px; }
+    .press-inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .awards-inner { gap: 20px; }
+    .founder-card { padding: 28px 24px; }
+    .founder-portrait { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 480px) {
     .hero h1 { font-size: clamp(30px, 11vw, 44px); }
@@ -855,21 +1065,23 @@
     .areas-grid { grid-template-columns: 1fr; }
     .cta-band h2 { font-size: 26px; }
     .testimonial-stars { display: none; }
+    .press-logos-row { gap: 6px; }
   }
+
 </style>
 </head>
 <body>
 
-  <!-- Utility Bar -->
+  <!-- ─── Utility Bar ─────────────────────────────────────────────────── -->
   <div class="utility-bar">
     <div class="ub-left">
+      <span class="ub-status">SYSTEMS ONLINE</span>
       <span>New Orleans · Est. 2000</span>
-      <span>Mon–Fri 9am–6pm CST · 24/7 Emergency</span>
     </div>
     <a href="tel:5045476565" class="ub-phone">(504) 547-6565</a>
   </div>
 
-  <!-- Nav -->
+  <!-- ─── Nav ─────────────────────────────────────────────────────────── -->
   <nav>
     <div class="nav-logo-wrap">
       <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
@@ -887,12 +1099,12 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero">
     <div class="container">
       <div class="hero-grid">
 
-        <!-- Left column: copy -->
+        <!-- Left: copy -->
         <div class="hero-copy">
           <div class="hero-kicker">New Orleans · Est. 2000 · Google Premier Partner 2025</div>
 
@@ -922,16 +1134,18 @@
             <a class="btn btn-outline" href="tel:5045476565">Call (504) 547-6565</a>
           </div>
 
-          <!-- Google Premier Partner badge -->
+          <!-- Google Premier Partner badge — frosted dark -->
           <div class="pp-badge">
             <div class="pp-dot"></div>
             <div class="pp-text">
-              <strong>Google Premier Partner 2025</strong> &nbsp;·&nbsp; Top 3% of all Google Ads Agencies in the US. Audited annually.
+              <strong>Google Premier Partner 2025</strong>&nbsp;·&nbsp;Top 3% of all Google Ads Agencies in the US. Audited annually.
             </div>
+            <img src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg"
+                 alt="Google Premier Partner 2025" style="height:40px; width:auto; flex-shrink:0;">
           </div>
         </div>
 
-        <!-- Right column: lead form -->
+        <!-- Right: lead form card -->
         <div class="hero-form-card">
           <div class="form-card-head">
             <div class="form-kicker">// Free Consultation</div>
@@ -975,23 +1189,33 @@
     </div>
   </section>
 
-  <!-- Press Strip (Section 2) -->
+  <!-- ─── Press Strip (Section 2) ──────────────────────────────────────── -->
   <div class="press-strip">
     <div class="container">
       <div class="press-inner">
         <div class="press-label">// Featured In</div>
-        <div class="press-pills">
-          <div class="press-pill">BuzzFeed</div>
-          <div class="press-pill">Entrepreneur</div>
-          <div class="press-pill">HuffPost</div>
-          <div class="press-pill">Inc.</div>
-          <div class="press-pill">SME</div>
+        <div class="press-logos-row">
+          <div class="press-logo-pill">
+            <img src="../Images/buzz-feed-logo.png" alt="BuzzFeed">
+          </div>
+          <div class="press-logo-pill">
+            <img src="../Images/entrepreneur-logo.png" alt="Entrepreneur">
+          </div>
+          <div class="press-logo-pill">
+            <img src="../Images/huffpost-logo.png" alt="HuffPost">
+          </div>
+          <div class="press-logo-pill">
+            <img src="../Images/inc-logo.png" alt="Inc.">
+          </div>
+          <div class="press-logo-pill">
+            <img src="../Images/sme-logo.png" alt="SME">
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Stats Bento -->
+  <!-- ─── Stats Bento ─────────────────────────────────────────────────── -->
   <section class="stats-section" id="stats">
     <div class="container">
       <div class="sec-head">
@@ -999,32 +1223,49 @@
         <h2>26 years of data. Every number earned.</h2>
         <p>Real metrics from a real agency that started before Google AdWords existed and has ranked through every algorithm shift since.</p>
       </div>
-      <div class="stats-bento">
+      <div class="stats-bento" id="stats-bento">
+
         <div class="stat-card">
           <div class="s-label">// Experience</div>
           <div class="s-num c-orange">26+</div>
           <div class="s-ctx">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
+          <div class="data-bar">
+            <div class="data-bar-fill orange-bar" style="--bar-target: 78%;"></div>
+          </div>
         </div>
+
         <div class="stat-card">
-          <div class="s-label">// Built To Date</div>
+          <div class="s-label">// Websites Built</div>
           <div class="s-num c-gold">4,000+</div>
           <div class="s-ctx">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
+          <div class="data-bar">
+            <div class="data-bar-fill gold-bar" style="--bar-target: 92%;"></div>
+          </div>
         </div>
+
         <div class="stat-card">
           <div class="s-label">// SEO Optimized</div>
-          <div class="s-num c-pink">750+</div>
+          <div class="s-num c-orange">750+</div>
           <div class="s-ctx">Sites engineered for ranking — not just shipped, then trained on results data.</div>
+          <div class="data-bar">
+            <div class="data-bar-fill orange-bar" style="--bar-target: 68%;"></div>
+          </div>
         </div>
+
         <div class="stat-card">
           <div class="s-label">// Google Partnership</div>
-          <div class="s-num c-neon">2025</div>
+          <div class="s-num c-gold">2025</div>
           <div class="s-ctx">Top 3% of all Google Ads agencies in the United States. Audited annually.</div>
+          <div class="data-bar">
+            <div class="data-bar-fill gold-bar" style="--bar-target: 97%;"></div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- ─── Services Grid ────────────────────────────────────────────────── -->
   <section class="services-section" id="services">
     <div class="container">
       <div class="sec-head">
@@ -1115,7 +1356,34 @@
     </div>
   </section>
 
-  <!-- Testimonial -->
+  <!-- ─── Founder Card ─────────────────────────────────────────────────── -->
+  <section class="founder-section" id="about">
+    <div class="container">
+      <div class="sec-head">
+        <div class="sec-label">// About</div>
+        <h2>The person on the other end of the line.</h2>
+      </div>
+      <div class="founder-card">
+        <div class="founder-portrait">
+          <div class="portrait-pill">
+            <img src="../Images/brian-hong.png" alt="Brian Hong, Founder &amp; CEO" style="width:160px;height:160px;border-radius:6px;object-fit:cover;display:block;">
+          </div>
+          <div class="portrait-label">Brian Hong<br>Founder &amp; CEO</div>
+        </div>
+        <div class="founder-copy">
+          <div class="founder-kicker">// Founder's Message</div>
+          <h2>This call goes to Brian Hong — not a sales rep.</h2>
+          <p class="founder-body">I started Infintech in 2000 because the agencies I'd worked at were treating SEO like a billable mystery. We've since built more than 4,000 websites and ranked 750+ businesses on the back of one principle: every account gets senior strategists, every month, no junior hand-offs. If you're tired of agency churn, get on the line.</p>
+          <div class="founder-sig">
+            <strong>— Brian Hong</strong><br>
+            Founder &amp; CEO · Infintech Designs · New Orleans
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Testimonial ──────────────────────────────────────────────────── -->
   <section class="testimonial-section">
     <div class="container">
       <div class="sec-head" style="text-align:center;">
@@ -1139,7 +1407,29 @@
     </div>
   </section>
 
-  <!-- Service Areas -->
+  <!-- ─── Awards Row ───────────────────────────────────────────────────── -->
+  <div class="awards-section">
+    <div class="container">
+      <div class="awards-inner">
+        <div class="awards-label">// Awards &amp; Recognition</div>
+        <div class="award-item">
+          <img src="../Images/award-upcity.png" alt="UpCity National &amp; Local Excellence" style="height:48px; filter: brightness(0) invert(0.8);">
+        </div>
+        <div class="award-item">
+          <img src="../Images/award-kicksta.png" alt="Kicksta Top Social Media" style="height:40px; filter: brightness(0) invert(0.8);">
+        </div>
+        <div class="award-item">
+          <img src="../Images/award-seolium.png" alt="Seolium #1 New Orleans" style="height:40px; filter: brightness(0) invert(0.8);">
+        </div>
+        <div class="award-item">
+          <img src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg"
+               alt="Google Premier Partner 2025" style="height:72px; width:auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Service Areas ────────────────────────────────────────────────── -->
   <section class="areas-section" id="areas">
     <div class="container">
       <div class="sec-head">
@@ -1209,7 +1499,7 @@
     </div>
   </section>
 
-  <!-- CTA Band -->
+  <!-- ─── CTA Band ─────────────────────────────────────────────────────── -->
   <section class="cta-band" id="contact">
     <div class="container">
       <div class="cta-kicker">// Start Here</div>
@@ -1226,7 +1516,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ─── Footer ───────────────────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
       <div class="footer-top">
@@ -1237,7 +1527,7 @@
           <p>
             Rank Higher. Grow Faster. Convert Better.<br>
             3436 Magazine St, #120, New Orleans, LA 70115<br>
-            Google Premier Partner 2025 · Est. 2000
+            Google Premier Partner 2025 · Est. 2000 · 24/7
           </p>
         </div>
         <div class="footer-col">
@@ -1255,7 +1545,8 @@
           <p>
             <a href="tel:5045476565" class="f-phone">(504) 547-6565</a>
             Available 24/7<br>
-            <a href="mailto:info@infintechdesigns.com" style="color:var(--dark-text-dim); transition:color .2s;">info@infintechdesigns.com</a>
+            New Orleans · Houston · Dallas<br>
+            Austin · SF · Seattle · Atlanta · NYC
           </p>
         </div>
       </div>
@@ -1265,6 +1556,46 @@
       </div>
     </div>
   </footer>
+
+  <!-- ─── Animated Data Bars (Intersection Observer) ───────────────────── -->
+  <script>
+    (function () {
+      // Trigger data bar animations when stats section enters viewport
+      var fills = document.querySelectorAll('.data-bar-fill');
+      if (!fills.length) return;
+
+      // Respect prefers-reduced-motion
+      var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mq && mq.matches) {
+        fills.forEach(function (f) { f.style.width = f.style.getPropertyValue('--bar-target') || '70%'; });
+        return;
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: animate after a short delay
+        setTimeout(function () {
+          fills.forEach(function (f) { f.classList.add('animated'); });
+        }, 400);
+        return;
+      }
+
+      var observed = false;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !observed) {
+            observed = true;
+            fills.forEach(function (f, i) {
+              setTimeout(function () { f.classList.add('animated'); }, i * 120);
+            });
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      var statsBento = document.getElementById('stats-bento');
+      if (statsBento) io.observe(statsBento);
+    }());
+  </script>
 
 </body>
 </html>

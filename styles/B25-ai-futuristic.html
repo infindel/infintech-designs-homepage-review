@@ -1478,6 +1478,18 @@
     .agent-head h2, .cta-band h2, .process-head h2 { font-size: clamp(24px, 8vw, 36px); }
     .terminal .term-body { font-size: 11.5px; padding: 16px; overflow-x: auto; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    body::after { animation: none; }
+    .ribbon .pulse { animation: none; }
+    .hero .agent-status .dot { animation: none; }
+    .side-rail:hover { transform: translateY(-50%) rotate(180deg); }
+  }
 </style>
 </head>
 <body>
@@ -1628,16 +1640,19 @@
 
       <div class="process-grid">
         <div class="process-card s1">
+          <img src="../Images/process-icon-1.png" alt="Step 1 icon" style="width:40px;height:40px;object-fit:contain;margin-bottom:16px;opacity:0.9;">
           <div class="step-num"><span class="glyph">1</span> STEP_01</div>
           <h3>Unleash Your Brand's Digital Spark</h3>
           <p>Our seasoned experts are ready to explore your aspirations, challenges, and digital ambitions, painting a clear picture of your brand's current digital landscape and its untapped potential.</p>
         </div>
         <div class="process-card s2">
+          <img src="../Images/process-icon-2.png" alt="Step 2 icon" style="width:40px;height:40px;object-fit:contain;margin-bottom:16px;opacity:0.9;">
           <div class="step-num"><span class="glyph">2</span> STEP_02</div>
           <h3>Strategic Blueprint Tailored For You</h3>
           <p>After our conversation, we'll create a plan that combines your goals with what's working best in the industry right now.</p>
         </div>
         <div class="process-card s3">
+          <img src="../Images/process-icon-3.png" alt="Step 3 icon" style="width:40px;height:40px;object-fit:contain;margin-bottom:16px;opacity:0.9;">
           <div class="step-num"><span class="glyph">3</span> STEP_03</div>
           <h3>Embark On Your Digital Transformation</h3>
           <p>Upon your green signal, we spring into action. From revamping your web design to kickstarting robust SEO campaigns and executing laser-focused digital marketing strategies, we ensure your online presence is both potent and captivating.</p>
@@ -1714,16 +1729,23 @@
     </div>
   </section>
 
-  <!-- PRESS PILLS -->
+  <!-- PRESS + AWARDS -->
   <section class="press-section">
     <div class="shell">
       <div class="label">// As Seen On</div>
       <div class="press-row">
-        <span class="press-pill">BuzzFeed</span>
-        <span class="press-pill">Entrepreneur</span>
-        <span class="press-pill">HuffPost</span>
-        <span class="press-pill">Inc.</span>
-        <span class="press-pill">SME</span>
+        <span class="press-pill"><img src="../Images/buzz-feed-logo.png" alt="BuzzFeed" style="height:20px;filter:brightness(0) invert(0.8);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/entrepreneur-logo.png" alt="Entrepreneur" style="height:20px;filter:brightness(0) invert(0.8);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/huffpost-logo.png" alt="HuffPost" style="height:20px;filter:brightness(0) invert(0.8);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/inc-logo.png" alt="Inc." style="height:20px;filter:brightness(0) invert(0.8);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/sme-logo.png" alt="SME" style="height:20px;filter:brightness(0) invert(0.8);vertical-align:middle;"></span>
+      </div>
+      <div class="label" style="margin-top:32px;">// Awards &amp; Recognition</div>
+      <div class="press-row">
+        <span class="press-pill"><img src="../Images/award-upcity.png" alt="UpCity National Excellence Award" style="height:44px;filter:brightness(0) invert(0.85);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/award-kicksta.png" alt="Kicksta Top Social Media LA" style="height:36px;filter:brightness(0) invert(0.85);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="../Images/award-seolium.png" alt="Seolium #1 New Orleans" style="height:36px;filter:brightness(0) invert(0.85);vertical-align:middle;"></span>
+        <span class="press-pill"><img src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg" alt="Google Premier Partner 2025" style="height:56px;vertical-align:middle;"></span>
       </div>
     </div>
   </section>
@@ -1864,6 +1886,9 @@
       <div class="testi-grid">
         <div class="testi-card founder">
           <div class="role">Founder &amp; CEO</div>
+          <div style="background:#fff;border-radius:8px;padding:6px;display:inline-block;margin-bottom:16px;box-shadow:0 0 20px var(--orange-glow);">
+            <img src="../Images/brian-hong.png" alt="Brian Hong, Founder &amp; CEO of Infintech Designs" style="width:120px;height:120px;border-radius:6px;object-fit:cover;display:block;">
+          </div>
           <h3>This call goes to <span class="acc">Brian Hong</span> — not a sales rep.</h3>
           <p>I started Infintech in 2000 because the agencies I'd worked at were treating SEO like a billable mystery. We've since built more than 4,000 websites and ranked 750+ businesses on the back of one principle: every account gets senior strategists, every month, no junior hand-offs. If you're tired of agency churn, get on the line.</p>
           <div class="signature">— Brian Hong</div>
@@ -1899,6 +1924,21 @@
               <div class="stars" style="color: var(--text-muted);">☆☆☆☆☆</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT LOGOS -->
+  <section style="padding:0 0 80px;text-align:center;position:relative;z-index:2;">
+    <div class="shell">
+      <div class="press-section" style="padding:0;">
+        <div class="label">// Brands We've Built &amp; Ranked</div>
+        <div class="press-row" style="margin-top:20px;">
+          <span class="press-pill"><img src="../Images/client-nba.png" alt="NBA" style="height:32px;filter:brightness(0) invert(0.7);vertical-align:middle;transition:filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0) invert(0.7)'"></span>
+          <span class="press-pill"><img src="../Images/client-50floor.png" alt="50 Floor" style="height:28px;filter:brightness(0) invert(0.7);vertical-align:middle;transition:filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0) invert(0.7)'"></span>
+          <span class="press-pill"><img src="../Images/client-walkon.png" alt="Walk On's" style="height:28px;filter:brightness(0) invert(0.7);vertical-align:middle;transition:filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0) invert(0.7)'"></span>
+          <span class="press-pill" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--text-muted);">+ 4,000 more</span>
         </div>
       </div>
     </div>

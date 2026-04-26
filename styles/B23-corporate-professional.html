@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
-  Style: B23 — Corporate / Professional
-  Client: Infintech Designs (New Orleans)
-  Design notes: Enterprise-grade, credential-forward. Navy #1C2E54 primary dark;
-  white paper; #EA4517 orange as SINGLE accent on CTAs only. Raleway 700 headings.
-  Section order: Hero (H1 + trust bar with PP badge + awards) → Awards/Press grid
-  (trust gate) → Stats strip with context labels → Services 3-col grid →
-  Founder section → Testimonial → Service areas → Lead form → Footer.
-  Pattern references: Ignite Visibility award grid in hero; SmartSites partner badge bar.
-  No headshots. No invented stats. Single orange CTA pattern throughout.
+  Style: B23 — Corporate / Professional  (v3 rebuild — 2026-04-25)
+  Client: Infintech Designs (infindel / Infintech Designs USA)
+  Bold concept: Credential wall before everything. S2 is a full-width awards + press
+  grid — every badge, every logo, every certification — BEFORE a single service is
+  mentioned. Enterprise buyers verify trust first, then evaluate capabilities.
+  Palette: #0F1E3D navy + #FFFFFF white + #F7F8FC light bg + #EA4517 orange accent ONLY
+  Fonts: Raleway 700+ headings · Lexend body text
+  Pattern refs: Ignite Visibility award grid in hero · SmartSites partner badge bar
+  No headshots. No invented stats. No secondary accent colors.
 -->
 <html lang="en">
 <head>
@@ -17,172 +17,220 @@
 <title>Infintech Designs — Full-Service Digital Marketing Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* ─────────────────────────────────────────────────
+     DESIGN TOKENS
+  ───────────────────────────────────────────────── */
   :root {
-    /* Corporate palette — navy primary, white paper, single orange accent */
-    --navy:        #1C2E54;
-    --navy-deep:   #0F1E3D;
-    --navy-mid:    #253660;
-    --navy-light:  #2E4380;
-    --accent:      #EA4517;
-    --accent-dark: #C43912;
-    --accent-soft: rgba(234, 69, 23, 0.10);
-    --ink:         #121212;
-    --body:        #374151;
-    --muted:       #6B7280;
-    --paper:       #FFFFFF;
-    --paper-alt:   #F7F8FC;
-    --line:        #DDE2EE;
-    --line-dark:   #C8CDD8;
-    --badge-bg:    #F0F3FA;
+    /* Strict B23 palette — navy + white + single orange */
+    --navy:       #0F1E3D;
+    --navy-mid:   #1A2F56;
+    --navy-light: #243870;
+    --accent:     #EA4517;
+    --accent-dk:  #C43912;
+    --accent-soft:rgba(234, 69, 23, 0.10);
+    --white:      #FFFFFF;
+    --light-bg:   #F7F8FC;
+    --ink:        #121212;
+    --body-text:  #374151;
+    --muted:      #6B7280;
+    --line:       #DDE2EE;
+    --line-dark:  #C8CDD8;
   }
 
-  /* ── Reset ── */
+  /* ─────────────────────────────────────────────────
+     RESET & BASE
+  ───────────────────────────────────────────────── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { overflow-x: hidden; }
   body {
-    background: var(--paper);
-    color: var(--body);
-    font-family: 'Raleway', sans-serif;
+    background: var(--white);
+    color: var(--body-text);
+    font-family: 'Lexend', sans-serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Raleway', sans-serif; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
 
-  /* ── Utility bar ── */
+  /* ─────────────────────────────────────────────────
+     ANIMATIONS
+  ───────────────────────────────────────────────── */
+  @keyframes shine {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes countUp {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Reduced-motion: disable decorative animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────
+     UTILITY BAR
+  ───────────────────────────────────────────────── */
   .utility-bar {
-    background: var(--navy-deep);
-    color: rgba(255,255,255,0.78);
-    padding: 9px 40px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.80);
+    padding: 9px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Lexend', sans-serif;
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    gap: 12px;
   }
-  .utility-bar .left { display: flex; align-items: center; gap: 10px; }
+  .utility-bar .left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
   .utility-bar .pp-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(234,69,23,0.18);
-    border: 1px solid rgba(234,69,23,0.45);
+    background: rgba(234,69,23,0.20);
+    border: 1px solid rgba(234,69,23,0.50);
     color: #fff;
     padding: 3px 10px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
-  .utility-bar .pp-pill .star { color: var(--accent); }
-  .utility-bar .divider { width: 1px; height: 12px; background: rgba(255,255,255,0.2); margin: 0 4px; }
-  .utility-bar .phone-link { color: #fff; font-weight: 700; font-size: 13px; }
+  .utility-bar .u-divider {
+    width: 1px;
+    height: 12px;
+    background: rgba(255,255,255,0.22);
+    flex-shrink: 0;
+  }
+  .utility-bar .phone-link {
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
   .utility-bar .phone-link:hover { color: var(--accent); }
+  .utility-bar .open-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.70);
+    white-space: nowrap;
+  }
 
-  /* ── Navigation ── */
+  /* ─────────────────────────────────────────────────
+     NAVIGATION
+  ───────────────────────────────────────────────── */
   nav {
-    background: #fff;
+    background: var(--white);
     border-bottom: 1px solid var(--line);
-    padding: 18px 40px;
+    padding: 18px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    z-index: 200;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
   }
-  nav .logo img { height: 36px; }
-  nav ul {
+  .nav-logo img { height: 34px; }
+  .nav-links {
     list-style: none;
     display: flex;
-    gap: 32px;
-    font-size: 13px;
+    gap: 36px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  nav ul a { color: var(--navy); transition: color 0.2s; }
-  nav ul a:hover { color: var(--accent); }
-  nav .nav-right {
+  .nav-links a { color: var(--navy); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 22px;
   }
-  nav .nav-phone {
+  .nav-phone-display {
+    font-family: 'Raleway', sans-serif;
     font-size: 14px;
     font-weight: 700;
     color: var(--navy);
-    letter-spacing: 0.02em;
   }
-
-  /* ── Buttons ── */
   .btn {
     display: inline-block;
     background: var(--accent);
     color: #fff;
-    padding: 14px 28px;
+    padding: 13px 26px;
     font-family: 'Raleway', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     border: 2px solid var(--accent);
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
   }
-  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-  .btn-ghost {
-    background: transparent;
-    color: #fff;
-    border: 2px solid rgba(255,255,255,0.45);
+  .btn:hover {
+    background: var(--accent-dk);
+    border-color: var(--accent-dk);
   }
-  .btn-ghost:hover { background: #fff; color: var(--navy); border-color: #fff; }
-  .btn-ghost-navy {
-    background: transparent;
-    color: var(--navy);
-    border: 2px solid var(--navy);
-  }
-  .btn-ghost-navy:hover { background: var(--navy); color: #fff; }
+  .btn:active { transform: scale(0.98); }
 
-  /* ── Hero ── */
+  /* ─────────────────────────────────────────────────
+     S1 — HERO
+  ───────────────────────────────────────────────── */
   .hero {
     background: var(--navy);
-    background-image:
-      linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+    background-image: linear-gradient(150deg, #0F1E3D 0%, #1A2F56 60%, #0F1E3D 100%);
     color: #fff;
-    padding: 80px 40px 72px;
+    padding: 80px 48px 72px;
     position: relative;
     overflow: hidden;
   }
-  /* Subtle structured grid overlay */
+  /* Structural grid overlay */
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 64px 64px;
+      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 72px 72px;
     pointer-events: none;
   }
-  /* Restrained orange glow — top-right only */
+  /* Restrained orange glow top-right */
   .hero::after {
     content: '';
     position: absolute;
-    top: -60px;
-    right: -80px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(234,69,23,0.12) 0%, transparent 65%);
+    top: -80px;
+    right: -100px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(234,69,23,0.10) 0%, transparent 65%);
     pointer-events: none;
   }
   .hero-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -191,93 +239,117 @@
     gap: 64px;
     align-items: start;
   }
-  .hero-left {}
+  .hero-left { animation: fadeUp 0.6s ease both; }
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    font-family: 'Lexend', sans-serif;
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 20px;
-  }
-  .hero-eyebrow .bar {
-    width: 24px;
-    height: 2px;
-    background: var(--accent);
-  }
-  .hero h1 {
-    font-size: clamp(32px, 4.8vw, 56px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #fff;
+    color: rgba(255,255,255,0.65);
     margin-bottom: 22px;
   }
-  .hero h1 .accent-word { color: var(--accent); }
-  .hero .hero-sub {
-    font-size: 16px;
-    color: rgba(255,255,255,0.80);
-    line-height: 1.68;
-    max-width: 560px;
-    margin-bottom: 30px;
+  .hero-eyebrow .bar {
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+    flex-shrink: 0;
   }
+  .hero h1 {
+    font-size: clamp(32px, 4.6vw, 58px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .hero h1 .accent-word { color: var(--accent); }
 
-  /* Trust bar — IMMEDIATELY in hero, below H1 */
+  /* ── Trust bar in hero — with shine animation ── */
   .hero-trust-bar {
     display: flex;
     align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    padding: 18px 22px;
+    gap: 0;
+    flex-wrap: nowrap;
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.14);
-    border-left: 3px solid var(--accent);
-    margin-bottom: 32px;
+    border-left: 4px solid var(--accent);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
   }
-  .trust-badge {
-    display: inline-flex;
+  /* Shine sweep left-to-right */
+  .hero-trust-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,0.07) 45%,
+      rgba(255,255,255,0.13) 50%,
+      rgba(255,255,255,0.07) 55%,
+      transparent 100%
+    );
+    background-size: 200% auto;
+    animation: shine 3.5s linear infinite;
+    pointer-events: none;
+  }
+  .trust-item {
+    display: flex;
     align-items: center;
-    gap: 7px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
+    gap: 9px;
+    padding: 14px 20px;
+    border-right: 1px solid rgba(255,255,255,0.12);
     white-space: nowrap;
   }
-  .trust-badge .badge-icon {
-    width: 20px;
-    height: 20px;
-    background: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 800;
-    color: #fff;
-    flex-shrink: 0;
-  }
-  .trust-badge .badge-icon.gold { background: #C8A030; }
-  .trust-bar-divider {
-    width: 1px;
-    height: 24px;
-    background: rgba(255,255,255,0.2);
-    flex-shrink: 0;
-  }
-  .hero-ctas {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-  }
-  .hero-phone-note {
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
+  .trust-item:last-child { border-right: none; }
+  .trust-item-label {
+    font-family: 'Lexend', sans-serif;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+  }
+  /* PP badge in trust bar */
+  .trust-item .pp-badge-img {
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
+  }
+  /* Award img in trust bar */
+  .trust-item .award-img-small {
+    filter: brightness(0) invert(0.9);
+    opacity: 0.85;
+  }
+
+  .hero-sub {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 30px;
+  }
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .hero-cta-row .btn { font-size: 12px; padding: 15px 30px; }
+  .hero-phone-note {
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 500;
   }
   .hero-phone-note a {
     color: #fff;
@@ -286,255 +358,292 @@
   }
   .hero-phone-note a:hover { color: var(--accent); }
 
-  /* Hero right — bullet proof card */
-  .hero-card {
-    background: #fff;
+  /* ── Hero form card ── */
+  .hero-form-card {
+    background: var(--white);
     border-top: 4px solid var(--accent);
-    box-shadow: 0 24px 64px rgba(0,0,0,0.32);
+    box-shadow: 0 28px 72px rgba(0,0,0,0.34);
     padding: 36px 32px 32px;
     color: var(--ink);
+    animation: fadeUp 0.6s 0.15s ease both;
   }
-  .hero-card .card-label {
+  .hero-form-card .card-label {
+    font-family: 'Raleway', sans-serif;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
-  .hero-card h3 {
-    font-size: 18px;
+  .hero-form-card h3 {
+    font-size: 17px;
     font-weight: 700;
     color: var(--navy);
     line-height: 1.4;
-    margin-bottom: 18px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
+    margin-bottom: 6px;
   }
-  .hero-card ul { list-style: none; }
-  .hero-card li {
-    font-size: 13px;
-    color: var(--body);
-    padding: 8px 0 8px 18px;
-    position: relative;
+  .hero-form-card .card-sub {
+    font-family: 'Lexend', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
     line-height: 1.5;
+    padding-bottom: 18px;
     border-bottom: 1px solid var(--line);
   }
-  .hero-card li:last-child { border-bottom: none; }
-  .hero-card li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 15px;
-    width: 8px;
-    height: 2px;
-    background: var(--accent);
-  }
-  .hero-card .card-footer {
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    font-size: 11px;
-    font-weight: 700;
+  .hf-group { margin-bottom: 14px; }
+  .hf-group label {
+    display: block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .hf-group input,
+  .hf-group select {
+    width: 100%;
+    border: 1px solid var(--line-dark);
+    padding: 10px 13px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .hf-group input:focus,
+  .hf-group select:focus { border-color: var(--navy); }
+  .hf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hero-form-card .btn { width: 100%; text-align: center; margin-top: 6px; font-size: 11px; }
+  .hf-note {
+    font-family: 'Lexend', sans-serif;
+    font-size: 10px;
     color: var(--muted);
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.5;
   }
 
-  /* ── Section 2: Awards & Press Trust Gate ── */
-  .trust-gate {
-    background: var(--paper-alt);
-    padding: 72px 40px;
-    border-bottom: 1px solid var(--line);
+  /* ─────────────────────────────────────────────────
+     S2 — AWARDS WALL (navy bg — credential gate)
+  ───────────────────────────────────────────────── */
+  .awards-wall {
+    background: var(--navy);
+    padding: 80px 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  .trust-gate-inner { max-width: 1200px; margin: 0 auto; }
-  .section-kicker {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.3em;
+  .awards-inner { max-width: 1240px; margin: 0 auto; }
+  .aw-heading-row {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .aw-kicker {
+    font-family: 'Lexend', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: rgba(255,255,255,0.45);
     margin-bottom: 10px;
   }
-  .section-heading {
-    font-size: clamp(26px, 3.2vw, 38px);
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 8px;
+  .aw-heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.2;
   }
-  .section-sub {
-    font-size: 15px;
-    color: var(--body);
-    line-height: 1.65;
-    max-width: 620px;
-    margin-bottom: 48px;
+  .aw-rule {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin: 14px auto 0;
   }
 
-  /* Award badges grid */
-  .awards-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
+  /* Awards row — 4 badges large */
+  .awards-badge-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
     margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
   }
-  .award-badge {
-    background: #fff;
-    padding: 32px 24px;
-    text-align: center;
+  .award-badge-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    transition: background 0.2s;
+    gap: 10px;
+    cursor: default;
+    transition: transform 0.2s ease, filter 0.2s ease;
   }
-  .award-badge:hover { background: var(--paper-alt); }
-  .award-icon {
-    width: 52px;
-    height: 52px;
-    border: 2px solid var(--navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .award-badge-item:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.2));
   }
-  .award-icon .shield {
-    font-size: 22px;
-    color: var(--navy);
-    font-weight: 900;
-    font-style: normal;
-  }
-  .award-icon .pp-star { font-size: 22px; color: var(--accent); }
-  .award-badge .award-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.35;
-    text-align: center;
-  }
-  .award-badge .award-org {
-    font-size: 11px;
-    font-weight: 600;
+  .award-badge-item .award-caption {
+    font-family: 'Lexend', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--muted);
-  }
-  /* Google PP badge — accent-bordered */
-  .award-badge.pp-badge { border-top: 3px solid var(--accent); }
-  .award-badge.pp-badge .award-icon { border-color: var(--accent); }
-  .award-badge.pp-badge .shield { color: var(--accent); }
-
-  /* Press features row */
-  .press-row-wrap {
-    border-top: 1px solid var(--line);
-    padding-top: 36px;
-  }
-  .press-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
+    color: rgba(255,255,255,0.50);
     text-align: center;
+    max-width: 140px;
+    line-height: 1.4;
   }
-  .press-names {
+
+  /* Press logos row */
+  .press-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 40px;
     flex-wrap: wrap;
   }
-  .press-item {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--navy);
-    letter-spacing: 0.04em;
-    opacity: 0.65;
-    padding: 8px 28px;
-    border-right: 1px solid var(--line);
-    transition: opacity 0.2s;
+  .press-logo-item {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.70;
   }
-  .press-item:last-child { border-right: none; }
-  .press-item:hover { opacity: 1; color: var(--navy); }
+  .press-logo-item:hover {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  .press-section-label {
+    font-family: 'Lexend', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-bottom: 24px;
+  }
 
-  /* ── Section 3: Stats strip ── */
+  /* ─────────────────────────────────────────────────
+     S3 — STATS STRIP (white bg)
+  ───────────────────────────────────────────────── */
   .stats-strip {
-    background: var(--navy-deep);
-    padding: 64px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: var(--white);
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--line);
   }
   .stats-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
+    border: 1px solid var(--line);
   }
   .stat-block {
-    padding: 28px 32px;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    text-align: left;
+    padding: 36px 32px;
+    border-right: 1px solid var(--line);
+    position: relative;
   }
   .stat-block:last-child { border-right: none; }
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: transparent;
+    transition: background 0.2s;
+  }
+  .stat-block:hover::before { background: var(--accent); }
   .stat-number {
-    font-size: clamp(42px, 5vw, 64px);
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(44px, 5.5vw, 68px);
     font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.03em;
+    color: var(--navy);
+    letter-spacing: -0.04em;
     line-height: 1;
     margin-bottom: 6px;
   }
   .stat-number sup {
-    font-size: 0.45em;
+    font-size: 0.4em;
     color: var(--accent);
     font-weight: 800;
     vertical-align: super;
   }
   .stat-number .stat-year {
-    font-size: clamp(36px, 4vw, 56px);
+    font-size: clamp(38px, 4.5vw, 58px);
     color: var(--accent);
   }
   .stat-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--navy);
+    opacity: 0.65;
     margin-bottom: 10px;
   }
   .stat-context {
+    font-family: 'Lexend', sans-serif;
     font-size: 12px;
-    color: rgba(255,255,255,0.50);
-    line-height: 1.55;
+    color: var(--body-text);
+    line-height: 1.6;
     font-weight: 400;
     max-width: 220px;
   }
 
-  /* ── Section 4: Services ── */
+  /* ─────────────────────────────────────────────────
+     S4 — SERVICES (light bg)
+  ───────────────────────────────────────────────── */
   .services-section {
-    background: var(--paper);
-    padding: 88px 40px;
-    border-bottom: 1px solid var(--line);
+    background: var(--light-bg);
+    padding: 88px 48px;
   }
-  .services-inner { max-width: 1200px; margin: 0 auto; }
-  .section-header {
+  .services-inner { max-width: 1240px; margin: 0 auto; }
+  .section-header-row {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1.4fr;
     gap: 48px;
     align-items: end;
     margin-bottom: 52px;
     padding-bottom: 24px;
     border-bottom: 2px solid var(--navy);
   }
-  .section-header-desc {
-    font-size: 15px;
-    color: var(--body);
-    line-height: 1.7;
+  .section-kicker {
+    font-family: 'Lexend', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
   }
+  .section-heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .section-desc {
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    color: var(--body-text);
+    line-height: 1.75;
+  }
+
   .svc-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -543,57 +652,16 @@
     border-left: 1px solid var(--line);
   }
   .svc-card {
-    padding: 32px 28px 36px;
+    background: var(--white);
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    background: #fff;
-    transition: background 0.2s, border-color 0.2s;
+    padding: 30px 26px 34px;
     position: relative;
-  }
-  .svc-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
-  .svc-card:hover { background: var(--paper-alt); }
-  .svc-card:hover::after { width: 100%; }
-  .svc-num {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .svc-name {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-  .svc-outcome {
-    font-size: 13px;
-    color: var(--body);
-    line-height: 1.6;
-  }
-  /* 11th card fills 2-col span in last row to avoid orphan */
-  .svc-card.wide { grid-column: span 1; }
-
-  /* ── Section 5: Founder ── */
-  .founder-section {
-    background: var(--navy);
-    color: #fff;
-    padding: 88px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: relative;
+    transition: background 0.2s;
     overflow: hidden;
   }
-  .founder-section::before {
+  /* Orange left-border accent on hover */
+  .svc-card::before {
     content: '';
     position: absolute;
     left: 0;
@@ -601,190 +669,363 @@
     width: 4px;
     height: 100%;
     background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.25s ease;
+  }
+  .svc-card:hover { background: #FAFBFF; }
+  .svc-card:hover::before { transform: scaleY(1); }
+  .svc-num {
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .svc-name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 7px;
+    line-height: 1.3;
+  }
+  .svc-outcome {
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: var(--body-text);
+    line-height: 1.6;
+  }
+
+  /* ─────────────────────────────────────────────────
+     S5 — FOUNDER (white bg)
+  ───────────────────────────────────────────────── */
+  .founder-section {
+    background: var(--white);
+    padding: 88px 48px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
   .founder-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
+    grid-template-columns: auto 1fr;
     gap: 72px;
     align-items: start;
   }
-  .founder-left .section-kicker { color: rgba(234,69,23,0.95); }
-  .founder-left .section-heading { color: #fff; margin-bottom: 20px; }
-  .founder-title-block {
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+  .founder-portrait-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
-  .founder-title-block .title-name {
-    font-size: 20px;
+  .founder-portrait-col img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+  }
+  .founder-name-badge {
+    text-align: center;
+  }
+  .founder-name-badge .f-name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
     font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
+    color: var(--navy);
+    margin-bottom: 3px;
   }
-  .founder-title-block .title-role {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+  .founder-name-badge .f-title {
+    font-family: 'Lexend', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--muted);
   }
-  .founder-copy {
-    padding: 40px 44px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-left: 3px solid var(--accent);
-  }
+  .founder-copy-col { border-left: 3px solid var(--accent); padding-left: 44px; }
+  .founder-copy-col .section-kicker { margin-bottom: 10px; }
+  .founder-copy-col .section-heading { margin-bottom: 24px; }
   .founder-quote-lead {
-    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 21px;
     font-weight: 700;
-    color: #fff;
+    color: var(--navy);
     line-height: 1.35;
-    margin-bottom: 26px;
+    margin-bottom: 22px;
     letter-spacing: -0.01em;
   }
   .founder-quote-body {
+    font-family: 'Lexend', sans-serif;
     font-size: 15px;
-    color: rgba(255,255,255,0.78);
-    line-height: 1.75;
-    margin-bottom: 30px;
+    color: var(--body-text);
+    line-height: 1.80;
+    margin-bottom: 28px;
   }
   .founder-sig {
+    font-family: 'Lexend', sans-serif;
     font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: rgba(255,255,255,0.60);
-    border-top: 1px solid rgba(255,255,255,0.14);
+    font-weight: 500;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
     padding-top: 18px;
   }
-  .founder-sig strong { color: #fff; }
+  .founder-sig strong {
+    font-family: 'Raleway', sans-serif;
+    color: var(--navy);
+    font-weight: 700;
+  }
 
-  /* ── Section 6: Testimonial ── */
-  .testimonial-section {
-    background: var(--paper-alt);
-    padding: 80px 40px;
+  /* ─────────────────────────────────────────────────
+     S6 — INDUSTRIES (navy bg — 5 vertical photos)
+  ───────────────────────────────────────────────── */
+  .industries-section {
+    background: var(--navy);
+    padding: 88px 48px;
+  }
+  .industries-inner { max-width: 1240px; margin: 0 auto; }
+  .ind-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .ind-header .section-kicker { color: rgba(255,255,255,0.50); }
+  .ind-header .section-heading { color: #fff; }
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .industry-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+  }
+  .industry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+  .industry-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+  }
+  .industry-card-body {
+    padding: 18px 16px;
+  }
+  .industry-card-body .ind-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .industry-card-body .ind-desc {
+    font-family: 'Lexend', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* ─────────────────────────────────────────────────
+     S7 — CLIENT LOGOS (white bg)
+  ───────────────────────────────────────────────── */
+  .clients-section {
+    background: var(--white);
+    padding: 72px 48px;
+    border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
-  .testimonial-inner { max-width: 1200px; margin: 0 auto; }
-  .testimonial-heading-row {
+  .clients-inner { max-width: 1240px; margin: 0 auto; text-align: center; }
+  .clients-section .section-kicker { margin-bottom: 6px; }
+  .clients-heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 44px;
+  }
+  .client-logos-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .client-logo-item {
+    display: flex;
+    align-items: center;
+    opacity: 0.55;
+    filter: grayscale(100%);
+    transition: opacity 0.2s, filter 0.2s;
+    cursor: default;
+  }
+  .client-logo-item:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  /* ─────────────────────────────────────────────────
+     S8 — TESTIMONIAL (light bg)
+  ───────────────────────────────────────────────── */
+  .testimonial-section {
+    background: var(--light-bg);
+    padding: 88px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .testimonial-inner { max-width: 1240px; margin: 0 auto; }
+  .t-framing-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 48px;
-    padding-bottom: 24px;
+    margin-bottom: 44px;
+    padding-bottom: 22px;
     border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .t-framing {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .t-verified {
+    font-family: 'Lexend', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
   }
   .testimonial-card {
-    background: #fff;
+    background: var(--white);
     border: 1px solid var(--line);
-    border-top: 3px solid var(--accent);
-    padding: 44px 48px;
-    max-width: 780px;
+    border-top: 4px solid var(--accent);
+    padding: 48px 52px;
+    max-width: 840px;
     position: relative;
   }
-  .testimonial-card .open-quote {
-    font-size: 80px;
+  .t-open-quote {
+    font-family: 'Raleway', sans-serif;
+    font-size: 100px;
     font-weight: 900;
-    color: var(--accent);
-    line-height: 0.6;
-    opacity: 0.25;
-    position: absolute;
-    top: 32px;
-    left: 40px;
     font-style: normal;
+    color: var(--accent);
+    line-height: 0.65;
+    opacity: 0.18;
+    position: absolute;
+    top: 36px;
+    left: 44px;
     user-select: none;
+    pointer-events: none;
   }
-  .testimonial-text {
-    font-size: 20px;
+  .t-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+  .t-stars .star {
+    color: #F59E0B;
+    font-size: 18px;
+    font-style: normal;
+  }
+  .t-quote {
+    font-family: 'Raleway', sans-serif;
+    font-size: 21px;
     font-weight: 500;
     color: var(--navy);
-    line-height: 1.6;
+    line-height: 1.62;
     letter-spacing: -0.01em;
     margin-bottom: 30px;
     position: relative;
     z-index: 1;
   }
-  .testimonial-attr {
+  .t-attr {
     display: flex;
     align-items: center;
     gap: 14px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--navy);
   }
-  .testimonial-attr .attr-initials {
-    width: 40px;
-    height: 40px;
+  .t-initials {
+    width: 42px;
+    height: 42px;
     background: var(--navy);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Raleway', sans-serif;
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.04em;
     flex-shrink: 0;
+    border-radius: 50%;
   }
-  .testimonial-attr .attr-right { display: flex; flex-direction: column; gap: 3px; }
-  .testimonial-attr .attr-name { color: var(--navy); font-weight: 700; }
-  .testimonial-attr .attr-verified {
+  .t-attr-right { display: flex; flex-direction: column; gap: 3px; }
+  .t-name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .t-label {
+    font-family: 'Lexend', sans-serif;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
   }
-  .testimonial-stars {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 20px;
-  }
-  .testimonial-stars .star {
-    color: #F59E0B;
-    font-size: 18px;
-    font-style: normal;
-  }
-  .testimonial-framing {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--navy);
-  }
 
-  /* ── Section 7: Service areas ── */
+  /* ─────────────────────────────────────────────────
+     S9 — SERVICE AREAS (navy bg)
+  ───────────────────────────────────────────────── */
   .areas-section {
-    background: var(--paper);
-    padding: 80px 40px;
-    border-bottom: 1px solid var(--line);
+    background: var(--navy);
+    padding: 88px 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  .areas-inner { max-width: 1200px; margin: 0 auto; }
+  .areas-inner { max-width: 1240px; margin: 0 auto; }
+  .areas-header {
+    margin-bottom: 48px;
+  }
+  .areas-header .section-kicker { color: rgba(255,255,255,0.50); margin-bottom: 10px; }
+  .areas-header .section-heading { color: #fff; }
   .areas-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-    margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    border-left: 1px solid rgba(255,255,255,0.10);
   }
   .area-cell {
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 24px 22px;
+    border-right: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    padding: 26px 24px;
     transition: background 0.2s;
   }
-  .area-cell:hover { background: var(--paper-alt); }
+  .area-cell:hover { background: rgba(255,255,255,0.04); }
   .area-cell.hq { border-top: 3px solid var(--accent); }
   .area-city {
+    font-family: 'Raleway', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: var(--navy);
+    color: #fff;
     margin-bottom: 3px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .area-city .hq-tag {
+  .hq-tag {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.15em;
@@ -792,80 +1033,97 @@
     background: var(--accent);
     color: #fff;
     padding: 2px 7px;
+    border-radius: 2px;
   }
   .area-state {
+    font-family: 'Lexend', sans-serif;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: rgba(255,255,255,0.45);
     margin-bottom: 10px;
   }
   .area-phone {
+    font-family: 'Lexend', sans-serif;
     font-size: 13px;
-    font-weight: 600;
-    color: var(--body);
-    letter-spacing: 0.02em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
   }
-  .area-phone a { color: var(--navy); font-weight: 700; transition: color 0.2s; }
+  .area-phone a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 700;
+    transition: color 0.2s;
+  }
   .area-phone a:hover { color: var(--accent); }
 
-  /* ── Section 8: Lead form ── */
+  /* ─────────────────────────────────────────────────
+     S10 — LEAD FORM (white bg)
+  ───────────────────────────────────────────────── */
   .form-section {
-    background: var(--navy-deep);
-    padding: 88px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    color: #fff;
+    background: var(--white);
+    padding: 96px 48px;
+    border-top: 1px solid var(--line);
   }
   .form-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 72px;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
     align-items: start;
   }
-  .form-left {}
-  .form-left .section-kicker { color: var(--accent); margin-bottom: 12px; }
-  .form-left .section-heading { color: #fff; margin-bottom: 20px; }
-  .form-left .section-sub { color: rgba(255,255,255,0.70); margin-bottom: 36px; max-width: 440px; }
-  .form-trust-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .form-trust-list li {
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
-    padding-left: 18px;
-    position: relative;
-    line-height: 1.5;
-    font-weight: 600;
+  .form-left-col .section-kicker { margin-bottom: 10px; }
+  .form-left-col .section-heading { margin-bottom: 20px; }
+  .form-left-col .form-intro {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    color: var(--body-text);
+    line-height: 1.75;
+    margin-bottom: 36px;
   }
-  .form-trust-list li::before {
+  .form-trust-points { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .form-trust-points li {
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    color: var(--body-text);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .form-trust-points li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
-    width: 8px;
+    top: 9px;
+    width: 10px;
     height: 2px;
     background: var(--accent);
   }
 
   .lead-form {
-    background: #fff;
+    background: var(--white);
+    border: 1px solid var(--line);
     border-top: 4px solid var(--accent);
-    padding: 40px 36px;
-    color: var(--ink);
+    padding: 44px 40px;
   }
   .lead-form .form-title {
-    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 17px;
     font-weight: 700;
     color: var(--navy);
     margin-bottom: 6px;
     line-height: 1.4;
   }
   .lead-form .form-sub {
+    font-family: 'Lexend', sans-serif;
     font-size: 13px;
     color: var(--muted);
     margin-bottom: 28px;
     line-height: 1.5;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
   }
   .form-row {
     display: grid;
@@ -875,9 +1133,10 @@
   .form-group { margin-bottom: 16px; }
   .form-group label {
     display: block;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--navy);
     margin-bottom: 6px;
@@ -888,92 +1147,108 @@
     width: 100%;
     border: 1px solid var(--line-dark);
     padding: 11px 14px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Lexend', sans-serif;
     font-size: 14px;
     color: var(--ink);
-    background: #fff;
+    background: var(--white);
     outline: none;
     transition: border-color 0.2s;
     appearance: none;
   }
   .form-group input:focus,
   .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--navy);
-  }
-  .form-group textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+  .form-group textarea:focus { border-color: var(--navy); }
+  .form-group textarea { resize: vertical; min-height: 92px; line-height: 1.55; }
   .form-group.full { grid-column: 1 / -1; }
   .form-checkbox {
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    font-family: 'Lexend', sans-serif;
     font-size: 12px;
     color: var(--muted);
-    line-height: 1.45;
+    line-height: 1.5;
     margin-bottom: 22px;
+    grid-column: 1 / -1;
   }
-  .form-checkbox input { flex-shrink: 0; margin-top: 2px; width: 15px; height: 15px; accent-color: var(--accent); }
-  .form-submit .btn { width: 100%; text-align: center; padding: 16px 28px; font-size: 13px; }
+  .form-checkbox input {
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+  }
+  .form-submit { grid-column: 1 / -1; }
+  .form-submit .btn { width: 100%; text-align: center; padding: 17px 28px; font-size: 12px; }
   .form-captcha-note {
+    font-family: 'Lexend', sans-serif;
     font-size: 11px;
     color: var(--muted);
     margin-top: 12px;
     line-height: 1.5;
     text-align: center;
+    grid-column: 1 / -1;
   }
 
-  /* ── Footer ── */
+  /* ─────────────────────────────────────────────────
+     FOOTER (navy)
+  ───────────────────────────────────────────────── */
   footer {
-    background: var(--navy-deep);
-    color: rgba(255,255,255,0.60);
-    padding: 60px 40px 28px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    padding: 0 48px 32px;
+    border-top: 4px solid var(--accent);
   }
-  .foot-inner { max-width: 1200px; margin: 0 auto; }
+  .foot-inner { max-width: 1240px; margin: 0 auto; }
   .foot-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 36px;
+    gap: 44px;
+    padding: 56px 0 40px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     margin-bottom: 24px;
   }
-  .foot-about {}
-  .foot-logo-pill {
-    background: #fff;
+  .foot-logo-wrap {
+    background: var(--white);
     border-radius: 4px;
     padding: 7px 14px;
     display: inline-block;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
-  .foot-logo-pill img { height: 28px; }
+  .foot-logo-wrap img { height: 28px; }
   .foot-about p {
+    font-family: 'Lexend', sans-serif;
     font-size: 13px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+    color: rgba(255,255,255,0.52);
     max-width: 320px;
     margin-bottom: 16px;
   }
   .foot-tagline {
+    font-family: 'Raleway', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
   }
   .foot-col h5 {
-    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 16px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
   }
-  .foot-col a, .foot-col .foot-item {
+  .foot-col a,
+  .foot-col .foot-item {
     display: block;
+    font-family: 'Lexend', sans-serif;
     font-size: 13px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.52);
     padding: 4px 0;
     transition: color 0.2s;
   }
@@ -982,488 +1257,671 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Lexend', sans-serif;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.30);
+    color: rgba(255,255,255,0.28);
   }
-  .foot-bottom .pp-note { color: rgba(255,255,255,0.45); }
+  .foot-bottom .pp-note { color: rgba(255,255,255,0.42); }
 
-  /* ────────────────────────────────────────────────
-     RESPONSIVE BREAKPOINTS
-  ──────────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────────
+     RESPONSIVE — 1024px
+  ───────────────────────────────────────────────── */
   @media (max-width: 1024px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-card { max-width: 540px; }
-    .awards-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-inner { grid-template-columns: 1fr; gap: 44px; }
+    .hero-form-card { max-width: 560px; }
     .stats-inner { grid-template-columns: repeat(2, 1fr); }
     .stat-block:nth-child(2) { border-right: none; }
     .stat-block:nth-child(1),
-    .stat-block:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .section-header { grid-template-columns: 1fr; gap: 16px; }
+    .stat-block:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .section-header-row { grid-template-columns: 1fr; gap: 16px; }
     .svc-grid { grid-template-columns: repeat(2, 1fr); }
     .founder-inner { grid-template-columns: 1fr; gap: 40px; }
+    .founder-portrait-col { flex-direction: row; }
+    .founder-copy-col { border-left: none; border-top: 3px solid var(--accent); padding-left: 0; padding-top: 28px; }
+    .industries-grid { grid-template-columns: repeat(3, 1fr); }
     .areas-grid { grid-template-columns: repeat(2, 1fr); }
     .form-inner { grid-template-columns: 1fr; gap: 44px; }
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
 
+  /* ─────────────────────────────────────────────────
+     RESPONSIVE — 768px
+  ───────────────────────────────────────────────── */
   @media (max-width: 768px) {
-    .utility-bar { padding: 8px 20px; font-size: 11px; flex-direction: column; gap: 6px; text-align: center; }
+    .utility-bar {
+      padding: 8px 20px;
+      font-size: 11px;
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
+    }
     nav { padding: 14px 20px; }
-    nav ul { display: none; }
-    nav .nav-phone { display: none; }
-    .hero { padding: 56px 20px 52px; }
-    .hero h1 { font-size: clamp(28px, 8vw, 40px); }
-    .hero-trust-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .trust-bar-divider { display: none; }
-    .hero-ctas { flex-direction: column; }
-    .hero-ctas .btn { text-align: center; }
-    .trust-gate { padding: 56px 20px; }
-    .awards-grid { grid-template-columns: repeat(2, 1fr); }
-    .press-names { gap: 0; }
-    .press-item { padding: 8px 16px; font-size: 16px; }
-    .stats-strip { padding: 48px 20px; }
-    .stat-block { padding: 20px 16px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .nav-links { display: none; }
+    .nav-phone-display { display: none; }
+    .hero { padding: 52px 20px 48px; }
+    .hero h1 { font-size: clamp(26px, 7.5vw, 38px); }
+    .hero-trust-bar { flex-direction: column; flex-wrap: wrap; }
+    .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); width: 100%; }
+    .trust-item:last-child { border-bottom: none; }
+    .hero-cta-row { flex-direction: column; }
+    .hero-cta-row .btn { text-align: center; width: 100%; }
+    .hf-row { grid-template-columns: 1fr; }
+    .awards-wall { padding: 60px 20px; }
+    .awards-badge-row { gap: 28px; }
+    .press-row { gap: 24px; }
+    .stats-strip { padding: 56px 20px; }
+    .stat-block { padding: 24px 20px; border-right: none; border-bottom: 1px solid var(--line); }
     .stat-block:last-child { border-bottom: none; }
     .services-section { padding: 64px 20px; }
     .svc-grid { grid-template-columns: 1fr; }
     .founder-section { padding: 64px 20px; }
-    .founder-copy { padding: 28px 24px; }
-    .testimonial-section { padding: 60px 20px; }
-    .testimonial-heading-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .testimonial-card { padding: 32px 28px; }
-    .testimonial-text { font-size: 17px; }
-    .areas-section { padding: 60px 20px; }
+    .founder-portrait-col { flex-direction: column; align-items: center; }
+    .industries-section { padding: 64px 20px; }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .clients-section { padding: 56px 20px; }
+    .client-logos-row { gap: 32px; }
+    .testimonial-section { padding: 64px 20px; }
+    .testimonial-card { padding: 32px 24px; }
+    .t-framing-row { flex-direction: column; align-items: flex-start; }
+    .t-quote { font-size: 18px; }
+    .areas-section { padding: 64px 20px; }
     .areas-grid { grid-template-columns: 1fr 1fr; }
     .form-section { padding: 64px 20px; }
-    .lead-form { padding: 28px 22px; }
+    .lead-form { padding: 30px 22px; }
     .form-row { grid-template-columns: 1fr; }
-    footer { padding: 44px 20px 24px; }
+    footer { padding: 0 20px 24px; }
     .foot-grid { grid-template-columns: 1fr; gap: 28px; }
     .foot-bottom { flex-direction: column; gap: 8px; text-align: center; }
   }
 
-  @media (max-width: 400px) {
-    .hero h1 { font-size: 26px; overflow-wrap: break-word; }
-    .awards-grid { grid-template-columns: 1fr 1fr; }
-    .stat-number { font-size: 38px; }
+  /* ─────────────────────────────────────────────────
+     RESPONSIVE — 375px
+  ───────────────────────────────────────────────── */
+  @media (max-width: 375px) {
+    .hero h1 { font-size: 24px; overflow-wrap: break-word; }
+    .awards-badge-row { flex-direction: column; align-items: center; gap: 24px; }
+    .awards-badge-row > .award-badge-item { width: 80%; }
+    .industries-grid { grid-template-columns: 1fr; }
+    .stat-number { font-size: 40px; }
     .areas-grid { grid-template-columns: 1fr; }
-    .section-heading { font-size: 24px; overflow-wrap: break-word; }
+    .section-heading { font-size: 22px; overflow-wrap: break-word; }
+    .svc-grid { grid-template-columns: 1fr; }
   }
+
+  /* ─────────────────────────────────────────────────
+     COUNT-UP JS INIT HELPERS
+  ───────────────────────────────────────────────── */
+  .count-target { display: inline; }
 </style>
 </head>
 <body>
 
-  <!-- ── Utility bar ── -->
-  <div class="utility-bar">
-    <div class="left">
-      <div class="pp-pill"><span class="star">★</span> Google Premier Partner 2025</div>
-      <div class="divider"></div>
-      <span>Full-Service Digital Marketing Agency — New Orleans, LA</span>
-    </div>
-    <a href="tel:5045476565" class="phone-link">(504) 547-6565</a>
+<!-- ──────────────────────────────────────────────────
+  UTILITY BAR
+  navy · phone · PP credential · Open 24/7
+──────────────────────────────────────────────────── -->
+<div class="utility-bar">
+  <div class="left">
+    <div class="pp-pill">&#9733; Google Premier Partner 2025</div>
+    <div class="u-divider"></div>
+    <span>Full-Service Digital Marketing — New Orleans, LA</span>
+    <div class="u-divider"></div>
+    <span class="open-tag">Open 24/7</span>
   </div>
+  <a href="tel:5045476565" class="phone-link">(504) 547-6565</a>
+</div>
 
-  <!-- ── Navigation ── -->
-  <nav>
-    <div class="logo"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#areas">Service Areas</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="nav-phone">(504) 547-6565</div>
-      <a class="btn" href="#contact">Free Consultation</a>
+<!-- ──────────────────────────────────────────────────
+  NAVIGATION
+  white bg · navy text · single orange CTA
+──────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#areas">Service Areas</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-phone-display">(504) 547-6565</div>
+    <a class="btn" href="#contact">Free Consultation</a>
+  </div>
+</nav>
+
+<!-- ──────────────────────────────────────────────────
+  S1 — HERO
+  H1 verbatim · Trust bar with PP SVG + award img inline · Lead form card right
+──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="bar"></span>
+        Established 2000 &middot; New Orleans, Louisiana
+      </div>
+
+      <h1>We Help Businesses <span class="accent-word">Rank Higher</span>, Grow Faster And Convert Better To Drive Revenue</h1>
+
+      <!-- Trust bar — immediately below H1 — shine animation active -->
+      <div class="hero-trust-bar" role="list" aria-label="Trust credentials">
+        <div class="trust-item" role="listitem">
+          <img src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg"
+               alt="Google Premier Partner 2025"
+               class="pp-badge-img"
+               style="height:48px; width:auto;">
+        </div>
+        <div class="trust-item" role="listitem">
+          <img src="../Images/award-upcity.png"
+               alt="UpCity National &amp; Local Excellence Award"
+               class="award-img-small"
+               style="height:44px; width:auto; filter:brightness(0) invert(0.9);">
+          <span class="trust-item-label">UpCity Excellence</span>
+        </div>
+        <div class="trust-item" role="listitem">
+          <img src="../Images/award-seolium.png"
+               alt="Seolium #1 New Orleans"
+               class="award-img-small"
+               style="height:40px; width:auto; filter:brightness(0) invert(0.9);">
+          <span class="trust-item-label">#1 New Orleans</span>
+        </div>
+        <div class="trust-item" role="listitem">
+          <span class="trust-item-label">Top 3% US Google Ads Agencies &mdash; Audited Annually</span>
+        </div>
+      </div>
+
+      <p class="hero-sub">Our Team Innovated The Google Ranking Game And Is Committed That Your Business Ranks On The Highly Coveted Top 3 Spots Of The Google Map Pack</p>
+
+      <div class="hero-cta-row">
+        <a class="btn" href="#contact">CLAIM YOUR FREE CONSULTATION NOW!</a>
+      </div>
+      <div class="hero-phone-note">
+        Prefer to call? <a href="tel:5045476565">(504) 547-6565</a> &mdash; answered 24/7
+      </div>
+    </div><!-- /hero-left -->
+
+    <!-- Hero form card — white, orange top border, 7 fields -->
+    <div class="hero-form-card">
+      <div class="card-label">Start Here — Free Consultation</div>
+      <h3>Get your website on the first page of Google.</h3>
+      <p class="card-sub">Schedule a free consultation with Founder &amp; CEO Brian Hong. No bots, no junior hand-offs.</p>
+
+      <div class="hf-row">
+        <div class="hf-group">
+          <label for="h-name">Full Name *</label>
+          <input type="text" id="h-name" name="full_name" placeholder="Jane Smith" required>
+        </div>
+        <div class="hf-group">
+          <label for="h-phone">Phone *</label>
+          <input type="tel" id="h-phone" name="phone" placeholder="(504) 000-0000" required>
+        </div>
+      </div>
+      <div class="hf-group">
+        <label for="h-email">Email Address *</label>
+        <input type="email" id="h-email" name="email" placeholder="jane@company.com" required>
+      </div>
+      <div class="hf-group">
+        <label for="h-budget">Monthly Budget</label>
+        <select id="h-budget" name="budget">
+          <option value="" disabled selected>Select your budget range</option>
+          <option>Under $2,500</option>
+          <option>$2,500 – $5,000</option>
+          <option>$5,000 – $10,000</option>
+          <option>$10,000 – $25,000</option>
+          <option>$25,000+</option>
+        </select>
+      </div>
+      <a class="btn" href="#contact" style="display:block; text-align:center; margin-top:4px;">Schedule My Free Consultation &rarr;</a>
+      <div class="hf-note">Your information is safe. No bots &mdash; this goes directly to Brian Hong.</div>
+    </div><!-- /hero-form-card -->
+
+  </div><!-- /hero-inner -->
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S2 — AWARDS WALL (navy bg)
+  Enterprise trust gate. ALL 4 awards + ALL 5 press logos.
+  Credential wall before services — boardroom pattern.
+──────────────────────────────────────────────────── -->
+<section class="awards-wall" id="credentials">
+  <div class="awards-inner">
+
+    <div class="aw-heading-row">
+      <div class="aw-kicker">Recognition &amp; Credentials</div>
+      <h2 class="aw-heading">Awards &amp; Recognition</h2>
+      <div class="aw-rule"></div>
     </div>
-  </nav>
 
-  <!-- ────────────────────────────────────────────────
-    SECTION 1 — HERO
-    H1 verbatim · Trust bar immediately below H1 (PP badge + awards)
-    Phone prominent · Lead form card right column
-  ──────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <span class="bar"></span>
-          Established 2000 &middot; New Orleans, Louisiana
-        </div>
-        <h1>We Help Businesses <span class="accent-word">Rank Higher</span>, Grow Faster And Convert Better To Drive Revenue</h1>
+    <!-- Row 1 — Award images, large, white-filtered -->
+    <div class="awards-badge-row" role="list" aria-label="Industry awards">
 
-        <!-- Trust bar — IMMEDIATELY below H1 per CRO requirement -->
-        <div class="hero-trust-bar">
-          <div class="trust-badge">
-            <span class="badge-icon">★</span>
-            Google Premier Partner 2025
-          </div>
-          <div class="trust-bar-divider"></div>
-          <div class="trust-badge">
-            <span class="badge-icon gold">#1</span>
-            #1 Agency in New Orleans — Seolium
-          </div>
-          <div class="trust-bar-divider"></div>
-          <div class="trust-badge">
-            <span class="badge-icon">A</span>
-            UpCity National Excellence Award
-          </div>
-        </div>
-
-        <p class="hero-sub">Our Team Innovated The Google Ranking Game And Is Committed That Your Business Ranks On The Highly Coveted Top 3 Spots Of The Google Map Pack</p>
-
-        <div class="hero-ctas">
-          <a class="btn" href="#contact">CLAIM YOUR FREE CONSULTATION NOW!</a>
-        </div>
-        <div class="hero-phone-note">
-          Prefer a call? Reach us directly at&nbsp;<a href="tel:5045476565">(504) 547-6565</a>
-        </div>
+      <div class="award-badge-item" role="listitem">
+        <img src="../Images/award-upcity.png"
+             alt="UpCity National &amp; Local Excellence Award"
+             style="height:72px; width:auto; filter:brightness(0) invert(0.9);">
+        <div class="award-caption">UpCity National &amp; Local Excellence Award</div>
       </div>
 
-      <!-- Hero card — proof of engagement model -->
-      <div class="hero-card">
-        <div class="card-label">Why Infintech</div>
-        <h3>A direct line to senior strategy — every account, every month.</h3>
-        <ul>
-          <li>FREE Initial Consultation With Founder &amp; CEO Brian Hong</li>
-          <li>Over 26 Years Experience In SEO And Web Design</li>
-          <li>Real-Time Tracking Dashboard</li>
-          <li>Data-Driven SEO Marketing With Measurable Results</li>
-          <li>Web Design That Turns Visitors Into Customers</li>
-        </ul>
-        <div class="card-footer">Founder-led &middot; No junior hand-offs &middot; No bots</div>
+      <div class="award-badge-item" role="listitem">
+        <img src="../Images/award-kicksta.png"
+             alt="Kicksta Top Social Media Agencies in Louisiana"
+             style="height:64px; width:auto; filter:brightness(0) invert(0.9);">
+        <div class="award-caption">Kicksta Top Social Media LA</div>
+      </div>
+
+      <div class="award-badge-item" role="listitem">
+        <img src="../Images/award-seolium.png"
+             alt="Seolium #1 Agency in New Orleans"
+             style="height:64px; width:auto; filter:brightness(0) invert(0.9);">
+        <div class="award-caption">Seolium #1 New Orleans</div>
+      </div>
+
+      <div class="award-badge-item" role="listitem">
+        <img src="https://www.gstatic.com/partners/badge/images/2025/PremierBadgeClickable.svg"
+             alt="Google Premier Partner 2025"
+             style="height:88px; width:auto;">
+        <div class="award-caption">Google Premier Partner 2025 &mdash; Top 3% US</div>
+      </div>
+
+    </div><!-- /awards-badge-row -->
+
+    <!-- Row 2 — Press logos, white-filtered -->
+    <div class="press-section-label">As Seen On</div>
+    <div class="press-row" role="list" aria-label="Media features">
+
+      <div class="press-logo-item" role="listitem">
+        <img src="../Images/buzz-feed-logo.png"
+             alt="BuzzFeed"
+             style="height:32px; width:auto; filter:brightness(0) invert(0.8);">
+      </div>
+
+      <div class="press-logo-item" role="listitem">
+        <img src="../Images/entrepreneur-logo.png"
+             alt="Entrepreneur"
+             style="height:32px; width:auto; filter:brightness(0) invert(0.8);">
+      </div>
+
+      <div class="press-logo-item" role="listitem">
+        <img src="../Images/inc-logo.png"
+             alt="Inc."
+             style="height:32px; width:auto; filter:brightness(0) invert(0.8);">
+      </div>
+
+      <div class="press-logo-item" role="listitem">
+        <img src="../Images/huffpost-logo.png"
+             alt="HuffPost"
+             style="height:32px; width:auto; filter:brightness(0) invert(0.8);">
+      </div>
+
+      <div class="press-logo-item" role="listitem">
+        <img src="../Images/sme-logo.png"
+             alt="SME"
+             style="height:32px; width:auto; filter:brightness(0) invert(0.8);">
+      </div>
+
+    </div><!-- /press-row -->
+
+  </div><!-- /awards-inner -->
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S3 — STATS STRIP (white bg)
+  26+ · 4,000+ · 750+ · PP 2025 — verbatim context labels
+  Count-up on scroll via IntersectionObserver
+──────────────────────────────────────────────────── -->
+<section class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="stat-number"><span class="count-target" data-target="26">26</span><sup>+</sup></div>
+      <div class="stat-label">Years of Experience</div>
+      <div class="stat-context">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number"><span class="count-target" data-target="4000">4,000</span><sup>+</sup></div>
+      <div class="stat-label">Websites Built to Date</div>
+      <div class="stat-context">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number"><span class="count-target" data-target="750">750</span><sup>+</sup></div>
+      <div class="stat-label">Sites Optimized for SEO</div>
+      <div class="stat-context">Sites engineered for ranking — not just shipped, then trained on results data.</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number"><span class="stat-year">2025</span></div>
+      <div class="stat-label">Premier Partner Status</div>
+      <div class="stat-context">Top 3% of all Google Ads agencies in the United States. Audited annually.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S4 — SERVICES (light bg)
+  All 11 · 3-col grid · outcome-labeled · orange left-border on hover
+──────────────────────────────────────────────────── -->
+<section class="services-section" id="services">
+  <div class="services-inner">
+    <div class="section-header-row">
+      <div>
+        <div class="section-kicker">Capabilities</div>
+        <h2 class="section-heading">Eleven integrated disciplines. One senior team.</h2>
+      </div>
+      <div class="section-desc">Every engagement is sequenced strategically: SEO informs web design, web design informs CRO, CRO informs paid. All eleven services operate under a single senior strategist — no vendor relay-race, no junior hand-offs.</div>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Search Engine Optimization</div>
+        <div class="svc-outcome">Map-pack first. Rank in the Top 3 of Google.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Web Design &amp; Development</div>
+        <div class="svc-outcome">Built to convert. Engineered to rank. 4,000+ shipped.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-name">PPC &amp; Google Ads</div>
+        <div class="svc-outcome">Premier-Partner audited campaigns. Every dollar tracked.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <div class="svc-name">Full Stack Digital Marketing</div>
+        <div class="svc-outcome">One agency owning every channel. No vendor relay-race.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <div class="svc-name">Social Media Marketing</div>
+        <div class="svc-outcome">Organic + paid social tuned for your business pipeline.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">06</div>
+        <div class="svc-name">Content Marketing</div>
+        <div class="svc-outcome">SEO-led editorial that ranks and reads like a human wrote it.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">07</div>
+        <div class="svc-name">Conversion Rate Optimization</div>
+        <div class="svc-outcome">A/B test the funnel until the math wins.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">08</div>
+        <div class="svc-name">Online Reputation Management</div>
+        <div class="svc-outcome">Reviews, citations, and brand sentiment management.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">09</div>
+        <div class="svc-name">Lead Generation</div>
+        <div class="svc-outcome">Qualified-lead pipelines, not vanity-form fills.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">10</div>
+        <div class="svc-name">White Label Services</div>
+        <div class="svc-outcome">Agency-to-agency partnerships under your brand.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">11</div>
+        <div class="svc-name">AI Automation Services</div>
+        <div class="svc-outcome">Workflow automation and agent integration for the modern SMB.</div>
+      </div>
+    </div><!-- /svc-grid -->
+
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S5 — FOUNDER (white bg)
+  brian-hong.png 180px circle · verbatim "This call goes to Brian Hong" copy
+──────────────────────────────────────────────────── -->
+<section class="founder-section" id="about">
+  <div class="founder-inner">
+
+    <div class="founder-portrait-col">
+      <img src="../Images/brian-hong.png"
+           alt="Brian Hong, Founder &amp; CEO of Infintech Designs"
+           style="width:180px; height:180px; border-radius:50%; border:3px solid #EA4517; object-fit:cover;">
+      <div class="founder-name-badge">
+        <div class="f-name">Brian Hong</div>
+        <div class="f-title">Founder &amp; CEO &middot; Infintech Designs</div>
       </div>
     </div>
-  </section>
 
-  <!-- ────────────────────────────────────────────────
-    SECTION 2 — AWARDS & PRESS TRUST GATE
-    Enterprise buyer's first credibility checkpoint.
-    All 4 confirmed awards + all 5 press features.
-  ──────────────────────────────────────────────── -->
-  <section class="trust-gate">
-    <div class="trust-gate-inner">
-      <div class="section-kicker">Recognition &amp; Credentials</div>
-      <h2 class="section-heading">Independently verified. Peer-recognized. Partner-certified.</h2>
-      <p class="section-sub">Before a strategy conversation, review the credentials. Every award and partnership listed here has been independently verified — not self-nominated, not purchased.</p>
+    <div class="founder-copy-col">
+      <div class="section-kicker">From the Founder</div>
+      <h2 class="section-heading">This call goes to Brian Hong &mdash; not a sales rep.</h2>
+      <div class="founder-quote-lead">"This call goes to Brian Hong — not a sales rep."</div>
+      <div class="founder-quote-body">I started Infintech in 2000 because the agencies I'd worked at were treating SEO like a billable mystery. We've since built more than 4,000 websites and ranked 750+ businesses on the back of one principle: every account gets senior strategists, every month, no junior hand-offs. If you're tired of agency churn, get on the line.</div>
+      <div class="founder-sig">
+        <strong>— Brian Hong</strong><br>
+        Founder &amp; CEO &middot; Infintech Designs &middot; New Orleans
+      </div>
+    </div>
 
-      <!-- Award badges — all 4 confirmed -->
-      <div class="awards-grid">
+  </div>
+</section>
 
-        <!-- Google Premier Partner — accent treatment (most important) -->
-        <div class="award-badge pp-badge">
-          <div class="award-icon">
-            <span class="shield">★</span>
-          </div>
-          <div class="award-name">Google Premier Partner 2025</div>
-          <div class="award-org">Top 3% of all Google Ads agencies in the US &mdash; audited annually</div>
+<!-- ──────────────────────────────────────────────────
+  S6 — INDUSTRIES (navy bg)
+  5 vertical photo cards — legal · medical · home services · restaurant · small biz
+──────────────────────────────────────────────────── -->
+<section class="industries-section">
+  <div class="industries-inner">
+
+    <div class="ind-header">
+      <div class="section-kicker">Verticals We Serve</div>
+      <h2 class="section-heading" style="color:#fff;">Ranked in every vertical. Proven in every market.</h2>
+    </div>
+
+    <div class="industries-grid">
+
+      <div class="industry-card">
+        <img src="../Images/vertical-legal.jpg" alt="Legal services" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;">
+        <div class="industry-card-body">
+          <div class="ind-label">Legal &amp; Law Firms</div>
+          <div class="ind-desc">Attorney SEO, local map-pack dominance, practice-area content.</div>
         </div>
-
-        <!-- Seolium #1 -->
-        <div class="award-badge">
-          <div class="award-icon">
-            <span class="shield">#1</span>
-          </div>
-          <div class="award-name">#1 Agency in New Orleans</div>
-          <div class="award-org">Seolium &mdash; Independent Agency Rankings</div>
-        </div>
-
-        <!-- UpCity -->
-        <div class="award-badge">
-          <div class="award-icon">
-            <span class="shield">UC</span>
-          </div>
-          <div class="award-name">National &amp; Local Excellence Award</div>
-          <div class="award-org">UpCity &mdash; National and Local Excellence</div>
-        </div>
-
-        <!-- Kicksta -->
-        <div class="award-badge">
-          <div class="award-icon">
-            <span class="shield">K</span>
-          </div>
-          <div class="award-name">Top Social Media Agencies in Louisiana</div>
-          <div class="award-org">Kicksta &mdash; State Rankings</div>
-        </div>
-
       </div>
 
-      <!-- Press features -->
-      <div class="press-row-wrap">
-        <div class="press-label">As Seen On</div>
-        <div class="press-names">
-          <div class="press-item">BuzzFeed</div>
-          <div class="press-item">Entrepreneur</div>
-          <div class="press-item">HuffPost</div>
-          <div class="press-item">Inc.</div>
-          <div class="press-item">SME</div>
+      <div class="industry-card">
+        <img src="../Images/vertical-medical.jpg" alt="Medical &amp; dental services" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;">
+        <div class="industry-card-body">
+          <div class="ind-label">Medical &amp; Dental</div>
+          <div class="ind-desc">Healthcare SEO, HIPAA-conscious copy, patient acquisition funnels.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <img src="../Images/vertical-home-services.jpg" alt="Home services — HVAC, plumbing, roofing" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;">
+        <div class="industry-card-body">
+          <div class="ind-label">Home Services</div>
+          <div class="ind-desc">HVAC, plumbing, roofing, garage door — local lead generation at scale.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <img src="../Images/vertical-restaurant.jpg" alt="Restaurant &amp; hospitality" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;">
+        <div class="industry-card-body">
+          <div class="ind-label">Restaurant &amp; Hospitality</div>
+          <div class="ind-desc">Google Maps presence, reservation-driving SEO, reputation management.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <img src="../Images/vertical-small-business.jpg" alt="Small business digital marketing" style="width:100%; height:180px; object-fit:cover; border-radius:8px 8px 0 0;">
+        <div class="industry-card-body">
+          <div class="ind-label">Small Business</div>
+          <div class="ind-desc">Full-stack digital marketing built to scale with your growth.</div>
+        </div>
+      </div>
+
+    </div><!-- /industries-grid -->
+
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S7 — CLIENT LOGOS (white bg)
+  NBA · 50 Floor · Walk On's — "Trusted by America's leading brands"
+──────────────────────────────────────────────────── -->
+<section class="clients-section">
+  <div class="clients-inner">
+    <div class="section-kicker" style="text-align:center;">Our Clients</div>
+    <h2 class="clients-heading">Trusted by America's leading brands.</h2>
+    <div class="client-logos-row" role="list" aria-label="Client logos">
+
+      <div class="client-logo-item" role="listitem">
+        <img src="../Images/client-nba.png"
+             alt="NBA"
+             style="height:40px; width:auto; filter:brightness(0) invert(0.7);">
+      </div>
+
+      <div class="client-logo-item" role="listitem">
+        <img src="../Images/client-50floor.png"
+             alt="50 Floor"
+             style="height:36px; width:auto; filter:brightness(0) invert(0.7);">
+      </div>
+
+      <div class="client-logo-item" role="listitem">
+        <img src="../Images/client-walkon.png"
+             alt="Walk On's Sports Bistreaux"
+             style="height:36px; width:auto; filter:brightness(0) invert(0.7);">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  S8 — TESTIMONIAL (light bg)
+  Jon Silkin verbatim · "REAL STORIES FROM REAL CLIENTS"
+──────────────────────────────────────────────────── -->
+<section class="testimonial-section">
+  <div class="testimonial-inner">
+    <div class="t-framing-row">
+      <div class="t-framing">Real Stories From Real Clients</div>
+      <div class="t-verified">5-Star Verified Review</div>
+    </div>
+    <div class="testimonial-card">
+      <span class="t-open-quote" aria-hidden="true">&ldquo;</span>
+      <div class="t-stars">
+        <i class="star">&#9733;</i>
+        <i class="star">&#9733;</i>
+        <i class="star">&#9733;</i>
+        <i class="star">&#9733;</i>
+        <i class="star">&#9733;</i>
+      </div>
+      <div class="t-quote">"I contacted Infintech Designs 2 months ago to create and build a creative website for my company. The web design service from Brian and his team has been great from the start."</div>
+      <div class="t-attr">
+        <div class="t-initials">JS</div>
+        <div class="t-attr-right">
+          <div class="t-name">Jon Silkin</div>
+          <div class="t-label">5-Star Verified Review</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ────────────────────────────────────────────────
-    SECTION 3 — STATS STRIP
-    All 3 confirmed stats + Google PP + verbatim context labels
-  ──────────────────────────────────────────────── -->
-  <section class="stats-strip">
-    <div class="stats-inner">
-      <div class="stat-block">
-        <div class="stat-number">26<sup>+</sup></div>
-        <div class="stat-label">Years of Experience</div>
-        <div class="stat-context">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number">4,000<sup>+</sup></div>
-        <div class="stat-label">Websites Built</div>
-        <div class="stat-context">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number">750<sup>+</sup></div>
-        <div class="stat-label">Sites Optimized for SEO</div>
-        <div class="stat-context">Sites engineered for ranking — not just shipped, then trained on results data.</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number"><span class="stat-year">2025</span></div>
-        <div class="stat-label">Premier Partner Status</div>
-        <div class="stat-context">Top 3% of all Google Ads agencies in the United States. Audited annually.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ────────────────────────────────────────────────
-    SECTION 4 — SERVICES
-    All 11 services, 3-column structured grid, outcome-labeled
-  ──────────────────────────────────────────────── -->
-  <section class="services-section" id="services">
-    <div class="services-inner">
-      <div class="section-header">
-        <div>
-          <div class="section-kicker">Capabilities</div>
-          <h2 class="section-heading">Eleven integrated disciplines. One senior team.</h2>
-        </div>
-        <div class="section-header-desc">Every engagement is sequenced strategically: SEO informs web design, web design informs CRO, CRO informs paid. All eleven services operate under a single senior strategist — no vendor relay-race, no junior hand-offs.</div>
-      </div>
-
-      <div class="svc-grid">
-        <div class="svc-card">
-          <div class="svc-num">01</div>
-          <div class="svc-name">Search Engine Optimization</div>
-          <div class="svc-outcome">Map-pack first. Rank in the Top 3 of Google.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">02</div>
-          <div class="svc-name">Web Design &amp; Development</div>
-          <div class="svc-outcome">Built to convert. Engineered to rank. 4,000+ shipped.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">03</div>
-          <div class="svc-name">PPC &amp; Google Ads</div>
-          <div class="svc-outcome">Premier-Partner audited campaigns. Every dollar tracked.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">04</div>
-          <div class="svc-name">Full Stack Digital Marketing</div>
-          <div class="svc-outcome">One agency owning every channel. No vendor relay-race.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">05</div>
-          <div class="svc-name">Social Media Marketing</div>
-          <div class="svc-outcome">Organic + paid social tuned for your business pipeline.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">06</div>
-          <div class="svc-name">Content Marketing</div>
-          <div class="svc-outcome">SEO-led editorial that ranks and reads like a human wrote it.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">07</div>
-          <div class="svc-name">Conversion Rate Optimization</div>
-          <div class="svc-outcome">A/B test the funnel until the math wins.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">08</div>
-          <div class="svc-name">Online Reputation Management</div>
-          <div class="svc-outcome">Reviews, citations, and brand sentiment management.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">09</div>
-          <div class="svc-name">Lead Generation</div>
-          <div class="svc-outcome">Qualified-lead pipelines, not vanity-form fills.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">10</div>
-          <div class="svc-name">White Label Services</div>
-          <div class="svc-outcome">Agency-to-agency partnerships under your brand.</div>
-        </div>
-        <div class="svc-card">
-          <div class="svc-num">11</div>
-          <div class="svc-name">AI Automation Services</div>
-          <div class="svc-outcome">Workflow automation and agent integration for the modern SMB.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ────────────────────────────────────────────────
-    SECTION 5 — FOUNDER
-    "This call goes to Brian Hong — not a sales rep."
-    Text-only. No photo. Verbatim founder copy from brief.
-  ──────────────────────────────────────────────── -->
-  <section class="founder-section" id="about">
-    <div class="founder-inner">
-      <div class="founder-left">
-        <div class="section-kicker">From the Founder</div>
-        <h2 class="section-heading" style="color:#fff;">This call goes to Brian Hong — not a sales rep.</h2>
-        <div class="founder-title-block">
-          <div class="title-name">Brian Hong</div>
-          <div class="title-role">Founder &amp; CEO &middot; Infintech Designs</div>
-        </div>
-      </div>
-      <div class="founder-copy">
-        <div class="founder-quote-lead">"This call goes to Brian Hong — not a sales rep."</div>
-        <div class="founder-quote-body">I started Infintech in 2000 because the agencies I'd worked at were treating SEO like a billable mystery. We've since built more than 4,000 websites and ranked 750+ businesses on the back of one principle: every account gets senior strategists, every month, no junior hand-offs. If you're tired of agency churn, get on the line.</div>
-        <div class="founder-sig">
-          <strong>— Brian Hong</strong><br>
-          Founder &amp; CEO &middot; Infintech Designs &middot; New Orleans
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ────────────────────────────────────────────────
-    SECTION 6 — TESTIMONIAL
-    Jon Silkin quote verbatim. "REAL STORIES FROM REAL CLIENTS" framing.
-  ──────────────────────────────────────────────── -->
-  <section class="testimonial-section">
-    <div class="testimonial-inner">
-      <div class="testimonial-heading-row">
-        <div class="testimonial-framing">Real Stories From Real Clients</div>
-        <div style="font-size:12px; font-weight:600; color:var(--muted); letter-spacing:0.05em;">Verified client review</div>
-      </div>
-      <div class="testimonial-card">
-        <span class="open-quote" aria-hidden="true">&ldquo;</span>
-        <div class="testimonial-stars">
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-        </div>
-        <div class="testimonial-text">"I contacted Infintech Designs 2 months ago to create and build a creative website for my company. The web design service from Brian and his team has been great from the start."</div>
-        <div class="testimonial-attr">
-          <div class="attr-initials">JS</div>
-          <div class="attr-right">
-            <div class="attr-name">Jon Silkin</div>
-            <div class="attr-verified">5-Star Verified Review</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ────────────────────────────────────────────────
-    SECTION 7 — SERVICE AREAS
-    All 8 cities with phone numbers. HQ tagged.
-  ──────────────────────────────────────────────── -->
-  <section class="areas-section" id="areas">
-    <div class="areas-inner">
+<!-- ──────────────────────────────────────────────────
+  S9 — SERVICE AREAS (navy bg)
+  8 cities · phone numbers · HQ tagged
+──────────────────────────────────────────────────── -->
+<section class="areas-section" id="areas">
+  <div class="areas-inner">
+    <div class="areas-header">
       <div class="section-kicker">Service Areas</div>
-      <h2 class="section-heading">New Orleans roots. National reach.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Senior strategists serving eight markets across the US. Every engagement operates from our New Orleans headquarters — one team, one set of standards.</p>
-
-      <div class="areas-grid">
-        <div class="area-cell hq">
-          <div class="area-city">New Orleans <span class="hq-tag">HQ</span></div>
-          <div class="area-state">Louisiana</div>
-          <div class="area-phone"><a href="tel:5045476565">(504) 547-6565</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">Houston</div>
-          <div class="area-state">Texas</div>
-          <div class="area-phone"><a href="tel:7138437501">(713) 843-7501</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">Dallas</div>
-          <div class="area-state">Texas</div>
-          <div class="area-phone"><a href="tel:4698157570">(469) 815-7570</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">Austin</div>
-          <div class="area-state">Texas</div>
-          <div class="area-phone"><a href="tel:5128900845">(512) 890-0845</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">San Francisco</div>
-          <div class="area-state">California</div>
-          <div class="area-phone"><a href="tel:6289009377">(628) 900-9377</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">Seattle</div>
-          <div class="area-state">Washington</div>
-          <div class="area-phone"><a href="tel:4253861649">(425) 386-1649</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">Atlanta</div>
-          <div class="area-state">Georgia</div>
-          <div class="area-phone"><a href="tel:4045906256">(404) 590-6256</a></div>
-        </div>
-        <div class="area-cell">
-          <div class="area-city">New York</div>
-          <div class="area-state">New York</div>
-          <div class="area-phone"><a href="tel:3472345963">(347) 234-5963</a></div>
-        </div>
+      <h2 class="section-heading" style="color:#fff;">New Orleans roots. National reach.</h2>
+    </div>
+    <div class="areas-grid">
+      <div class="area-cell hq">
+        <div class="area-city">New Orleans <span class="hq-tag">HQ</span></div>
+        <div class="area-state">Louisiana</div>
+        <div class="area-phone"><a href="tel:5045476565">(504) 547-6565</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">Houston</div>
+        <div class="area-state">Texas</div>
+        <div class="area-phone"><a href="tel:7138437501">(713) 843-7501</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">Dallas</div>
+        <div class="area-state">Texas</div>
+        <div class="area-phone"><a href="tel:4698157570">(469) 815-7570</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">Austin</div>
+        <div class="area-state">Texas</div>
+        <div class="area-phone"><a href="tel:5128900845">(512) 890-0845</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">San Francisco</div>
+        <div class="area-state">California</div>
+        <div class="area-phone"><a href="tel:6289009377">(628) 900-9377</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">Seattle</div>
+        <div class="area-state">Washington</div>
+        <div class="area-phone"><a href="tel:4253861649">(425) 386-1649</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">Atlanta</div>
+        <div class="area-state">Georgia</div>
+        <div class="area-phone"><a href="tel:4045906256">(404) 590-6256</a></div>
+      </div>
+      <div class="area-cell">
+        <div class="area-city">New York</div>
+        <div class="area-state">New York</div>
+        <div class="area-phone"><a href="tel:3472345963">(347) 234-5963</a></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ────────────────────────────────────────────────
-    SECTION 8 — LEAD FORM
-    Enterprise-feel. All 7 fields. Structured layout.
-  ──────────────────────────────────────────────── -->
-  <section class="form-section" id="contact">
-    <div class="form-inner">
-      <div class="form-left">
-        <div class="section-kicker">Start Here</div>
-        <h2 class="section-heading" style="color:#fff;">Get your website on the first page of Google.</h2>
-        <p class="section-sub">Schedule a free consultation with Founder &amp; CEO Brian Hong. No bots, no junior hand-offs.</p>
-        <ul class="form-trust-list">
-          <li>FREE Initial Consultation with Brian Hong — not a sales rep</li>
-          <li>Real-time performance tracking dashboard from day one</li>
-          <li>Senior strategist on your account every month</li>
-          <li>Google Premier Partner — top 3% of US agencies, audited annually</li>
-          <li>26+ years of SEO expertise across every Google algorithm era</li>
-        </ul>
-      </div>
+<!-- ──────────────────────────────────────────────────
+  S10 — LEAD FORM (white bg)
+  All 7 fields · enterprise-feel · trust signals
+──────────────────────────────────────────────────── -->
+<section class="form-section" id="contact">
+  <div class="form-inner">
 
-      <div class="lead-form">
-        <div class="form-title">Claim Your Free Consultation</div>
-        <div class="form-sub">We'll review your current digital presence and identify your highest-leverage next move — at no cost.</div>
+    <div class="form-left-col">
+      <div class="section-kicker">Start Here</div>
+      <h2 class="section-heading">Get your website on the first page of Google.</h2>
+      <p class="form-intro">Schedule a free consultation with Founder &amp; CEO Brian Hong. No bots, no junior hand-offs. This conversation goes directly to Brian.</p>
+      <ul class="form-trust-points">
+        <li>FREE initial consultation with Brian Hong — not a sales rep</li>
+        <li>Real-time performance tracking dashboard from day one</li>
+        <li>Senior strategist on your account every month, no exceptions</li>
+        <li>Google Premier Partner — top 3% of US agencies, audited annually</li>
+        <li>26+ years of SEO expertise across every Google algorithm era</li>
+      </ul>
+    </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-name">Full Name *</label>
-            <input type="text" id="f-name" name="full_name" placeholder="Jane Smith" required>
-          </div>
-          <div class="form-group">
-            <label for="f-phone">Phone Number *</label>
-            <input type="tel" id="f-phone" name="phone" placeholder="(504) 000-0000" required>
-          </div>
+    <div class="lead-form">
+      <div class="form-title">Claim Your Free Consultation</div>
+      <div class="form-sub">We'll review your current digital presence and identify your highest-leverage next move — at no cost.</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Full Name *</label>
+          <input type="text" id="f-name" name="full_name" placeholder="Jane Smith" required>
         </div>
-
+        <div class="form-group">
+          <label for="f-phone">Phone Number *</label>
+          <input type="tel" id="f-phone" name="phone" placeholder="(504) 000-0000" required>
+        </div>
         <div class="form-group full">
           <label for="f-email">Email Address *</label>
           <input type="email" id="f-email" name="email" placeholder="jane@company.com" required>
         </div>
-
         <div class="form-group full">
           <label for="f-company">Company Name</label>
           <input type="text" id="f-company" name="company" placeholder="Your company name (optional)">
         </div>
-
         <div class="form-group full">
           <label for="f-budget">Monthly Budget</label>
           <select id="f-budget" name="budget">
@@ -1475,65 +1933,123 @@
             <option>$25,000+</option>
           </select>
         </div>
-
         <div class="form-group full">
           <label for="f-details">Project Details</label>
-          <textarea id="f-details" name="details" placeholder="Tell us about your goals, current challenges, and what you'd like to achieve online…"></textarea>
+          <textarea id="f-details" name="details" placeholder="Tell us about your goals, current challenges, and what you'd like to achieve online&hellip;"></textarea>
         </div>
-
         <div class="form-checkbox">
           <input type="checkbox" id="f-tc" name="terms" required>
           <label for="f-tc">I agree to the Terms &amp; Conditions and consent to being contacted by Infintech Designs regarding my inquiry.</label>
         </div>
-
         <div class="form-submit">
           <button type="submit" class="btn">CLAIM YOUR FREE CONSULTATION NOW!</button>
         </div>
-
         <div class="form-captcha-note">Protected by reCAPTCHA. Your information is safe and will never be sold.</div>
-      </div>
-    </div>
-  </section>
+      </div><!-- /form-row -->
+    </div><!-- /lead-form -->
 
-  <!-- ── Footer ── -->
-  <footer>
-    <div class="foot-inner">
-      <div class="foot-grid">
-        <div class="foot-about">
-          <div class="foot-logo-pill"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></div>
-          <p>A full-service digital marketing agency headquartered in New Orleans, Louisiana. Google Premier Partner since 2025. Over 4,000 websites built and 750+ businesses ranked since 2000.</p>
-          <div class="foot-tagline">Rank Higher. Grow Faster. Convert Better.</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────
+  FOOTER (navy · orange top border line)
+──────────────────────────────────────────────────── -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo-wrap">
+          <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
         </div>
-        <div class="foot-col">
-          <h5>Services</h5>
-          <a href="#services">SEO</a>
-          <a href="#services">Web Design</a>
-          <a href="#services">PPC &amp; Google Ads</a>
-          <a href="#services">Social Media</a>
-          <a href="#services">Content Marketing</a>
-          <a href="#services">CRO</a>
-        </div>
-        <div class="foot-col">
-          <h5>Company</h5>
-          <a href="#about">About</a>
-          <a href="#services">Case Studies</a>
-          <a href="#areas">Service Areas</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="foot-col">
-          <h5>Contact</h5>
-          <div class="foot-item">3436 Magazine St, #120</div>
-          <div class="foot-item">New Orleans, LA 70115</div>
-          <div class="foot-item">(504) 547-6565</div>
-          <div class="foot-item">Available 24/7</div>
-        </div>
+        <p>A full-service digital marketing agency headquartered in New Orleans, Louisiana. Google Premier Partner 2025. Over 4,000 websites built and 750+ businesses ranked since 2000.</p>
+        <div class="foot-tagline">Rank Higher. Grow Faster. Convert Better.</div>
       </div>
-      <div class="foot-bottom">
-        <span>&copy; 2026 InfintechDesigns &middot; New Orleans, Louisiana</span>
-        <span class="pp-note">Google Premier Partner 2025 &middot; Top 3% of US Agencies</span>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">SEO</a>
+        <a href="#services">Web Design</a>
+        <a href="#services">PPC &amp; Google Ads</a>
+        <a href="#services">Social Media</a>
+        <a href="#services">Content Marketing</a>
+        <a href="#services">CRO</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#about">About</a>
+        <a href="#services">Case Studies</a>
+        <a href="#areas">Service Areas</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <div class="foot-item">3436 Magazine St, #120</div>
+        <div class="foot-item">New Orleans, LA 70115</div>
+        <div class="foot-item">(504) 547-6565</div>
+        <div class="foot-item">Available 24/7</div>
       </div>
     </div>
-  </footer>
+    <div class="foot-bottom">
+      <span>&copy; 2026 InfintechDesigns &middot; New Orleans, Louisiana</span>
+      <span class="pp-note">Google Premier Partner 2025 &middot; Top 3% of US Agencies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ──────────────────────────────────────────────────
+  JAVASCRIPT — Count-up via IntersectionObserver
+──────────────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  // Respect prefers-reduced-motion
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function formatNumber(n) {
+    if (n >= 1000) return n.toLocaleString('en-US');
+    return String(n);
+  }
+
+  function animateCount(el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    if (isNaN(target)) return;
+    if (reducedMotion) { el.textContent = formatNumber(target); return; }
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = formatNumber(current);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const targets = document.querySelectorAll('.count-target[data-target]');
+  if (!targets.length) return;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    targets.forEach(function (t) { observer.observe(t); });
+  } else {
+    // Fallback: just set the values
+    targets.forEach(function (t) {
+      const target = parseInt(t.getAttribute('data-target'), 10);
+      if (!isNaN(target)) t.textContent = formatNumber(target);
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
