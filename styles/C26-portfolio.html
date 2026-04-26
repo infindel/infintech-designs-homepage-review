@@ -1,659 +1,1220 @@
 <!DOCTYPE html>
 <!--
-  Style: C26 — Portfolio
+  Style: C26 — Portfolio / Case Studies
   Client: Infintech Designs
-  Angle: Case-study grid as the homepage hero. Gradient project cards with stat callouts and hover reveals.
+  Category: Functional / Conversion
+  Design notes: Work-showcase grid. 12 case study cards filterable by vertical.
+  The "see the proof" design for prospects who need evidence before they decide.
+  Case study metrics front and center. All specific client names and performance
+  metrics are marked [METRIC — TO CONFIRM] or [CLIENT — TO CONFIRM] per brief rules.
+  Filter tabs match Infintech's confirmed verticals. PP badge in hero zone.
+  Press strip (BuzzFeed / Entrepreneur / HuffPost / Inc. / SME) in section 2.
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Infintech Designs — Selected Results</title>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Infintech Designs — Case Studies &amp; Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --orange: #EA4517;
-    --gold: #ED9924;
-    --pink: #FF4E5E;
-    --ink: #121212;
-    --body: #212529;
-    --paper: #FFFFFF;
-    --subtle: #F5F5F5;
-    --line: #E5E5E5;
-    --muted: #6B6B6B;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { overflow-x: hidden; }
-  body { background: var(--paper); color: var(--body); font-family: 'Raleway', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
+/* ─── Brand Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --orange:      #EA4517;
+  --orange-glow: rgba(234, 69, 23, 0.45);
+  --orange-soft: rgba(234, 69, 23, 0.12);
+  --gold:        #ED9924;
+  --pink:        #FF4E5E;
+  --ink:         #212529;
+  --ink-heading: #121212;
+  --paper:       #FFFFFF;
+  --paper-alt:   #F9F9FA;
+  --cream:       #F5F0E8;
+  --muted:       #6B6B80;
+  --line:        #E5E5EA;
+}
 
-  nav {
-    padding: 20px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 20;
-  }
-  nav .brand img { height: 40px; display: block; }
-  nav ul { list-style: none; display: flex; gap: 32px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
-  nav a:hover { color: var(--orange); }
-  nav a.active { color: var(--orange); }
-  .nav-right { display: flex; align-items: center; gap: 20px; }
-  .nav-phone { font-size: 13px; font-weight: 600; color: var(--muted); }
-  .btn {
-    background: var(--orange);
-    color: #fff;
-    padding: 12px 22px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn:hover { background: #c93a10; transform: translateY(-1px); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
-  .btn-ghost:hover { background: var(--ink); color: #fff; }
+/* ─── Reset & Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
 
-  .hero {
-    padding: 72px 48px 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 56px;
-    align-items: end;
-  }
-  .hero .k {
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--orange);
-    font-weight: 700;
-    margin-bottom: 18px;
-  }
-  .hero h1 {
-    font-size: clamp(40px, 5.4vw, 68px);
-    line-height: 1.05;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-  .hero h1 .accent { color: var(--orange); }
-  .hero h1 .accent2 { color: var(--gold); }
-  .hero-right { padding-bottom: 8px; }
-  .hero-right p { font-size: 16px; color: var(--muted); margin-bottom: 24px; max-width: 420px; }
-  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 460px; }
-  .hero-stat .n { font-size: 34px; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.02em; }
-  .hero-stat .l { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 6px; font-weight: 600; }
+/* ─── Utility Bar ───────────────────────────────────────────────────────── */
+.utility-bar {
+  background: var(--ink-heading);
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 9px 20px;
+}
+.utility-bar a { color: var(--gold); transition: color 0.2s; }
+.utility-bar a:hover { color: #fff; }
+.utility-bar .sep { margin: 0 12px; opacity: 0.35; }
 
-  .filters-wrap {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: #fff;
-    position: sticky;
-    top: 80px;
-    z-index: 10;
-  }
-  .filters {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 18px 48px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filters-label {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
-    margin-right: 8px;
-  }
-  .filter {
-    padding: 9px 18px;
-    border: 1.5px solid var(--line);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink);
-    cursor: pointer;
-    border-radius: 100px;
-    transition: all 0.2s;
-    font-family: inherit;
-    letter-spacing: 0.01em;
-  }
-  .filter:hover { border-color: var(--ink); }
-  .filter.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+/* ─── Nav ───────────────────────────────────────────────────────────────── */
+nav {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+.nav-logo { flex-shrink: 0; }
+.nav-logo img { height: 38px; }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+nav ul li a { transition: color 0.2s; }
+nav ul li a:hover,
+nav ul li a.active { color: var(--orange); }
+.nav-right { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+.nav-phone {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.nav-phone a:hover { color: var(--orange); }
 
-  .portfolio {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 48px 80px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-  }
-  .project {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    aspect-ratio: 4/5;
-    border-radius: 10px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 28px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    isolation: isolate;
-  }
-  .project:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.18); }
-  .project.hidden { display: none; }
-  .project::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 55%);
-    z-index: -1;
-    pointer-events: none;
-  }
-  .project .p-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .project .p-tag {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(6px);
-    padding: 6px 12px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.25);
-  }
-  .project .p-num {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    font-weight: 600;
-    opacity: 0.75;
-  }
-  .project .p-body h3 {
-    font-size: 26px;
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin-bottom: 10px;
-  }
-  .project .p-vertical {
-    font-size: 13px;
-    font-weight: 500;
-    opacity: 0.85;
-    margin-bottom: 18px;
-  }
-  .project .p-stat {
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.22);
-    backdrop-filter: blur(8px);
-    padding: 14px 16px;
-    border-radius: 8px;
-  }
-  .project .p-stat .sv {
-    font-size: 19px;
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-  }
-  .project .p-stat .sl {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 600;
-    opacity: 0.85;
-    margin-top: 4px;
-  }
-  .project .p-hover {
-    position: absolute;
-    inset: 0;
-    background: rgba(18,18,18,0.92);
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    border-radius: 10px;
-  }
-  .project:hover .p-hover { opacity: 1; }
-  .project .p-hover .ht {
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .project .p-hover h4 {
-    font-size: 22px;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 14px;
-    letter-spacing: -0.01em;
-  }
-  .project .p-hover p {
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.82);
-    margin-bottom: 18px;
-  }
-  .project .p-hover .svc {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--orange);
-  }
+/* ─── Buttons ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  padding: 11px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: #c93a10;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--orange-glow);
+}
+.btn-lg {
+  padding: 15px 30px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+.btn-outline {
+  background: transparent;
+  color: var(--ink-heading);
+  border: 1.5px solid var(--ink-heading);
+}
+.btn-outline:hover {
+  background: var(--ink-heading);
+  color: #fff;
+  box-shadow: none;
+}
+.btn-white {
+  background: #fff;
+  color: var(--ink-heading);
+}
+.btn-white:hover {
+  background: var(--cream);
+  color: var(--ink-heading);
+  box-shadow: none;
+  transform: none;
+}
 
-  .g1  { background: linear-gradient(135deg, #EA4517 0%, #FF4E5E 55%, #ED9924 100%); }
-  .g2  { background: linear-gradient(140deg, #0B2A5B 0%, #1E6BB8 55%, #3BB7E5 100%); }
-  .g3  { background: linear-gradient(135deg, #0F7A43 0%, #3BBE6F 60%, #ED9924 100%); }
-  .g4  { background: linear-gradient(135deg, #5A1E8F 0%, #C23FA8 60%, #FF4E5E 100%); }
-  .g5  { background: linear-gradient(135deg, #121212 0%, #2A2A2A 50%, #EA4517 100%); }
-  .g6  { background: linear-gradient(140deg, #ED9924 0%, #F4C84A 50%, #EA4517 100%); }
-  .g7  { background: linear-gradient(135deg, #0A3D62 0%, #1ABC9C 100%); }
-  .g8  { background: linear-gradient(140deg, #6C1D3A 0%, #EA4517 60%, #ED9924 100%); }
-  .g9  { background: linear-gradient(135deg, #2C3E50 0%, #34495E 50%, #3BB7E5 100%); }
-  .g10 { background: linear-gradient(140deg, #ED9924 0%, #EA4517 45%, #6C1D3A 100%); }
-  .g11 { background: linear-gradient(135deg, #0F7A43 0%, #1ABC9C 50%, #3BB7E5 100%); }
-  .g12 { background: linear-gradient(135deg, #5A1E8F 0%, #0B2A5B 55%, #1ABC9C 100%); }
+/* ─── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  padding: 72px 48px 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.hero-kicker {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: clamp(36px, 4.8vw, 64px);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink-heading);
+  max-width: 860px;
+  margin-bottom: 22px;
+}
+.hero h1 .accent-orange { color: var(--orange); }
+.hero h1 .accent-gold   { color: var(--gold); }
 
-  .testimonial {
-    background: var(--subtle);
-    padding: 96px 48px;
-    border-top: 1px solid var(--line);
-  }
-  .testimonial-inner { max-width: 960px; margin: 0 auto; text-align: center; }
-  .testimonial .k {
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--orange);
-    font-weight: 700;
-    margin-bottom: 24px;
-  }
-  .testimonial blockquote {
-    font-size: clamp(22px, 2.4vw, 32px);
-    line-height: 1.35;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    margin-bottom: 28px;
-  }
-  .testimonial blockquote .hl { color: var(--orange); font-weight: 700; }
-  .testimonial .attr { font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
-  .testimonial .attr strong { color: var(--ink); font-weight: 700; }
+.hero-sub {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 36px;
+  line-height: 1.5;
+}
 
-  .cta-band {
-    background: var(--ink);
-    color: #fff;
-    padding: 96px 48px;
-    text-align: center;
-  }
-  .cta-band-inner { max-width: 880px; margin: 0 auto; }
-  .cta-band h2 {
-    font-size: clamp(32px, 4.2vw, 52px);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 18px;
-  }
-  .cta-band h2 .hl { color: var(--gold); }
-  .cta-band p { font-size: 17px; color: rgba(255,255,255,0.72); margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
-  .cta-band .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .cta-band .btn-line { background: #fff; color: var(--ink); }
-  .cta-band .btn-line:hover { background: var(--gold); color: var(--ink); }
-  .cta-band .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); }
-  .cta-band .btn-outline:hover { background: #fff; color: var(--ink); border-color: #fff; }
+/* Hero trust row */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.pp-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper-alt);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+.pp-badge-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pp-badge-icon::after {
+  content: "G";
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+.pp-badge-text { line-height: 1.25; }
+.pp-badge-text .pp-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--muted);
+}
+.pp-badge-text .pp-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-heading);
+}
+.trust-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--line);
+}
+.trust-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.trust-pill strong { color: var(--ink-heading); }
 
-  footer {
-    border-top: 1px solid #2a2a2a;
-    background: var(--ink);
-    color: #aaa;
-    padding: 28px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  footer .f-brand { color: #fff; font-weight: 700; letter-spacing: 0.15em; }
+/* Hero stats row */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-stat {}
+.hero-stat .n {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--ink-heading);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.hero-stat .n span { color: var(--orange); }
+.hero-stat .l {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 6px;
+}
+.hero-stat .ctx {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 4px;
+  max-width: 180px;
+  line-height: 1.4;
+}
 
-  @media (max-width: 1024px) {
-    .portfolio { grid-template-columns: repeat(2, 1fr); }
-    .hero { grid-template-columns: 1fr; gap: 32px; align-items: start; }
-    .hero-right { padding-bottom: 0; }
-    nav { padding: 18px 28px; }
-    .hero, .filters, .portfolio { padding-left: 28px; padding-right: 28px; }
-    .testimonial, .cta-band { padding-left: 28px; padding-right: 28px; }
-    footer { padding-left: 28px; padding-right: 28px; }
-  }
-  @media (max-width: 768px) {
-    nav ul { display: none; }
-    .nav-phone { display: none; }
-    .portfolio { grid-template-columns: 1fr; gap: 16px; padding: 28px 20px 56px; }
-    .filters-wrap { top: 72px; }
-    .filters { padding: 14px 20px; gap: 8px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-    .filters::-webkit-scrollbar { display: none; }
-    .filter { flex-shrink: 0; font-size: 12px; padding: 8px 14px; }
-    .filters-label { display: none; }
-    .hero { padding: 48px 20px 28px; }
-    .hero h1 { font-size: 38px; }
-    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .hero-stat .n { font-size: 26px; }
-    .project { aspect-ratio: 5/4; padding: 24px; }
-    .project .p-body h3 { font-size: 22px; }
-    .testimonial { padding: 64px 20px; }
-    .cta-band { padding: 64px 20px; }
-    footer { flex-direction: column; text-align: center; padding: 22px 20px; }
-    nav { padding: 14px 20px; }
-    nav .brand img { height: 32px; }
-    .btn { padding: 10px 16px; font-size: 12px; }
-  }
-  @media (max-width: 400px) {
-    .hero h1 { font-size: 32px; }
-    .hero-stat .n { font-size: 22px; }
-  }
+/* ─── Press Strip ───────────────────────────────────────────────────────── */
+.press-strip {
+  background: var(--paper-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 48px;
+}
+.press-strip-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.press-label {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.press-names {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.press-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-heading);
+  opacity: 0.55;
+  padding: 0 20px;
+  border-right: 1px solid var(--line);
+  transition: opacity 0.2s;
+}
+.press-name:last-child { border-right: none; }
+.press-name:hover { opacity: 1; }
+
+/* ─── Filter Bar ────────────────────────────────────────────────────────── */
+.filters-wrap {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 72px;
+  z-index: 90;
+}
+.filters {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filters-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.filter {
+  padding: 8px 18px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 100px;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+.filter:hover { border-color: var(--ink-heading); }
+.filter.active {
+  background: var(--ink-heading);
+  color: #fff;
+  border-color: var(--ink-heading);
+}
+
+/* ─── Portfolio Grid ────────────────────────────────────────────────────── */
+.portfolio-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 48px 80px;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.project {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  isolation: isolate;
+}
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 28px 56px rgba(0,0,0,0.22);
+}
+.project.hidden { display: none; }
+
+/* Ambient radial overlay on each card */
+.project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 15%, rgba(255,255,255,0.20), transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.project .p-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.project .p-tag {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.28);
+  line-height: 1;
+}
+.project .p-num {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  opacity: 0.70;
+  line-height: 1;
+  padding-top: 2px;
+}
+.project .p-body {
+  position: relative;
+  z-index: 2;
+}
+.project .p-body h3 {
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.project .p-vertical {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+.project .p-stat {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 14px 16px;
+  border-radius: 8px;
+}
+.project .p-stat .sv {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.project .p-stat .sl {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.80;
+  margin-top: 4px;
+}
+
+/* Placeholder cards — distinct visual treatment */
+.project.placeholder-card .p-stat .sv {
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Hover overlay */
+.project .p-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(10,10,15,0.94);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: 12px;
+}
+.project:hover .p-hover { opacity: 1; }
+.project .p-hover .ht {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.project .p-hover h4 {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.project .p-hover p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.80);
+  margin-bottom: 18px;
+}
+.project .p-hover .svc {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--orange);
+}
+.project .p-hover .cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
+  padding: 9px 16px;
+  margin-top: 16px;
+  transition: background 0.2s, border-color 0.2s;
+  letter-spacing: 0.03em;
+  width: fit-content;
+}
+.project .p-hover .cta-link:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+.project .p-hover .placeholder-note {
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(255,255,255,0.50);
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Card Gradient Palette ─────────────────────────────────────────────── */
+/* Home Services — warm/orange family */
+.g-hvac         { background: linear-gradient(140deg, #EA4517 0%, #FF4E5E 50%, #ED9924 100%); }
+.g-plumbing     { background: linear-gradient(140deg, #1E3A5F 0%, #2B6CB0 55%, #3BB7E5 100%); }
+.g-garage       { background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 50%, #EA4517 100%); }
+.g-roofing      { background: linear-gradient(140deg, #7C2D12 0%, #EA4517 60%, #ED9924 100%); }
+.g-construction { background: linear-gradient(135deg, #2D3748 0%, #4A5568 50%, #ED9924 100%); }
+/* Legal — deep navy/indigo */
+.g-legal        { background: linear-gradient(140deg, #1A1A4E 0%, #2D3A8C 55%, #5A7AE0 100%); }
+/* Medical — teal/green-blue */
+.g-medical      { background: linear-gradient(135deg, #065F46 0%, #059669 55%, #34D399 100%); }
+/* Restaurant — rich burgundy/warm */
+.g-restaurant   { background: linear-gradient(140deg, #7C1D1D 0%, #B91C1C 50%, #ED9924 100%); }
+/* Small Business — violet/pink */
+.g-small-biz    { background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 55%, #FF4E5E 100%); }
+/* Placeholder cards — neutral charcoal with faint orange hint */
+.g-placeholder-a { background: linear-gradient(135deg, #1A1A2E 0%, #2A2A3E 55%, #3A3A50 100%); }
+.g-placeholder-b { background: linear-gradient(140deg, #1E2030 0%, #2E3050 55%, #EA4517 100%); opacity-target: placeholder; }
+.g-placeholder-c { background: linear-gradient(135deg, #0D1117 0%, #21262D 55%, #2A2A3E 100%); }
+
+/* ─── Testimonial ───────────────────────────────────────────────────────── */
+.testimonial-section {
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 80px 48px;
+}
+.testimonial-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.testimonial-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+.testimonial-inner blockquote {
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--ink-heading);
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.testimonial-inner blockquote::before { content: "\201C"; }
+.testimonial-inner blockquote::after  { content: "\201D"; }
+.testimonial-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.testimonial-stars span {
+  font-size: 18px;
+  color: var(--gold);
+}
+.testimonial-attr {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.testimonial-attr strong { color: var(--ink-heading); font-weight: 700; }
+
+/* ─── CTA Band ──────────────────────────────────────────────────────────── */
+.cta-band {
+  background: var(--ink-heading);
+  color: #fff;
+  padding: 96px 48px;
+  text-align: center;
+}
+.cta-band-inner { max-width: 800px; margin: 0 auto; }
+.cta-band-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.cta-band h2 {
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.cta-band h2 .hl { color: var(--orange); }
+.cta-band p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+.cta-band-bullets {
+  list-style: none;
+  text-align: left;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.cta-band-bullets li {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.80);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cta-band-bullets li::before {
+  content: "✓";
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.cta-btn-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Footer ────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--ink-heading);
+  border-top: 3px solid var(--orange);
+  color: rgba(255,255,255,0.55);
+  padding: 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+footer .f-left { display: flex; flex-direction: column; gap: 6px; }
+footer .f-brand {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 13px;
+}
+footer .f-tag { font-style: italic; color: var(--gold); font-size: 11px; }
+footer .f-right { text-align: right; }
+footer .f-right a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+footer .f-right a:hover { color: var(--orange); }
+
+/* ─── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero, .portfolio-section { padding-left: 32px; padding-right: 32px; }
+  .press-strip, .testimonial-section, .cta-band { padding-left: 32px; padding-right: 32px; }
+  footer { padding-left: 32px; padding-right: 32px; }
+  nav { padding: 0 32px; }
+  .filters { padding-left: 32px; padding-right: 32px; }
+}
+@media (max-width: 768px) {
+  nav ul { display: none; }
+  .nav-phone { display: none; }
+  nav { padding: 0 20px; height: 64px; }
+  .nav-logo img { height: 32px; }
+  .filters-wrap { top: 64px; }
+  .filters { padding: 12px 20px; gap: 8px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter { flex-shrink: 0; font-size: 12px; padding: 7px 14px; }
+  .filters-label { display: none; }
+  .hero { padding: 48px 20px 36px; }
+  .hero h1 { font-size: 34px; letter-spacing: -0.02em; }
+  .hero-sub { font-size: 16px; }
+  .hero-stats { gap: 28px; }
+  .hero-stat .n { font-size: 32px; }
+  .hero-trust { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .trust-divider { display: none; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 16px; }
+  .portfolio-section { padding: 28px 20px 56px; }
+  .project { aspect-ratio: 5 / 4; padding: 22px; }
+  .project .p-body h3 { font-size: 20px; }
+  .press-strip { padding: 20px; }
+  .press-strip-inner { gap: 16px; }
+  .press-name { font-size: 12px; padding: 0 12px; }
+  .testimonial-section { padding: 60px 20px; }
+  .cta-band { padding: 64px 20px; }
+  footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+  footer .f-right { text-align: center; }
+}
+@media (max-width: 400px) {
+  .hero h1 { font-size: 28px; }
+  .hero-stat .n { font-size: 26px; }
+  .utility-bar { font-size: 11px; }
+}
 </style>
 </head>
 <body>
-  <nav>
-    <a href="#" class="brand"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
-    <ul>
-      <li><a href="#" class="active">Work</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Process</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <span class="nav-phone">(504) 547-6565</span>
-      <a class="btn" href="#">Free Consultation</a>
-    </div>
-  </nav>
 
-  <section class="hero">
-    <div>
-      <div class="k">Selected Work · 2000–2026</div>
-      <h1>Results we've delivered for <span class="accent">home-service,</span> <span class="accent2">legal &amp; medical</span> operators.</h1>
-    </div>
-    <div class="hero-right">
-      <p>A living portfolio of rankings climbed, leads generated, and sites shipped. Full-service digital marketing out of the Lower Garden District, New Orleans.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="n">26+</div><div class="l">Years</div></div>
-        <div class="hero-stat"><div class="n">4,000+</div><div class="l">Sites Built</div></div>
-        <div class="hero-stat"><div class="n">750+</div><div class="l">SEO Programs</div></div>
+<!-- ─── Utility Bar ──────────────────────────────────────────────────────── -->
+<div class="utility-bar">
+  <span>Google Premier Partner 2025 · Top 3% of U.S. Google Ads Agencies</span>
+  <span class="sep">|</span>
+  <a href="tel:5045476565">(504) 547-6565</a>
+  <span class="sep">·</span>
+  <span>24/7 Available</span>
+</div>
+
+<!-- ─── Nav ─────────────────────────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
+  </a>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#" class="active">Case Studies</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Service Areas</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone"><a href="tel:5045476565">(504) 547-6565</a></span>
+    <a class="btn" href="#">Free Consultation</a>
+  </div>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-kicker">Results · Proof · 26 Years of Work</div>
+  <h1>We Help Businesses <span class="accent-orange">Rank Higher,</span> Grow Faster And <span class="accent-gold">Convert Better</span> To Drive Revenue</h1>
+  <p class="hero-sub">See What We've Built — real campaigns, real verticals, real outcomes. This is the Infintech track record across home services, legal, medical, restaurants, and enterprise.</p>
+
+  <!-- Google PP badge + trust signals -->
+  <div class="hero-trust">
+    <div class="pp-badge">
+      <div class="pp-badge-icon"></div>
+      <div class="pp-badge-text">
+        <div class="pp-label">Google Premier Partner</div>
+        <div class="pp-value">2025 · Top 3% in the U.S.</div>
       </div>
     </div>
-  </section>
-
-  <div class="filters-wrap">
-    <div class="filters" id="filters">
-      <span class="filters-label">Filter</span>
-      <button class="filter active" data-filter="all">All Work</button>
-      <button class="filter" data-filter="seo">SEO</button>
-      <button class="filter" data-filter="web">Web Design</button>
-      <button class="filter" data-filter="ppc">PPC</button>
-      <button class="filter" data-filter="social">Social</button>
-      <button class="filter" data-filter="home">Home Services</button>
-      <button class="filter" data-filter="legal">Legal</button>
-      <button class="filter" data-filter="medical">Medical</button>
-    </div>
+    <div class="trust-divider"></div>
+    <span class="trust-pill"><strong>Est. 2000</strong> · New Orleans, LA</span>
+    <div class="trust-divider"></div>
+    <span class="trust-pill"><strong>26+</strong> Years in the SEO ranking game</span>
   </div>
 
-  <section class="portfolio" id="portfolio">
-    <article class="project g1" data-category="seo home">
-      <div class="p-top"><span class="p-tag">SEO · Local</span><span class="p-num">01 / 12</span></div>
-      <div class="p-body">
-        <h3>HVAC — New Orleans</h3>
-        <div class="p-vertical">Residential heating &amp; cooling · LA</div>
-        <div class="p-stat"><div class="sv">Ranked #47 → #3 in 90 days</div><div class="sl">Map Pack · "HVAC near me"</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>HVAC operator — New Orleans</h4>
-        <p>Local SEO rebuild targeting 14 service-area pages and GBP optimization. Cut cost-per-lead by a third against their previous PPC-only program.</p>
-        <div class="svc">SEO · GBP · On-Page</div>
-      </div>
-    </article>
-
-    <article class="project g2" data-category="web legal">
-      <div class="p-top"><span class="p-tag">Web Design</span><span class="p-num">02 / 12</span></div>
-      <div class="p-body">
-        <h3>Personal Injury Law — Houston</h3>
-        <div class="p-vertical">Plaintiff-side litigation firm · TX</div>
-        <div class="p-stat"><div class="sv">+142% qualified form fills</div><div class="sl">Post-launch, first 6 months</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>PI firm site rebuild — Houston</h4>
-        <p>Ground-up WordPress rebuild with intake-focused landing pages and call tracking. Mobile bounce dropped from 71% to 44% inside the first quarter.</p>
-        <div class="svc">Web Design · CRO</div>
-      </div>
-    </article>
-
-    <article class="project g3" data-category="seo medical">
-      <div class="p-top"><span class="p-tag">SEO · On-Page</span><span class="p-num">03 / 12</span></div>
-      <div class="p-body">
-        <h3>Dental Group — Dallas</h3>
-        <div class="p-vertical">Multi-location practice · TX</div>
-        <div class="p-stat"><div class="sv">Top-3 for 38 target keywords</div><div class="sl">Across 4 clinic locations</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Multi-location dental group</h4>
-        <p>Service-page content restructure plus location-schema rollout across four Dallas-area offices. Organic sessions up 78% year-over-year.</p>
-        <div class="svc">SEO · Content · Schema</div>
-      </div>
-    </article>
-
-    <article class="project g4" data-category="ppc home">
-      <div class="p-top"><span class="p-tag">PPC · Google Ads</span><span class="p-num">04 / 12</span></div>
-      <div class="p-body">
-        <h3>Plumbing Co. — Austin</h3>
-        <div class="p-vertical">24/7 emergency plumbing · TX</div>
-        <div class="p-stat"><div class="sv">CPL cut 48% over 4 months</div><div class="sl">Google Local Services + Search</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Emergency plumbing — Austin</h4>
-        <p>Restructured bidding around emergency intent keywords and layered in Local Services Ads. Lead volume held steady while spend fell meaningfully.</p>
-        <div class="svc">PPC · LSA · Landing Pages</div>
-      </div>
-    </article>
-
-    <article class="project g5" data-category="web home">
-      <div class="p-top"><span class="p-tag">Web Design · CRO</span><span class="p-num">05 / 12</span></div>
-      <div class="p-body">
-        <h3>Roofing Contractor — Atlanta</h3>
-        <div class="p-vertical">Storm-damage roofing specialists · GA</div>
-        <div class="p-stat"><div class="sv">Quote requests up 3.1×</div><div class="sl">90 days after relaunch</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Roofing site relaunch — Atlanta</h4>
-        <p>New design system with insurance-claim education and a two-step quote flow. Reduced form abandonment and lifted mobile conversion meaningfully.</p>
-        <div class="svc">Web Design · CRO</div>
-      </div>
-    </article>
-
-    <article class="project g6" data-category="social medical">
-      <div class="p-top"><span class="p-tag">Social</span><span class="p-num">06 / 12</span></div>
-      <div class="p-body">
-        <h3>MedSpa — Seattle</h3>
-        <div class="p-vertical">Aesthetic medicine &amp; injectables · WA</div>
-        <div class="p-stat"><div class="sv">9,400 new followers in 6 mos</div><div class="sl">Instagram + TikTok combined</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>MedSpa social program</h4>
-        <p>Content calendar built around before-and-after transformations and provider education. Consult bookings from social tripled quarter-over-quarter.</p>
-        <div class="svc">Social · Content · Paid Social</div>
-      </div>
-    </article>
-
-    <article class="project g7" data-category="seo legal">
-      <div class="p-top"><span class="p-tag">SEO · Link Building</span><span class="p-num">07 / 12</span></div>
-      <div class="p-body">
-        <h3>Family Law Firm — San Francisco</h3>
-        <div class="p-vertical">Divorce &amp; custody practice · CA</div>
-        <div class="p-stat"><div class="sv">DR 18 → DR 47 in 12 months</div><div class="sl">White-hat link program</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Family law SEO — SF Bay</h4>
-        <p>Digital PR plus legal-directory cleanup earned the firm durable links from local news and bar-association properties. Consults from organic up 64%.</p>
-        <div class="svc">SEO · Link Building · PR</div>
-      </div>
-    </article>
-
-    <article class="project g8" data-category="ppc legal">
-      <div class="p-top"><span class="p-tag">PPC · Search</span><span class="p-num">08 / 12</span></div>
-      <div class="p-body">
-        <h3>Criminal Defense — New York</h3>
-        <div class="p-vertical">DUI &amp; defense attorney · NY</div>
-        <div class="p-stat"><div class="sv">$212 → $89 cost-per-lead</div><div class="sl">Google Ads, 5-month window</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Defense attorney paid search</h4>
-        <p>Negative-keyword overhaul, tightened match types, and rebuilt landing pages with phone-first CTAs. Lead quality score climbed alongside CPL dropping.</p>
-        <div class="svc">PPC · Landing Pages</div>
-      </div>
-    </article>
-
-    <article class="project g9" data-category="web medical">
-      <div class="p-top"><span class="p-tag">Web Design</span><span class="p-num">09 / 12</span></div>
-      <div class="p-body">
-        <h3>Orthopedic Clinic — Houston</h3>
-        <div class="p-vertical">Sports-medicine &amp; surgery · TX</div>
-        <div class="p-stat"><div class="sv">PageSpeed 42 → 96</div><div class="sl">Mobile Core Web Vitals pass</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Orthopedic clinic rebuild</h4>
-        <p>Replaced a slow page-builder stack with a performance-first custom theme. Appointment requests from organic grew meaningfully alongside the speed gain.</p>
-        <div class="svc">Web Design · Performance · SEO</div>
-      </div>
-    </article>
-
-    <article class="project g10" data-category="seo home">
-      <div class="p-top"><span class="p-tag">SEO · Local</span><span class="p-num">10 / 12</span></div>
-      <div class="p-body">
-        <h3>Electrical Services — Dallas</h3>
-        <div class="p-vertical">Residential &amp; commercial electric · TX</div>
-        <div class="p-stat"><div class="sv">4.8★ / 312 Google reviews</div><div class="sl">Up from 4.3★ / 47 in 10 mos</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Electrical services reputation</h4>
-        <p>Review-request automation paired with GBP post cadence and service-area page SEO. Map-pack impressions doubled inside the first two quarters.</p>
-        <div class="svc">SEO · ORM · GBP</div>
-      </div>
-    </article>
-
-    <article class="project g11" data-category="social home">
-      <div class="p-top"><span class="p-tag">Social · Paid</span><span class="p-num">11 / 12</span></div>
-      <div class="p-body">
-        <h3>Landscaping Co. — Atlanta</h3>
-        <div class="p-vertical">Design-build landscaping · GA</div>
-        <div class="p-stat"><div class="sv">$14 cost-per-booked-estimate</div><div class="sl">Meta Ads, spring-summer season</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Landscaping paid social</h4>
-        <p>Portfolio-led Meta creative rotated weekly, paired with a lightweight lead form. Booked estimates outpaced the prior year's season by a wide margin.</p>
-        <div class="svc">Paid Social · Creative</div>
-      </div>
-    </article>
-
-    <article class="project g12" data-category="web ppc legal">
-      <div class="p-top"><span class="p-tag">Web + PPC</span><span class="p-num">12 / 12</span></div>
-      <div class="p-body">
-        <h3>Immigration Law — San Francisco</h3>
-        <div class="p-vertical">Visa &amp; family immigration · CA</div>
-        <div class="p-stat"><div class="sv">Consult bookings up 2.4×</div><div class="sl">After site + ads rebuild</div></div>
-      </div>
-      <div class="p-hover">
-        <div class="ht">Case Study</div>
-        <h4>Immigration firm full rebuild</h4>
-        <p>Bilingual site relaunch plus a restructured Google Ads account targeting visa-specific intent. Cost-per-consult fell while total volume grew.</p>
-        <div class="svc">Web · PPC · CRO</div>
-      </div>
-    </article>
-  </section>
-
-  <section class="testimonial">
-    <div class="testimonial-inner">
-      <div class="k">Client Testimonial</div>
-      <blockquote>
-        "Infintech Designs has been <span class="hl">instrumental</span> in growing our online presence. Their team is professional, knowledgeable, and truly invested in our success."
-      </blockquote>
-      <div class="attr"><strong>Jon Silkin</strong> · Infintech Designs client</div>
+  <!-- Stats -->
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="n">4,000<span>+</span></div>
+      <div class="l">Websites Built</div>
+      <div class="ctx">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
     </div>
-  </section>
-
-  <section class="cta-band">
-    <div class="cta-band-inner">
-      <h2>Ready to become <span class="hl">case study #13?</span></h2>
-      <p>Claim your free consultation with Founder &amp; CEO Brian Hong. We'll walk through your goals, audit what's live, and map a path to better rankings, leads, and revenue.</p>
-      <div class="btn-row">
-        <a class="btn btn-line" href="#">Claim Your FREE Consultation</a>
-        <a class="btn btn-outline" href="tel:5045476565">Call (504) 547-6565</a>
-      </div>
+    <div class="hero-stat">
+      <div class="n">750<span>+</span></div>
+      <div class="l">SEO Programs</div>
+      <div class="ctx">Sites engineered for ranking — not just shipped, then trained on results data.</div>
     </div>
-  </section>
+    <div class="hero-stat">
+      <div class="n">26<span>+</span></div>
+      <div class="l">Years Experience</div>
+      <div class="ctx">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <span class="f-brand">INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</span>
-    <span>Locally Owned in the Lower Garden District</span>
-  </footer>
+<!-- ─── Press Strip ──────────────────────────────────────────────────────── -->
+<div class="press-strip">
+  <div class="press-strip-inner">
+    <span class="press-label">// Featured In</span>
+    <div class="press-names">
+      <span class="press-name">BuzzFeed</span>
+      <span class="press-name">Entrepreneur</span>
+      <span class="press-name">HuffPost</span>
+      <span class="press-name">Inc.</span>
+      <span class="press-name">SME</span>
+    </div>
+  </div>
+</div>
 
+<!-- ─── Filter Bar ────────────────────────────────────────────────────────── -->
+<div class="filters-wrap">
+  <div class="filters" id="filters">
+    <span class="filters-label">Filter by Vertical</span>
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="home-services">Home Services</button>
+    <button class="filter" data-filter="legal">Legal</button>
+    <button class="filter" data-filter="medical">Medical</button>
+    <button class="filter" data-filter="restaurant">Restaurant</button>
+    <button class="filter" data-filter="enterprise">Enterprise</button>
+  </div>
+</div>
+
+<!-- ─── Portfolio Grid ────────────────────────────────────────────────────── -->
+<section class="portfolio-section">
+  <div class="portfolio-grid" id="portfolio">
+
+    <!-- Card 01 — HVAC (Home Services) -->
+    <article class="project g-hvac" data-category="home-services">
+      <div class="p-top">
+        <span class="p-tag">SEO · Local Map Pack</span>
+        <span class="p-num">01 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>HVAC Company — New Orleans</h3>
+        <div class="p-vertical">Home Services · Louisiana</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Map Pack · Organic Lead Growth</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Home Services · SEO</div>
+        <h4>HVAC Company — New Orleans, LA</h4>
+        <p>Local SEO and Google Business Profile optimization targeting service-area searches across the Greater New Orleans metro.</p>
+        <div class="svc">SEO · GBP Optimization · On-Page</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 02 — Plumbing (Home Services) -->
+    <article class="project g-plumbing" data-category="home-services">
+      <div class="p-top">
+        <span class="p-tag">SEO · PPC</span>
+        <span class="p-num">02 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Plumbing Business</h3>
+        <div class="p-vertical">Home Services · Emergency Plumbing</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Lead Volume &amp; Cost-Per-Lead</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Home Services · SEO + PPC</div>
+        <h4>Plumbing Business</h4>
+        <p>Full-funnel digital marketing for a plumbing operator targeting emergency and scheduled service calls across their service area.</p>
+        <div class="svc">SEO · PPC · Local Services Ads</div>
+        <a class="cta-link" href="/case-studies/plumbing">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 03 — Garage Door (Home Services) -->
+    <article class="project g-garage" data-category="home-services">
+      <div class="p-top">
+        <span class="p-tag">Web Design · SEO</span>
+        <span class="p-num">03 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Garage Door Company</h3>
+        <div class="p-vertical">Home Services · Installation &amp; Repair</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Organic Traffic &amp; Leads</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Home Services · Web + SEO</div>
+        <h4>Garage Door Company</h4>
+        <p>New conversion-focused website combined with local SEO to capture installation and emergency repair demand in competitive markets.</p>
+        <div class="svc">Web Design · SEO · CRO</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 04 — Roofing (Home Services) -->
+    <article class="project g-roofing" data-category="home-services">
+      <div class="p-top">
+        <span class="p-tag">Web Design · CRO</span>
+        <span class="p-num">04 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Roofing Business</h3>
+        <div class="p-vertical">Home Services · Storm Damage &amp; Replacement</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Quote Requests &amp; Conversions</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Home Services · Web + CRO</div>
+        <h4>Roofing Business</h4>
+        <p>Website redesign built around insurance-claim homeowners and storm-damage urgency, with a streamlined two-step quote request flow.</p>
+        <div class="svc">Web Design · CRO · PPC</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 05 — Commercial Construction (Enterprise) -->
+    <article class="project g-construction" data-category="enterprise">
+      <div class="p-top">
+        <span class="p-tag">Full Stack Digital</span>
+        <span class="p-num">05 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Commercial Construction</h3>
+        <div class="p-vertical">Enterprise · B2B Construction</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Pipeline &amp; Lead Generation</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Enterprise · Full Stack Digital</div>
+        <h4>Commercial Construction</h4>
+        <p>End-to-end digital marketing strategy for a commercial construction operator: site, SEO, PPC, and lead gen pipeline targeting B2B project owners.</p>
+        <div class="svc">Web · SEO · PPC · Lead Gen</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 06 — Law Firm (Legal) -->
+    <article class="project g-legal" data-category="legal">
+      <div class="p-top">
+        <span class="p-tag">SEO · Web Design</span>
+        <span class="p-num">06 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Law Firm</h3>
+        <div class="p-vertical">Legal · Attorney Practice</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Qualified Consult Volume</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Legal · SEO + Web</div>
+        <h4>Law Firm</h4>
+        <p>Practice-area SEO and conversion-focused redesign to increase qualified consultation requests from organic and paid channels.</p>
+        <div class="svc">SEO · Web Design · PPC</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 07 — Medical/Dental Practice (Medical) -->
+    <article class="project g-medical" data-category="medical">
+      <div class="p-top">
+        <span class="p-tag">SEO · Content</span>
+        <span class="p-num">07 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Medical/Dental Practice</h3>
+        <div class="p-vertical">Medical · Healthcare Provider</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">New Patient Appointments</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Medical · SEO + Content</div>
+        <h4>Medical/Dental Practice</h4>
+        <p>Local SEO with HIPAA-aware content strategy targeting new patient searches. Service-page architecture built around procedure-specific keyword intent.</p>
+        <div class="svc">SEO · Content · Local Maps</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 08 — Restaurant (Restaurant) -->
+    <article class="project g-restaurant" data-category="restaurant">
+      <div class="p-top">
+        <span class="p-tag">Social · SEO</span>
+        <span class="p-num">08 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Restaurant</h3>
+        <div class="p-vertical">Restaurant · Food &amp; Beverage</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Reservations &amp; Foot Traffic</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Restaurant · Social + SEO</div>
+        <h4>Restaurant</h4>
+        <p>Social media content program and local SEO driving reservation volume and walk-in traffic for a New Orleans-area dining establishment.</p>
+        <div class="svc">Social · SEO · GBP · Content</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 09 — Small Business -->
+    <article class="project g-small-biz" data-category="home-services">
+      <div class="p-top">
+        <span class="p-tag">Web Design · SEO</span>
+        <span class="p-num">09 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>Small Business</h3>
+        <div class="p-vertical">Small Business · Local Service Provider</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">Organic Visibility &amp; Leads</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Small Business · Web + SEO</div>
+        <h4>Small Business</h4>
+        <p>Website and local SEO package for a small business operator competing against larger regional players — with results that levelled the playing field.</p>
+        <div class="svc">Web Design · SEO · ORM</div>
+        <a class="cta-link" href="#">See Case Study →</a>
+      </div>
+    </article>
+
+    <!-- Card 10 — [CLIENT — TO CONFIRM] Placeholder -->
+    <article class="project g-placeholder-a placeholder-card" data-category="enterprise">
+      <div class="p-top">
+        <span class="p-tag">[Service — To Confirm]</span>
+        <span class="p-num">10 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>[CLIENT — TO CONFIRM]</h3>
+        <div class="p-vertical">[Vertical — To Confirm]</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">[Result Label — To Confirm]</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Case Study Slot</div>
+        <h4>[CLIENT — TO CONFIRM]</h4>
+        <p>This card is reserved for a confirmed client case study. Vertical, service mix, and result metrics will be added once client details are verified.</p>
+        <div class="svc">[Services — To Confirm]</div>
+        <div class="placeholder-note">Placeholder · Awaiting client confirmation</div>
+      </div>
+    </article>
+
+    <!-- Card 11 — [CLIENT — TO CONFIRM] Placeholder -->
+    <article class="project g-placeholder-b placeholder-card" data-category="legal">
+      <div class="p-top">
+        <span class="p-tag">[Service — To Confirm]</span>
+        <span class="p-num">11 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>[CLIENT — TO CONFIRM]</h3>
+        <div class="p-vertical">[Vertical — To Confirm]</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">[Result Label — To Confirm]</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Case Study Slot</div>
+        <h4>[CLIENT — TO CONFIRM]</h4>
+        <p>This card is reserved for a confirmed client case study. Vertical, service mix, and result metrics will be added once client details are verified.</p>
+        <div class="svc">[Services — To Confirm]</div>
+        <div class="placeholder-note">Placeholder · Awaiting client confirmation</div>
+      </div>
+    </article>
+
+    <!-- Card 12 — [CLIENT — TO CONFIRM] Placeholder -->
+    <article class="project g-placeholder-c placeholder-card" data-category="medical">
+      <div class="p-top">
+        <span class="p-tag">[Service — To Confirm]</span>
+        <span class="p-num">12 / 12</span>
+      </div>
+      <div class="p-body">
+        <h3>[CLIENT — TO CONFIRM]</h3>
+        <div class="p-vertical">[Vertical — To Confirm]</div>
+        <div class="p-stat">
+          <div class="sv">[METRIC — TO CONFIRM]</div>
+          <div class="sl">[Result Label — To Confirm]</div>
+        </div>
+      </div>
+      <div class="p-hover">
+        <div class="ht">Case Study Slot</div>
+        <h4>[CLIENT — TO CONFIRM]</h4>
+        <p>This card is reserved for a confirmed client case study. Vertical, service mix, and result metrics will be added once client details are verified.</p>
+        <div class="svc">[Services — To Confirm]</div>
+        <div class="placeholder-note">Placeholder · Awaiting client confirmation</div>
+      </div>
+    </article>
+
+  </div><!-- /.portfolio-grid -->
+</section><!-- /.portfolio-section -->
+
+<!-- ─── Testimonial ───────────────────────────────────────────────────────── -->
+<section class="testimonial-section">
+  <div class="testimonial-inner">
+    <div class="testimonial-kicker">// Real Stories From Real Clients</div>
+    <div class="testimonial-stars">
+      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+    </div>
+    <blockquote>I contacted Infintech Designs 2 months ago to create and build a creative website for my company. The web design service from Brian and his team has been great from the start.</blockquote>
+    <div class="testimonial-attr"><strong>Jon Silkin</strong> · 5-star verified · Infintech Designs client</div>
+  </div>
+</section>
+
+<!-- ─── CTA Band ──────────────────────────────────────────────────────────── -->
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <div class="cta-band-kicker">// Your Turn</div>
+    <h2>Ready to be our <span class="hl">next case study?</span></h2>
+    <p>Claim your free consultation with Founder &amp; CEO Brian Hong. We'll walk through your goals, audit what's live, and map a path to better rankings, leads, and revenue.</p>
+    <ul class="cta-band-bullets">
+      <li>FREE Initial Consultation With Founder &amp; CEO Brian Hong</li>
+      <li>Over 26 Years Experience In SEO And Web Design</li>
+      <li>Real-Time Tracking Dashboard</li>
+      <li>Data-Driven SEO Marketing With Measurable Results</li>
+      <li>Web Design That Turns Visitors Into Customers</li>
+    </ul>
+    <div class="cta-btn-row">
+      <a class="btn btn-lg" href="#">CLAIM YOUR FREE CONSULTATION NOW!</a>
+      <a class="btn btn-lg btn-white" href="tel:5045476565">Call (504) 547-6565</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="f-left">
+    <div class="f-brand">INFINTECH DESIGNS · INFINTECHDESIGNS.COM</div>
+    <div class="f-tag">Rank Higher. Grow Faster. Convert Better.</div>
+    <div>3436 Magazine St, #120, New Orleans, LA 70115 · (504) 547-6565 · 24/7</div>
+  </div>
+  <div class="f-right">
+    <div style="margin-bottom:6px;">
+      <a href="#">Facebook</a>&nbsp;·&nbsp;
+      <a href="#">LinkedIn</a>&nbsp;·&nbsp;
+      <a href="#">Instagram</a>
+    </div>
+    <div>© 2026 InfintechDesigns. Google Premier Partner 2025.</div>
+  </div>
+</footer>
+
+<!-- ─── Filter Logic ──────────────────────────────────────────────────────── -->
 <script>
-  (function () {
-    var filters = document.querySelectorAll('.filter');
-    var projects = document.querySelectorAll('#portfolio .project');
-    filters.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        filters.forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var f = btn.getAttribute('data-filter');
-        projects.forEach(function (p) {
-          if (f === 'all') {
-            p.classList.remove('hidden');
+(function () {
+  var filterBtns = document.querySelectorAll('#filters .filter');
+  var projectCards = document.querySelectorAll('#portfolio .project');
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      // Update active state
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var selected = btn.getAttribute('data-filter');
+
+      projectCards.forEach(function (card) {
+        if (selected === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          var cats = (card.getAttribute('data-category') || '').split(/\s+/);
+          if (cats.indexOf(selected) !== -1) {
+            card.classList.remove('hidden');
           } else {
-            var cats = (p.getAttribute('data-category') || '').split(/\s+/);
-            if (cats.indexOf(f) !== -1) { p.classList.remove('hidden'); }
-            else { p.classList.add('hidden'); }
+            card.classList.add('hidden');
           }
-        });
+        }
       });
     });
-  })();
+  });
+}());
 </script>
 </body>
 </html>

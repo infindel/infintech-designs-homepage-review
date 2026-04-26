@@ -2,7 +2,16 @@
 <!--
   Style: A07 — Full-Screen Hero
   Category: Structural Layout
-  Infintech angle: 100vh cinematic hero on near-black with a drifting red-orange/pink/gold gradient blob. Display Raleway h1 with keyword emphasis in #EA4517, trust-signal row, single orange CTA. Services + stats + footer below the fold. Black-wordmark logo in a white pill reads cleanest on the dark hero.
+  Client: Infintech Designs — New Orleans
+  Design notes:
+    100vh cinematic hero on near-black (#0A0A0F) with drifting orange/pink gradient blobs.
+    H1 at 80–100px Raleway 900, tight letter-spacing. Google PP badge + phone number
+    anchored to lower-left of hero (newsroom byline treatment). No lead form in hero.
+    Section 2: press pills row ("As Seen On"). Section 3: stats strip with context labels.
+    Section 4: lead form. Section 5: 11 services grid with outcome labels.
+    Section 6: Jon Silkin testimonial. Section 7: 8 service areas. Footer.
+    Competitor reference: Ignite Visibility — uppercase headline, trust bar, single CTA.
+    Version: rewrite 2026-04-25
 -->
 <html lang="en">
 <head>
@@ -11,347 +20,1358 @@
 <title>Infintech Designs — Rank Higher, Grow Faster, Convert Better</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --orange: #EA4517;
-    --gold: #ED9924;
-    --pink: #FF4E5E;
-    --ink: #121212;
-    --body: #212529;
-    --paper: #FFFFFF;
-    --mute: #F5F5F5;
-    --dark: #0A0A0A;
-    --dark-2: #151515;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { overflow-x: hidden; }
-  body { font-family: 'Raleway', sans-serif; color: var(--body); line-height: 1.6; background: var(--paper); -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
+/* ============================================================
+   BRAND TOKENS
+   ============================================================ */
+:root {
+  --orange:       #EA4517;
+  --orange-glow:  rgba(234, 69, 23, 0.45);
+  --orange-soft:  rgba(234, 69, 23, 0.12);
+  --gold:         #ED9924;
+  --pink:         #FF4E5E;
+  --ink:          #212529;
+  --ink-heading:  #121212;
+  --paper:        #FFFFFF;
+  --paper-alt:    #F9F9FA;
+  --cream:        #F5F0E8;
+  --dark-0:       #050507;
+  --dark-1:       #0A0A0F;
+  --dark-2:       #11111A;
+  --dark-text:    #E8E8F0;
+  --dark-text-dim:#9A9AAB;
+  --line:         rgba(255,255,255,0.06);
+  --line-bright:  rgba(255,255,255,0.12);
+}
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 22px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: transparent;
-    transition: background 0.3s;
-  }
-  nav .logo-pill { background: #fff; border-radius: 100px; padding: 8px 20px; display: inline-flex; align-items: center; }
-  nav .logo-pill img { height: 28px; width: auto; display: block; }
-  nav ul { list-style: none; display: flex; gap: 34px; align-items: center; }
-  nav ul a { color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
-  nav ul a:hover { color: var(--gold); }
-  nav .nav-cta { background: var(--orange); color: #fff !important; padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
-  nav .nav-cta:hover { background: #c53a12; color: #fff !important; }
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+body {
+  font-family: 'Raleway', sans-serif;
+  color: var(--ink);
+  line-height: 1.6;
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-  .hero {
-    height: 100vh;
-    min-height: 720px;
-    position: relative;
-    overflow: hidden;
-    background: var(--dark);
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 110px 48px 90px;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -20%; left: -10%;
-    width: 70vw; height: 70vw;
-    max-width: 1100px; max-height: 1100px;
-    background: radial-gradient(circle at 30% 30%, rgba(234,69,23,0.65), rgba(255,78,94,0.45) 40%, rgba(237,153,36,0.25) 70%, transparent 80%);
-    filter: blur(70px);
-    opacity: 0.6;
-    border-radius: 50%;
-    animation: drift-a 18s ease-in-out infinite alternate;
-    z-index: 1;
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -25%; right: -15%;
-    width: 65vw; height: 65vw;
-    max-width: 1000px; max-height: 1000px;
-    background: radial-gradient(circle at 50% 50%, rgba(255,78,94,0.55), rgba(237,153,36,0.35) 45%, rgba(234,69,23,0.2) 70%, transparent 80%);
-    filter: blur(80px);
-    opacity: 0.55;
-    border-radius: 50%;
-    animation: drift-b 22s ease-in-out infinite alternate;
-    z-index: 1;
-    pointer-events: none;
-  }
-  @keyframes drift-a {
-    0%   { transform: translate(0, 0) scale(1); }
-    50%  { transform: translate(8vw, 6vh) scale(1.1); }
-    100% { transform: translate(-4vw, 10vh) scale(0.95); }
-  }
-  @keyframes drift-b {
-    0%   { transform: translate(0, 0) scale(1); }
-    50%  { transform: translate(-6vw, -4vh) scale(1.08); }
-    100% { transform: translate(4vw, -8vh) scale(0.92); }
-  }
+/* ============================================================
+   UTILITY BAR
+   ============================================================ */
+.util-bar {
+  background: var(--dark-0);
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 9px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.util-bar a { color: var(--gold); transition: color 0.2s; }
+.util-bar a:hover { color: #fff; }
+.util-bar .util-left { display: flex; align-items: center; gap: 20px; }
+.util-bar .util-sep { color: var(--line-bright); }
 
-  .hero .grain {
-    position: absolute; inset: 0; z-index: 2; pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.55) 100%);
-  }
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  padding: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--dark-1);
+  border-bottom: 1px solid var(--line);
+}
+.logo-pill {
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  display: inline-block;
+  line-height: 0;
+}
+.logo-pill img { height: 32px; width: auto; display: block; }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+nav ul a {
+  color: var(--dark-text);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--orange) !important;
+  color: #fff !important;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover { background: #c53a12 !important; transform: translateY(-1px); }
 
-  .hero-content { position: relative; z-index: 3; max-width: 1180px; width: 100%; }
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); font-weight: 600;
-    padding: 7px 16px;
-    border: 1px solid rgba(237,153,36,0.4);
-    border-radius: 999px;
-    margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-size: clamp(42px, 6.2vw, 96px);
-    line-height: 1.04;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin: 0 auto 28px;
-    max-width: 16ch;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  .hero h1 .hl { color: var(--orange); }
-  .hero .trust-row {
-    display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
-    gap: 12px 24px;
-    margin-bottom: 36px;
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.72); font-weight: 600;
-  }
-  .hero .trust-row .dot { width: 4px; height: 4px; background: var(--orange); border-radius: 50%; display: inline-block; }
-  .hero .cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .btn-primary {
-    display: inline-block;
-    background: var(--orange);
-    color: #fff;
-    padding: 20px 42px;
-    font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    border-radius: 999px;
-    box-shadow: 0 14px 40px -12px rgba(234,69,23,0.7);
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  }
-  .btn-primary:hover { background: #c53a12; transform: translateY(-2px); box-shadow: 0 18px 44px -10px rgba(234,69,23,0.8); }
-  .hero .subline { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
-  .hero .subline a { color: var(--gold); font-weight: 600; }
+/* ============================================================
+   HERO — SECTION 1
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--dark-1);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 90px 48px 120px;
+  overflow: hidden;
+}
 
-  .scroll-ind {
-    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-    z-index: 3; color: rgba(255,255,255,0.6); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    text-align: center;
-  }
-  .scroll-ind::after { content: ''; display: block; width: 1px; height: 28px; background: rgba(255,255,255,0.5); margin: 10px auto 0; animation: pulse 1.8s ease-in-out infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 0.25; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+/* Ambient gradient blobs */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -15%; left: -10%;
+  width: 75vw; height: 75vw;
+  max-width: 1100px; max-height: 1100px;
+  background: radial-gradient(circle at 30% 30%, rgba(234,69,23,0.6), rgba(255,78,94,0.35) 45%, rgba(237,153,36,0.2) 70%, transparent 82%);
+  filter: blur(80px);
+  opacity: 0.55;
+  border-radius: 50%;
+  animation: hero-drift-a 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%; right: -12%;
+  width: 68vw; height: 68vw;
+  max-width: 1000px; max-height: 1000px;
+  background: radial-gradient(circle at 60% 60%, rgba(255,78,94,0.5), rgba(237,153,36,0.3) 50%, rgba(234,69,23,0.15) 75%, transparent 85%);
+  filter: blur(90px);
+  opacity: 0.45;
+  border-radius: 50%;
+  animation: hero-drift-b 26s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes hero-drift-a {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(6vw, 5vh) scale(1.08); }
+  100% { transform: translate(-5vw, 9vh) scale(0.96); }
+}
+@keyframes hero-drift-b {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-5vw, -4vh) scale(1.06); }
+  100% { transform: translate(4vw, -7vh) scale(0.94); }
+}
 
-  .services { padding: 110px 48px; background: var(--paper); }
-  .container { max-width: 1200px; margin: 0 auto; }
-  .sec-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
-  .sec-head .k { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 14px; }
-  .sec-head h2 { font-size: clamp(30px, 4vw, 48px); color: var(--ink); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; }
-  .sec-head p { color: #555; font-size: 16px; }
+/* Radial vignette overlay */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(5,5,7,0.65) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
 
-  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .svc {
-    padding: 40px 32px;
-    border: 1px solid #eee;
-    border-radius: 16px;
-    background: #fff;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-  }
-  .svc:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.15); border-color: var(--orange); }
-  .svc .ico {
-    width: 52px; height: 52px; border-radius: 12px;
-    background: linear-gradient(135deg, rgba(234,69,23,0.12), rgba(237,153,36,0.12));
-    color: var(--orange);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 22px;
-  }
-  .svc h3 { font-size: 22px; color: var(--ink); font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
-  .svc p { color: #555; font-size: 15px; line-height: 1.65; }
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1120px;
+  width: 100%;
+}
 
-  .stat-band {
-    background: var(--ink);
-    color: #fff;
-    padding: 72px 48px;
-  }
-  .stat-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
-  .stat { border-right: 1px solid rgba(255,255,255,0.08); padding: 8px 16px; }
-  .stat:last-child { border-right: none; }
-  .stat .n { font-size: clamp(36px, 4.5vw, 60px); font-weight: 800; color: var(--orange); line-height: 1; letter-spacing: -0.02em; }
-  .stat .l { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 12px; font-weight: 600; }
+.hero h1 {
+  font-size: clamp(52px, 7.5vw, 96px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0 auto 32px;
+  max-width: 20ch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.hero h1 .hl { color: var(--orange); }
+.hero h1 .hl-gold { color: var(--gold); }
 
-  .cta-band {
-    padding: 100px 48px;
-    background: linear-gradient(135deg, #EA4517 0%, #ED9924 100%);
-    color: #fff;
-    text-align: center;
-  }
-  .cta-band h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.15; }
-  .cta-band p { font-size: 17px; opacity: 0.92; max-width: 620px; margin: 0 auto 36px; }
-  .cta-band .btn-inv {
-    display: inline-block; background: #fff; color: var(--orange);
-    padding: 20px 44px; border-radius: 999px;
-    font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
-    transition: transform 0.2s;
-  }
-  .cta-band .btn-inv:hover { transform: translateY(-2px); }
+.hero-sub {
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: rgba(255,255,255,0.72);
+  max-width: 640px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  font-weight: 400;
+}
 
-  footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 56px 48px 28px; }
-  footer .fg { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
-  footer h4 { color: #fff; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700; }
-  footer ul { list-style: none; }
-  footer ul li { margin-bottom: 10px; font-size: 14px; }
-  footer ul a:hover { color: var(--orange); }
-  footer .brand p { font-size: 14px; margin-top: 18px; line-height: 1.7; }
-  footer .brand .logo-pill { background: #fff; border-radius: 100px; padding: 8px 18px; display: inline-flex; }
-  footer .brand .logo-pill img { height: 28px; width: auto; }
-  footer .bar { max-width: 1200px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.hero-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
 
-  @media (max-width: 1024px) {
-    nav { padding: 18px 28px; }
-    nav ul { gap: 22px; }
-    .hero { padding: 110px 28px 70px; }
-    .services, .stat-band, .cta-band { padding-left: 28px; padding-right: 28px; }
-    footer { padding-left: 28px; padding-right: 28px; }
-    .svc-grid { grid-template-columns: repeat(2, 1fr); }
-    .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
-    footer .fg { grid-template-columns: 1.2fr 1fr 1fr; }
+.btn-primary {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  padding: 20px 46px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  box-shadow: 0 14px 40px -10px rgba(234,69,23,0.75);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  background: #c53a12;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px -10px rgba(234,69,23,0.85);
+}
+
+.hero-scroll-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Lower-left hero byline: PP badge + phone */
+.hero-byline {
+  position: absolute;
+  bottom: 36px;
+  left: 48px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.pp-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  padding: 8px 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.pp-badge-icon {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pp-badge-icon svg { display: block; }
+.pp-badge-text { line-height: 1.2; }
+.pp-badge-text .pp-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  display: block;
+}
+.pp-badge-text .pp-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  display: block;
+}
+.hero-byline-phone {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-byline-phone svg { color: var(--orange); flex-shrink: 0; }
+.hero-byline-phone a { color: var(--orange); transition: color 0.2s; }
+.hero-byline-phone a:hover { color: var(--gold); }
+
+/* Scroll indicator line */
+.scroll-line {
+  position: absolute;
+  bottom: 36px;
+  right: 48px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.scroll-line::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.35);
+  animation: line-pulse 2s ease-in-out infinite;
+}
+@keyframes line-pulse {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.5); transform-origin: top; }
+  50%       { opacity: 1;   transform: scaleY(1); }
+}
+
+/* ============================================================
+   SECTION 2 — PRESS PILLS ("AS SEEN ON")
+   ============================================================ */
+.press-section {
+  background: var(--dark-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 38px 48px;
+}
+.press-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.press-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dark-text-dim, #9A9AAB);
+  white-space: nowrap;
+}
+.press-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--line-bright);
+  flex-shrink: 0;
+}
+.press-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.press-pill {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.05);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.press-pill:hover {
+  border-color: var(--orange);
+  color: #fff;
+  background: var(--orange-soft);
+}
+
+/* ============================================================
+   SECTION 3 — STATS STRIP WITH CONTEXT LABELS
+   ============================================================ */
+.stats-section {
+  background: var(--dark-1);
+  padding: 80px 48px;
+}
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-kicker {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 56px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.stat-card {
+  background: var(--dark-2);
+  border: 1px solid var(--line);
+  padding: 40px 32px 36px;
+  text-align: center;
+  transition: border-color 0.25s;
+}
+.stat-card:first-child { border-radius: 12px 0 0 12px; }
+.stat-card:last-child  { border-radius: 0 12px 12px 0; }
+.stat-card:hover { border-color: rgba(234,69,23,0.4); }
+.stat-number {
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.stat-card:nth-child(2) .stat-number { color: var(--gold); }
+.stat-card:nth-child(3) .stat-number { color: var(--pink); }
+.stat-card:nth-child(4) .stat-number { color: var(--gold); font-size: clamp(28px, 3.5vw, 46px); }
+.stat-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark-text);
+  margin-bottom: 14px;
+}
+.stat-context {
+  font-size: 13px;
+  color: var(--dark-text-dim, #9A9AAB);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* ============================================================
+   SECTION 4 — LEAD FORM
+   ============================================================ */
+.form-section {
+  background: var(--paper-alt);
+  padding: 96px 48px;
+}
+.form-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.form-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.form-head .kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.form-head h2 {
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink-heading);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.form-head p {
+  font-size: 16px;
+  color: var(--ink);
+  opacity: 0.72;
+}
+.form-head p strong { color: var(--ink-heading); opacity: 1; font-weight: 700; }
+.lead-form {
+  background: #fff;
+  border-radius: 16px;
+  padding: 48px 44px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.form-row.single { grid-template-columns: 1fr; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-heading);
+}
+.field input,
+.field select,
+.field textarea {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper-alt);
+  border: 1.5px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 13px 16px;
+  width: 100%;
+  transition: border-color 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--orange); background: #fff; }
+.field textarea { min-height: 100px; resize: vertical; }
+.field select { cursor: pointer; }
+.form-tc {
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.65;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.form-tc input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--orange);
+  cursor: pointer;
+}
+.recaptcha-notice {
+  font-size: 11px;
+  color: var(--ink);
+  opacity: 0.45;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.btn-form-submit {
+  display: block;
+  width: 100%;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 19px 28px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 32px -8px rgba(234,69,23,0.65);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn-form-submit:hover {
+  background: #c53a12;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -6px rgba(234,69,23,0.75);
+}
+.form-byline {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
+/* ============================================================
+   SECTION 5 — SERVICES GRID (11 SERVICES)
+   ============================================================ */
+.services-section {
+  background: var(--paper);
+  padding: 96px 48px;
+}
+.services-inner { max-width: 1200px; margin: 0 auto; }
+.section-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 64px;
+}
+.section-head .kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.section-head h2 {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink-heading);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.section-head p { font-size: 16px; color: var(--ink); opacity: 0.72; }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.svc-card {
+  border: 1.5px solid #EBEBEB;
+  border-radius: 14px;
+  padding: 36px 30px;
+  background: var(--paper);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.svc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px -16px rgba(0,0,0,0.13);
+  border-color: var(--orange);
+}
+.svc-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  background: var(--orange-soft);
+  color: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+.svc-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink-heading);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.svc-outcome {
+  font-size: 13px;
+  color: var(--orange);
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+/* Last two cards span to keep grid balanced with 11 items */
+.svc-card:nth-child(10),
+.svc-card:nth-child(11) {
+  /* grid fills naturally — no special span needed for 3-col with 11 items */
+}
+
+/* ============================================================
+   SECTION 6 — TESTIMONIAL (JON SILKIN)
+   ============================================================ */
+.testimonial-section {
+  background: var(--dark-1);
+  padding: 96px 48px;
+}
+.testimonial-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.testimonial-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 40px;
+}
+.testimonial-quote {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 600;
+  color: var(--dark-text);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin-bottom: 36px;
+  font-style: italic;
+  position: relative;
+  padding: 0 24px;
+}
+.testimonial-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -20px; left: 0;
+  font-size: 72px;
+  color: var(--orange);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.6;
+}
+.testimonial-attr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: #fff;
+  flex-shrink: 0;
+}
+.testimonial-attr-text {}
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark-text);
+  display: block;
+}
+.testimonial-stars {
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 2px;
+}
+.testimonial-source {
+  font-size: 11px;
+  color: var(--dark-text-dim, #9A9AAB);
+  display: block;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   SECTION 7 — SERVICE AREAS
+   ============================================================ */
+.areas-section {
+  background: var(--paper-alt);
+  padding: 96px 48px;
+}
+.areas-inner { max-width: 1200px; margin: 0 auto; }
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+.area-card {
+  background: var(--paper);
+  border: 1.5px solid #EBEBEB;
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.area-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -10px rgba(234,69,23,0.15);
+}
+.area-card.hq { border-color: var(--orange); background: #fff8f6; }
+.area-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--dark-text-dim, #9A9AAB);
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.area-card.hq .area-dot { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
+.area-city {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink-heading);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.area-state {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+.area-card.hq .area-state { color: var(--orange); opacity: 1; }
+.area-phone {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.02em;
+  display: block;
+  transition: color 0.2s;
+}
+.area-phone:hover { color: #c53a12; }
+.area-hq-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-top: 10px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--dark-0);
+  color: rgba(255,255,255,0.5);
+  padding: 72px 48px 32px;
+  border-top: 2px solid var(--orange);
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 48px;
+}
+footer h4 {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+footer ul { list-style: none; }
+footer ul li { margin-bottom: 10px; font-size: 14px; }
+footer ul a:hover { color: var(--orange); }
+.footer-brand p {
+  font-size: 14px;
+  margin-top: 18px;
+  line-height: 1.7;
+  max-width: 280px;
+}
+.footer-tagline {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-top: 18px;
+}
+.footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   RESPONSIVE — 768px
+   ============================================================ */
+@media (max-width: 768px) {
+  .util-bar { padding: 9px 20px; font-size: 11px; }
+  .util-bar .util-left { gap: 12px; }
+  nav { padding: 14px 20px; }
+  nav ul li:not(:last-child) { display: none; }
+
+  .hero { padding: 80px 20px 100px; }
+  .hero h1 { font-size: clamp(40px, 10vw, 64px); letter-spacing: -0.025em; max-width: 100%; }
+  .hero-sub { font-size: 15px; }
+  .hero-byline {
+    bottom: 20px; left: 20px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  @media (max-width: 768px) {
-    nav ul li:not(:last-child) { display: none; }
-    .hero { padding: 100px 20px 70px; }
-    .hero h1 { letter-spacing: -0.02em; max-width: 100%; }
-    .hero .trust-row { gap: 10px 18px; font-size: 11px; letter-spacing: 0.18em; }
-    .hero .trust-row .dot { display: none; }
-    .services, .stat-band, .cta-band { padding-left: 20px; padding-right: 20px; }
-    footer { padding-left: 20px; padding-right: 20px; }
-    .svc-grid { grid-template-columns: 1fr; gap: 18px; }
-    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
-    .stat:nth-child(2) { border-right: none; }
-    footer .fg { grid-template-columns: 1fr; gap: 30px; }
-    .btn-primary { padding: 18px 32px; font-size: 13px; width: 100%; max-width: 340px; text-align: center; }
-  }
-  @media (max-width: 400px) {
-    nav { padding: 14px 16px; }
-    .hero { padding: 96px 16px 60px; }
-    .hero .eyebrow { font-size: 10px; padding: 6px 14px; margin-bottom: 22px; }
-    .hero h1 { font-size: clamp(34px, 9vw, 46px); }
-    .hero .trust-row { font-size: 10px; letter-spacing: 0.15em; gap: 8px 14px; margin-bottom: 32px; }
-    .services, .cta-band { padding-top: 72px; padding-bottom: 72px; }
-    .stat-band { padding-top: 56px; padding-bottom: 56px; }
-  }
+  .scroll-line { display: none; }
+
+  .press-section { padding: 28px 20px; }
+  .press-inner { gap: 14px 18px; }
+
+  .stats-section { padding: 64px 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .stat-card:first-child  { border-radius: 12px 0 0 0; }
+  .stat-card:nth-child(2) { border-radius: 0 12px 0 0; }
+  .stat-card:nth-child(3) { border-radius: 0 0 0 12px; }
+  .stat-card:last-child   { border-radius: 0 0 12px 0; }
+
+  .form-section { padding: 64px 20px; }
+  .lead-form { padding: 32px 22px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .services-section { padding: 64px 20px; }
+  .svc-grid { grid-template-columns: 1fr; gap: 18px; }
+
+  .testimonial-section { padding: 64px 20px; }
+  .testimonial-quote { font-size: 18px; }
+
+  .areas-section { padding: 64px 20px; }
+  .areas-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+  footer { padding: 56px 20px 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+  .btn-primary { width: 100%; max-width: 360px; text-align: center; padding: 18px 32px; }
+}
+
+/* ============================================================
+   RESPONSIVE — 375px
+   ============================================================ */
+@media (max-width: 400px) {
+  .hero { padding: 72px 16px 96px; }
+  .hero h1 { font-size: clamp(34px, 11vw, 52px); }
+  .hero-byline { left: 16px; bottom: 16px; }
+
+  .press-section { padding: 22px 16px; }
+  .stats-section { padding: 52px 16px; }
+  .stat-card { padding: 28px 18px 24px; }
+  .stat-number { font-size: clamp(34px, 9vw, 52px); }
+
+  .form-section { padding: 52px 16px; }
+  .lead-form { padding: 26px 16px; }
+
+  .services-section { padding: 52px 16px; }
+  .testimonial-section { padding: 52px 16px; }
+  .areas-section { padding: 52px 16px; }
+  .areas-grid { grid-template-columns: 1fr; }
+
+  footer { padding: 44px 16px 20px; }
+}
 </style>
 </head>
 <body>
+
+  <!-- UTILITY BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <span>Google Premier Partner 2025 <span class="util-sep">·</span> Top 3% of All Google Ads Agencies in the US</span>
+    </div>
+    <a href="tel:5045476565">(504) 547-6565 — Call Now</a>
+  </div>
+
+  <!-- NAV -->
   <nav>
-    <a href="#" class="logo-pill" aria-label="Infintech Designs"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
+    <a href="#" class="logo-pill" aria-label="Infintech Designs">
+      <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
+    </a>
     <ul>
       <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#areas">Service Areas</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="nav-cta">Free Consult</a></li>
+      <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
     </ul>
   </nav>
 
+  <!-- ================================================================
+       SECTION 1 — HERO (100VH)
+       ================================================================ -->
   <section class="hero">
-    <div class="grain"></div>
+    <div class="hero-vignette"></div>
+
     <div class="hero-content">
-      <span class="eyebrow">Google Premier Partner 2025</span>
-      <h1>We Help Businesses <span class="hl">Rank Higher, Grow Faster</span> and <span class="hl">Convert Better</span> To Drive Revenue.</h1>
-      <div class="trust-row">
-        <span>26 Years</span>
-        <span class="dot"></span>
-        <span>4,000+ Websites</span>
-        <span class="dot"></span>
-        <span>Google Premier Partner 2025</span>
-      </div>
-      <div class="cta-wrap">
-        <a href="#contact" class="btn-primary">Claim Your Free Consultation</a>
-        <div class="subline">Or call <a href="tel:5045476565">(504) 547-6565</a> — New Orleans, LA</div>
+      <h1>
+        We Help Businesses
+        <span class="hl">Rank Higher,</span>
+        <span class="hl-gold">Grow Faster</span>
+        And
+        <span class="hl">Convert Better</span>
+        To Drive Revenue
+      </h1>
+      <p class="hero-sub">
+        Our team innovated the Google Ranking Game and is committed to putting your business
+        in the Top&nbsp;3&nbsp;Spots of the Google Map&nbsp;Pack.
+      </p>
+      <div class="hero-cta-wrap">
+        <a href="#contact" class="btn-primary">CLAIM YOUR FREE CONSULTATION NOW!</a>
+        <span class="hero-scroll-hint">No bots. No junior hand-offs. Scroll to see the proof.</span>
       </div>
     </div>
-    <div class="scroll-ind">Scroll</div>
+
+    <!-- Lower-left newsroom byline: PP badge + phone -->
+    <div class="hero-byline">
+      <div class="pp-badge">
+        <div class="pp-badge-icon">
+          <!-- Google "G" lettermark in brand colors -->
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="pp-badge-text">
+          <span class="pp-label">Google</span>
+          <span class="pp-value">Premier Partner 2025</span>
+        </div>
+      </div>
+      <div class="hero-byline-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.24 6.24l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <a href="tel:5045476565">(504) 547-6565</a>
+      </div>
+    </div>
+
+    <div class="scroll-line">Scroll</div>
   </section>
 
-  <section class="services" id="services">
-    <div class="container">
-      <div class="sec-head">
-        <div class="k">What We Do</div>
-        <h2>Full-stack digital marketing, built to move revenue.</h2>
-        <p>Twenty-six years of SEO, paid media, and conversion-tuned web design — delivered from New Orleans to home-services, legal, medical, and restaurant clients across eight US cities.</p>
+  <!-- ================================================================
+       SECTION 2 — PRESS PILLS ("AS SEEN ON")
+       ================================================================ -->
+  <section class="press-section">
+    <div class="press-inner">
+      <span class="press-label">// Featured In</span>
+      <div class="press-divider"></div>
+      <div class="press-pills">
+        <span class="press-pill">BuzzFeed</span>
+        <span class="press-pill">Entrepreneur</span>
+        <span class="press-pill">HuffPost</span>
+        <span class="press-pill">Inc.</span>
+        <span class="press-pill">SME</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 3 — STATS STRIP WITH CONTEXT LABELS
+       ================================================================ -->
+  <section class="stats-section">
+    <div class="stats-inner">
+      <div class="section-kicker">// BY THE NUMBERS</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">26+</div>
+          <div class="stat-name">Years of Experience</div>
+          <div class="stat-context">In the SEO ranking game since the Google PageRank era — through every algorithm shift.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4,000+</div>
+          <div class="stat-name">Websites Built</div>
+          <div class="stat-context">Across home services, legal, medical, restaurants, and enterprise verticals.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">750+</div>
+          <div class="stat-name">SEO Optimizations</div>
+          <div class="stat-context">Sites engineered for ranking — not just shipped, then trained on results data.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2025</div>
+          <div class="stat-name">Google Premier Partner</div>
+          <div class="stat-context">Top 3% of all Google Ads agencies in the United States. Audited annually.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 4 — LEAD FORM
+       ================================================================ -->
+  <section class="form-section" id="contact">
+    <div class="form-inner">
+      <div class="form-head">
+        <div class="kicker">// Start Here</div>
+        <h2>Get your website on the first page of Google.</h2>
+        <p>Schedule a free consultation with <strong>Founder &amp; CEO Brian Hong</strong>. No bots, no junior hand-offs.</p>
+      </div>
+      <form class="lead-form" action="#" method="post">
+        <div class="form-row">
+          <div class="field">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Your full name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="field">
+            <label for="company">Company Name (optional)</label>
+            <input type="text" id="company" name="company" placeholder="Your company">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="budget">Monthly Budget</label>
+            <select id="budget" name="budget" required>
+              <option value="" disabled selected>Select a range</option>
+              <option>Under $2,500</option>
+              <option>$2,500–$5,000</option>
+              <option>$5,000–$10,000</option>
+              <option>$10,000–$25,000</option>
+              <option>$25,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="field">
+            <label for="details">Project Details</label>
+            <textarea id="details" name="details" placeholder="Tell us about your goals, challenges, and what you're hoping to achieve..."></textarea>
+          </div>
+        </div>
+        <div class="form-tc">
+          <input type="checkbox" id="tc" name="tc" required>
+          <label for="tc">I agree to the Terms &amp; Conditions and consent to being contacted by Infintech Designs regarding my inquiry.</label>
+        </div>
+        <div class="recaptcha-notice">This form is protected by reCAPTCHA. Google Privacy Policy and Terms of Service apply.</div>
+        <button type="submit" class="btn-form-submit">CLAIM YOUR FREE CONSULTATION NOW!</button>
+      </form>
+      <p class="form-byline">Or call directly: <a href="tel:5045476565" style="color:var(--orange);font-weight:700;">(504) 547-6565</a> — New Orleans, LA · 24/7</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 5 — SERVICES GRID (ALL 11)
+       ================================================================ -->
+  <section class="services-section" id="services">
+    <div class="services-inner">
+      <div class="section-head">
+        <div class="kicker">// What We Do</div>
+        <h2>Full-Stack Digital Marketing Built to Move Revenue</h2>
+        <p>Twenty-six years of expertise across every channel — delivered from New Orleans to clients in eight US cities.</p>
       </div>
       <div class="svc-grid">
-        <div class="svc">
-          <div class="ico">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           </div>
           <h3>Search Engine Optimization</h3>
-          <p>Local, on-page, off-page, and link-building programs engineered to claim the top three Google Map Pack positions in your market.</p>
+          <div class="svc-outcome">Map-pack first. Rank in the Top 3 of Google.</div>
         </div>
-        <div class="svc">
-          <div class="ico">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </div>
-          <h3>Paid Media &amp; PPC</h3>
-          <p>Google Ads and Meta campaigns managed by a Premier Partner team — built around measurable cost per acquisition, not vanity clicks.</p>
+          <h3>Web Design &amp; Development</h3>
+          <div class="svc-outcome">Built to convert. Engineered to rank. 4,000+ shipped.</div>
         </div>
-        <div class="svc">
-          <div class="ico">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 4v14"/></svg>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
           </div>
-          <h3>Web Design &amp; CRO</h3>
-          <p>Websites designed to convert: fast load, clear CTAs, conversion-rate optimization baked in from the first wireframe forward.</p>
+          <h3>PPC &amp; Google Ads</h3>
+          <div class="svc-outcome">Premier-Partner audited campaigns. Every dollar tracked.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Full Stack Digital Marketing</h3>
+          <div class="svc-outcome">One agency owning every channel. No vendor relay-race.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Social Media Marketing</h3>
+          <div class="svc-outcome">Organic + paid social tuned for your business pipeline.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Content Marketing</h3>
+          <div class="svc-outcome">SEO-led editorial that ranks and reads like a human wrote it.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Conversion Rate Optimization</h3>
+          <div class="svc-outcome">A/B test the funnel until the math wins.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Online Reputation Management</h3>
+          <div class="svc-outcome">Reviews, citations, and brand sentiment management.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <h3>Lead Generation</h3>
+          <div class="svc-outcome">Qualified-lead pipelines, not vanity-form fills.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>White Label Services</h3>
+          <div class="svc-outcome">Agency-to-agency partnerships under your brand.</div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>AI Automation Services</h3>
+          <div class="svc-outcome">Workflow automation and agent integration for the modern SMB.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 6 — TESTIMONIAL: JON SILKIN
+       ================================================================ -->
+  <section class="testimonial-section">
+    <div class="testimonial-inner">
+      <div class="testimonial-label">// Real Stories From Real Clients</div>
+      <blockquote class="testimonial-quote">
+        I contacted Infintech Designs 2&nbsp;months ago to create and build a creative website for my company.
+        The web design service from Brian and his team has been great from the start.
+      </blockquote>
+      <div class="testimonial-attr">
+        <div class="testimonial-avatar">JS</div>
+        <div class="testimonial-attr-text">
+          <span class="testimonial-name">Jon Silkin</span>
+          <span class="testimonial-stars">★★★★★</span>
+          <span class="testimonial-source">5-Star Verified Review</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="stat-band">
-    <div class="stat-grid">
-      <div class="stat"><div class="n">26+</div><div class="l">Years in Business</div></div>
-      <div class="stat"><div class="n">4,000+</div><div class="l">Websites Built</div></div>
-      <div class="stat"><div class="n">750+</div><div class="l">SEO Campaigns</div></div>
-      <div class="stat"><div class="n">8</div><div class="l">US Cities Served</div></div>
+  <!-- ================================================================
+       SECTION 7 — SERVICE AREAS
+       ================================================================ -->
+  <section class="areas-section" id="areas">
+    <div class="areas-inner">
+      <div class="section-head">
+        <div class="kicker">// Service Areas</div>
+        <h2>Serving Clients Across 8 US&nbsp;Cities</h2>
+        <p>Local roots in New Orleans. National reach across home services, legal, medical, and restaurant verticals.</p>
+      </div>
+      <div class="areas-grid">
+
+        <div class="area-card hq">
+          <div class="area-dot"></div>
+          <div class="area-city">New Orleans</div>
+          <div class="area-state">Louisiana — Headquarters</div>
+          <a href="tel:5045476565" class="area-phone">(504) 547-6565</a>
+          <div class="area-hq-tag">HQ</div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">Houston</div>
+          <div class="area-state">Texas</div>
+          <a href="tel:7138437501" class="area-phone">(713) 843-7501</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">Dallas</div>
+          <div class="area-state">Texas</div>
+          <a href="tel:4698157570" class="area-phone">(469) 815-7570</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">Austin</div>
+          <div class="area-state">Texas</div>
+          <a href="tel:5128900845" class="area-phone">(512) 890-0845</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">San Francisco</div>
+          <div class="area-state">California</div>
+          <a href="tel:6289009377" class="area-phone">(628) 900-9377</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">Seattle</div>
+          <div class="area-state">Washington</div>
+          <a href="tel:4253861649" class="area-phone">(425) 386-1649</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">Atlanta</div>
+          <div class="area-state">Georgia</div>
+          <a href="tel:4045906256" class="area-phone">(404) 590-6256</a>
+        </div>
+
+        <div class="area-card">
+          <div class="area-dot"></div>
+          <div class="area-city">New York</div>
+          <div class="area-state">New York</div>
+          <a href="tel:3472345963" class="area-phone">(347) 234-5963</a>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <section class="cta-band" id="contact">
-    <h2>Ready to outrank, outgrow, and outconvert your competition?</h2>
-    <p>Book a free consultation with Founder &amp; CEO Brian Hong and get a real-time dashboard look at what your growth plan can do.</p>
-    <a href="#" class="btn-inv">Schedule a Free Consultation</a>
-  </section>
-
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
   <footer>
-    <div class="fg">
-      <div class="brand">
-        <a href="#" class="logo-pill"><img src="../Logos/infintech-logo-black.png" alt="Infintech Designs"></a>
-        <p>Full-service digital marketing, locally owned in the Lower Garden District of New Orleans. Serving clients in eight US cities.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo-pill" aria-label="Infintech Designs">
+          <img src="../Logos/infintech-logo-black.png" alt="Infintech Designs">
+        </a>
+        <p>Full-service digital marketing, locally owned in the Lower Garden District of New Orleans.</p>
+        <div class="footer-tagline">Rank Higher. Grow Faster. Convert Better.</div>
       </div>
       <div>
         <h4>Services</h4>
         <ul>
-          <li><a href="#">SEO</a></li>
-          <li><a href="#">PPC &amp; Paid Media</a></li>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">CRO</a></li>
+          <li><a href="#">Search Engine Optimization</a></li>
+          <li><a href="#">PPC &amp; Google Ads</a></li>
+          <li><a href="#">Web Design &amp; Dev</a></li>
+          <li><a href="#">Content Marketing</a></li>
+          <li><a href="#">Social Media Marketing</a></li>
+          <li><a href="#">AI Automation</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
           <li><a href="#">About</a></li>
-          <li><a href="#">Work</a></li>
-          <li><a href="#">Press</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Service Areas</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
@@ -359,15 +1379,22 @@
         <h4>Get in Touch</h4>
         <ul>
           <li><a href="tel:5045476565">(504) 547-6565</a></li>
-          <li>New Orleans, LA</li>
-          <li>Mon–Fri 9a–6p CT</li>
+          <li>3436 Magazine St, #120</li>
+          <li>New Orleans, LA 70115</li>
+          <li>24/7</li>
+          <li style="margin-top:10px;">
+            <a href="#" style="margin-right:12px;">Facebook</a>
+            <a href="#" style="margin-right:12px;">LinkedIn</a>
+            <a href="#">Instagram</a>
+          </li>
         </ul>
       </div>
     </div>
-    <div class="bar">
-      <div>INFINTECH DESIGNS · INFINTECHDESIGNS.COM · NEW ORLEANS · © 2026</div>
-      <div>Google Premier Partner 2025</div>
+    <div class="footer-bottom">
+      <div>© 2026 InfintechDesigns · 3436 Magazine St #120 · New Orleans, LA 70115</div>
+      <div>Google Premier Partner 2025 · Top 3% of US Google Ads Agencies</div>
     </div>
   </footer>
+
 </body>
 </html>
